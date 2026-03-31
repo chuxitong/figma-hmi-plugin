@@ -1,0 +1,13 @@
+{
+  "name": "hmi-code-gen-figma-plugin",
+  "version": "0.1.0",
+  "description": "Figma plugin for generating HMI interface code from graphical mockups",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.100.0",
+    "typescript": "^5.4.0"
+  }
+}

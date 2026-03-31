@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; font-size: 12px; color: #e0e0e0; background: #2c2c2c; padding: 12px; }
+  h3 { font-size: 13px; margin-bottom: 8px; color: #fff; }
+  .section { margin-bottom: 14px; }
+  button {
+    background: #0d99ff; color: #fff; border: none; border-radius: 6px;
+    padding: 8px 14px; cursor: pointer; font-size: 12px; width: 100%;
+    margin-bottom: 6px; transition: background 0.15s;
+  }
+  button:hover { background: #0b85e0; }
+  button.secondary { background: #444; }
+  button.secondary:hover { background: #555; }
+  textarea, input[type="text"] {
+    width: 100%; background: #1e1e1e; color: #e0e0e0; border: 1px solid #555;
+    border-radius: 4px; padding: 6px 8px; font-family: monospace; font-size: 11px;
+    resize: vertical;
+  }
+  textarea { height: 120px; }
+  .preview-area {
+    width: 100%; min-height: 80px; background: #1e1e1e; border: 1px dashed #555;
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: #888; font-style: italic; overflow: hidden;
+  }
+  .preview-area img { max-width: 100%; }
+  .toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .toggle-row input { accent-color: #0d99ff; }
+  #log { font-family: monospace; font-size: 10px; color: #aaa; white-space: pre-wrap;
+         max-height: 80px; overflow-y: auto; background: #1a1a1a; padding: 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <h3>HMI Code Generator</h3>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkVars" /> <label for="chkVars">Include design variables</label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkCss" /> <label for="chkCss">Include CSS hints</label>
+  </div>
+  <button id="btnGenerate">Generate Code</button>
+  <button id="btnRefine" class="secondary">Make It Closer to the Mockup</button>
+</div>
+
+<div class="section">
+  <h3>Edit by Request</h3>
+  <input type="text" id="editInstruction" placeholder='e.g. "Make the button secondary"' />
+  <button id="btnEdit" class="secondary" style="margin-top:6px;">Apply Edit</button>
+</div>
+
+<div class="section">
+  <h3>Generated Code</h3>
+  <textarea id="codeOutput" readonly placeholder="Generated HTML/CSS will appear here..."></textarea>
+  <button id="btnCopy" class="secondary">Copy Code</button>
+</div>
+
+<div class="section">
+  <h3>Preview</h3>
+  <div class="preview-area" id="previewArea">No preview yet</div>
+</div>
+
+<div class="section">
+  <h3>Log</h3>
+  <div id="log">Ready.\n</div>
+</div>
+
+<script>
+const SERVICE_URL = "http://localhost:8000";
+let currentCode = "";
+let referenceImageBase64 = "";
+
+function log(text) {
+  const el = document.getElementById("log");
+  el.textContent += text + "\n";
+  el.scrollTop = el.scrollHeight;
+}
+
+window.onmessage = async (event) => {
+  const msg = event.data.pluginMessage;
+  if (!msg) return;
+
+  if (msg.type === "pong") {
+    log("Sandbox connection OK: " + msg.message);
+  }
+
+  if (msg.type === "error") {
+    log("ERROR: " + msg.message);
+  }
+
+  if (msg.type === "frame-exported") {
+    const d = msg.data;
+    referenceImageBase64 = d.imageBase64;
+    log(`Frame "${d.frameName}" exported (${d.width}×${d.height}).`);
+    log("Sending to local service for code generation...");
+
+    try {
+      const resp = await fetch(SERVICE_URL + "/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image_base64: d.imageBase64,
+          frame_name: d.frameName,
+          width: d.width,
+          height: d.height,
+          css_hints: d.cssHints || {},
+          variables: d.variables || {},
+        }),
+      });
+      const result = await resp.json();
+      currentCode = result.code || "";
+      document.getElementById("codeOutput").value = currentCode;
+      if (result.preview_base64) {
+        document.getElementById("previewArea").innerHTML =
+          `<img src="data:image/png;base64,${result.preview_base64}" />`;
+      }
+      log("Code generation complete.");
+    } catch (err) {
+      log("Service error: " + err.message);
+    }
+  }
+};
+
+document.getElementById("btnGenerate").onclick = () => {
+  const includeVariables = document.getElementById("chkVars").checked;
+  const includeCssHints = document.getElementById("chkCss").checked;
+  parent.postMessage({ pluginMessage: { type: "export-frame", payload: { includeVariables, includeCssHints } } }, "*");
+};
+
+document.getElementById("btnRefine").onclick = async () => {
+  if (!currentCode || !referenceImageBase64) {
+    log("Generate code first before refining.");
+    return;
+  }
+  log("Requesting refinement...");
+  try {
+    const resp = await fetch(SERVICE_URL + "/refine", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        reference_image_base64: referenceImageBase64,
+        current_code: currentCode,
+      }),
+    });
+    const result = await resp.json();
+    currentCode = result.code || currentCode;
+    document.getElementById("codeOutput").value = currentCode;
+    if (result.preview_base64) {
+      document.getElementById("previewArea").innerHTML =
+        `<img src="data:image/png;base64,${result.preview_base64}" />`;
+    }
+    log("Refinement complete.");
+  } catch (err) {
+    log("Service error: " + err.message);
+  }
+};
+
+document.getElementById("btnEdit").onclick = async () => {
+  const instruction = document.getElementById("editInstruction").value.trim();
+  if (!instruction) { log("Enter an edit instruction."); return; }
+  if (!currentCode) { log("Generate code first."); return; }
+  log("Applying edit: " + instruction);
+  try {
+    const resp = await fetch(SERVICE_URL + "/edit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ current_code: currentCode, instruction }),
+    });
+    const result = await resp.json();
+    currentCode = result.code || currentCode;
+    document.getElementById("codeOutput").value = currentCode;
+    if (result.preview_base64) {
+      document.getElementById("previewArea").innerHTML =
+        `<img src="data:image/png;base64,${result.preview_base64}" />`;
+    }
+    log("Edit applied.");
+  } catch (err) {
+    log("Service error: " + err.message);
+  }
+};
+
+document.getElementById("btnCopy").onclick = () => {
+  navigator.clipboard.writeText(currentCode).then(() => log("Code copied."));
+};
+
+parent.postMessage({ pluginMessage: { type: "ping" } }, "*");
+</script>
+</body>
+</html>
