@@ -1,11 +1,18 @@
 # Публикация на GitHub
 
 Каноническое имя репозитория: **figma-hmi-plugin**.  
-URL: https://github.com/chuxitong/figma-hmi-plugin
+Целевой URL: https://github.com/chuxitong/figma-hmi-plugin
 
-## Переименование с hmi-code-gen
+Пока репозиторий на GitHub ещё называется `hmi-code-gen`, выгрузка идёт в него:
 
-1. На GitHub: **Settings** → **General** → **Repository name** → ввести `figma-hmi-plugin` → **Rename**.
+```bash
+git remote set-url origin https://github.com/chuxitong/hmi-code-gen.git
+git push origin master
+```
+
+## Переименование с hmi-code-gen в figma-hmi-plugin
+
+1. На GitHub: **Settings** → **General** → **Repository name** → ввести `figma-hmi-plugin` → **Rename**. Старая ссылка обычно перенаправляется на новое имя.
 2. Локально обновить remote:
 
 ```bash
