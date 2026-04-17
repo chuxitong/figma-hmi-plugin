@@ -1,1 +1,1 @@
-https://github.com/chuxitong/hmi-code-gen
+https://github.com/chuxitong/figma-hmi-plugin

@@ -8,6 +8,6 @@
 
 Тема ВКР на русском: «Разработка интеллектуального программного модуля генерации и итеративной корректировки кода человеко-машинных интерфейсов по графическим макетам». Полный текст и обзор — в `thesis/`.
 
-Публичный репозиторий: https://github.com/chuxitong/hmi-code-gen
+Публичный репозиторий: https://github.com/chuxitong/figma-hmi-plugin
 
 Воспроизводимость: из корня проекта `py baseline-tests/run_all_experiments.py`, затем проверка состава артефактов — `py baseline-tests/verify_deliverables.py`. Снимок прототипа с тегом `v2026.04.17-prototype-freeze` описан в `release-notes.md`.
