@@ -1,0 +1,2 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 07 Energy Dashboard — HMI

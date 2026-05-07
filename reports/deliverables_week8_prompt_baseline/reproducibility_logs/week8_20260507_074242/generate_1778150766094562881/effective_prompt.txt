@@ -1,0 +1,21 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 08 Batch Recipe — HMI
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--step-active": "#1976d2",
+  "--step-done": "#2e7d32"
+}
+</design_variables>
+
+<css_hints>
+{
+  "StepList": {},
+  "Frame": {
+    "width": "1440px",
+    "height": "900px"
+  }
+}
+</css_hints>

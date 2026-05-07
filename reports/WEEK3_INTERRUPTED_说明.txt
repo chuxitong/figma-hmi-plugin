@@ -1,0 +1,55 @@
+第三周全链路（run_week3_verified.ps1）上次运行被中断 —— 收尾说明
+================================================================
+
+一、已完成的阶段（以仓库内落盘文件为准）
+------------------------------------------
+1. 参考输入：`reports/screenshots/week003_00_reference.png`（对应当前 `mockups/png/01-equipment-status.png`）
+2. 从 UI 截图生成代码（POST /generate）：
+   - `week003_01_generate.html`
+   - `week003_01_generate_preview.png`
+3. 按文字指令编辑（POST /edit），指令原文：
+   Increase the main page title font size and make it more prominent.
+   - `week003_02_after_edit.html`
+   - `week003_02_after_edit_preview.png`
+4. 迭代视觉反馈（多轮 Refine）**未完成**：仅生成了第 1 轮进入 /refine 前的渲染图
+   - `week003_refine_iter1_a_render_in.png`（/render 结果）
+   - 缺少 `week003_refine_iter1_b_preview.png` 及第 2、3 轮相关文件
+   - 未执行脚本的 [4] 步：Swagger 截屏、week003_health_snapshot.json
+
+因中断，本次没有生成 `week003_RUN_LOG.txt` / `week003_RECORD.txt` 完整版。
+
+二、如何收尾（二选一）
+-----------------------
+
+【推荐】在「同一套」环境变量下**保持/重启**本地服务，仅补跑 Refine + 证据：
+
+1. 启动 Uvicorn（与《DEPLOYMENT》一致，例如）：
+   USE_REAL_MODEL=1
+   UI2CODEN_QUANT=4bit
+   UI2CODEN_MODEL_ID=D:/hf_models/UI2Code_N
+   UI2CODEN_MAX_NEW_TOKENS=2048
+   在 `local-service` 目录执行 `python -m uvicorn app:app --host 127.0.0.1 --port 8000`
+2. 另开 PowerShell 执行续跑脚本（会重跑 3 轮 render+refine，覆盖 iter1 的 a 图；然后抓 Swagger+health）：
+
+   powershell -NoProfile -ExecutionPolicy Bypass -File `
+     D:\cursorwork\figma-hmi-plugin\reports\resume_week3_refine.ps1
+
+3. 确认 `http://127.0.0.1:8000/health` 中 `ui2code_n_active` 为 true 后再把截图交给导师。
+
+【备选】不保留半套文件、从零重跑全程：
+
+   powershell -NoProfile -ExecutionPolicy Bypass -File `
+     D:\cursorwork\figma-hmi-plugin\reports\run_week3_verified.ps1
+
+注意：真模型下 `/generate` 与 `/refine` 可能各需数十分钟，**勿关 Uvicorn 窗口、勿占用 8000 口的进程中途被杀**。
+
+三、导师要的三类「截图」对应文件（补全后）
+------------------------------------------
+- 截图→代码：00_reference + 01_generate_preview
+- 按指令编辑：02_after_edit_preview（与 01 对比）
+- 迭代改进：各轮 `refine_iterN_a_render_in.png` + `refine_iterN_b_preview.png`
+- 另建议：`week003_swagger_api_docs.png`、`week003_health_snapshot.json`（由 capture_week3_evidence.py 生成）
+
+四、若 8000 口仍被占用
+----------------------
+在 PowerShell 中先释放端口或结束旧 python 进程后再起服务。详见此前对话中「WinError 10048」的说明。

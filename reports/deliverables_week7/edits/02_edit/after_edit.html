@@ -1,0 +1,202 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-1 p-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <ControlPanel />
+                            <ReadoutPanel />
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        }
+        
+        function Header() {
+            return (
+                <header className="bg-[#13314f] text-white py-4 px-6">
+                    <div className="container mx-auto flex justify-between items-center">
+                        <div className="flex items-center">
+                            <i className="fas fa-cog text-xl mr-3"></i>
+                            <div>
+                                <h1 className="text-2xl font-bold">Operator Control Panel</h1>
+                                <p className="text-sm text-gray-300">Process loop: Mixer MX-501 · Operator: A. Petrov</p>
+                            </div>
+                        </div>
+                        <div className="bg-[#1e3a8d] rounded px-4 py-1 text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+        
+        function ControlPanel() {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 className="text-lg font-medium text-gray-800 mb-6">Manual control</h2>
+                    
+                    <div className="flex gap-4 mb-8">
+                        <button className="flex-1 bg-[#2e7d32] text-white py-3 px-6 rounded text-lg font-medium">
+                            START
+                        </button>
+                        <button className="flex-1 bg-[#c62828] text-white py-3 px-6 rounded text-lg font-medium">
+                            STOP
+                        </button>
+                        <button className="flex-1 border-2 border-gray-400 text-gray-600 py-3 px-6 rounded text-lg font-medium">
+                            RESET
+                        </button>
+                    </div>
+                    
+                    <div className="mb-8">
+                        <h3 className="text-gray-700 font-medium mb-4">Operating mode</h3>
+                        <div className="flex gap-2">
+                            <button className="flex-1 bg-[#13314f] text-white py-2 px-4 rounded text-sm font-medium">
+                                AUTO
+                            </button>
+                            <button className="flex-1 border border-gray-400 text-gray-600 py-2 px-4 rounded text-sm font-medium">
+                                MANUAL
+                            </button>
+                            <button className="flex-1 border border-gray-400 text-gray-600 py-2 px-4 rounded text-sm font-medium">
+                                SERVICE
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 className="text-gray-700 font-medium mb-4">Setpoints</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Temperature</span>
+                                <input 
+                                    type="text" 
+                                    value="75.0 °C" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm" 
+                                />
+                                <button className="bg-[#2e7d32] text-white px-4 py-1 rounded text-sm font-medium">
+                                    SET
+                                </button>
+                            </div>
+                            
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Flow rate</span>
+                                <input 
+                                    type="text" 
+                                    value="180 L/min" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm" 
+                                />
+                                <button className="bg-[#2e7d32] text-white px-4 py-1 rounded text-sm font-medium">
+                                    SET
+                                </button>
+                            </div>
+                            
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Mixer RPM</span>
+                                <input 
+                                    type="text" 
+                                    value="240 rpm" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm" 
+                                />
+                                <button className="bg-[#2e7d32] text-white px-4 py-1 rounded text-sm font-medium">
+                                    SET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        function ReadoutCard({ title, value, unit, status }) {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                    <div className="text-gray-500 text-sm mb-2">{title}</div>
+                    <div className="text-4xl font-light text-gray-800 mb-3">
+                        {value}
+                    </div>
+                    <div className="text-gray-500 text-xs mb-4">{unit}</div>
+                    <div>
+                        <button className={`px-6 py-0.5 rounded text-white text-xs font-medium ${
+                            status === 'OK' ? 'bg-[#2e7d32]' : 'bg-[#ef6c00]'
+                        }`}>
+                            {status}
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+        
+        function ReadoutPanel() {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 className="text-lg font-medium text-gray-800 mb-6">Live readouts</h2>
+                    
+                    <div className="grid grid-cols-1 gap-6">
+                        <ReadoutCard 
+                            title="Temperature out" 
+                            value="74.6" 
+                            unit="°C" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Flow out" 
+                            value="178" 
+                            unit="L/min" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Mixer RPM" 
+                            value="238" 
+                            unit="rpm" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Pressure" 
+                            value="3.18" 
+                            unit="bar" 
+                            status="WARN" 
+                        />
+                    </div>
+                </div>
+            );
+        }
+        
+        function Footer() {
+            return (
+                <footer className="bg-gray-100 py-3 px-6 border-t border-gray-200">
+                    <div className="container mx-auto">
+                        <p className="text-xs text-gray-500">
+                            Connection: OK · Loop status: closed-loop AUTO · Compliance: ANSI/ISA-101.01
+                        </p>
+                    </div>
+                </footer>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

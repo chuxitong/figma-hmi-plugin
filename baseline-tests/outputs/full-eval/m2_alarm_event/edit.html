@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Alarm Monitor</title>
+<style>
+  :root {
+    --bg: #1e1e2e;
+    --panel: #2d2d42;
+    --panel-2: #32324a;
+    --text: #e6e6ec;
+    --muted: #a0a0b0;
+    --ok: #4caf50;
+    --warn: #ff9800;
+    --err: #e53935;
+    --info: #2196f3;
+    --accent: #00bcd4;
+    --border: #4d4d66;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: Inter, system-ui, Arial, sans-serif; padding: 20px; }
+  h1 { font-size: 22px; margin-bottom: 12px; }
+  h2 { font-size: 16px; margin: 4px 0 12px; color: var(--muted); font-weight: 500; }
+  .grid { display: grid; gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; }
+  .ok { background: rgba(76,175,80,.18); color: var(--ok); }
+  .warn { background: rgba(255,152,0,.18); color: var(--warn); }
+  .err { background: rgba(229,57,53,.20); color: var(--err); }
+  .info { background: rgba(33,150,243,.18); color: var(--info); }
+  button.btn { background: var(--accent); color: #001014; border: none; border-radius: 6px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
+  button.btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; }
+  .kpi { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .kpi .card { min-width: 160px; }
+  .kpi .v { font-size: 22px; font-weight: 600; }
+  .kpi .l { color: var(--muted); font-size: 12px; }
+</style></head><body>
+<h1>Alarm & Event Monitor</h1><div class="kpi"><div class="card"><div class="v">2</div><div class="l">Critical</div></div><div class="card"><div class="v">5</div><div class="l">Warning</div></div><div class="card"><div class="v">11</div><div class="l">Info</div></div></div><div class="card"><table><thead><tr><th>Time</th><th>Description</th><th>Severity</th><th>Action</th></tr></thead><tbody><tr><td>12:04:21</td><td>Tank level high</td><td><span class="pill warn">WARN</span></td><td><button class="btn secondary">ACK</button></td></tr><tr><td>12:03:10</td><td>Temperature deviation</td><td><span class="pill err">ERR</span></td><td><button class="btn secondary">ACK</button></td></tr><tr><td>11:58:42</td><td>Pump A vibration</td><td><span class="pill warn">WARN</span></td><td><button class="btn secondary">ACK</button></td></tr><tr><td>11:42:09</td><td>Flow below setpoint</td><td><span class="pill info">INFO</span></td><td><button class="btn secondary">ACK</button></td></tr><tr><td>11:30:55</td><td>Communication restored</td><td><span class="pill ok">OK</span></td><td><button class="btn secondary">ACK</button></td></tr></tbody></table></div>
+</body></html>

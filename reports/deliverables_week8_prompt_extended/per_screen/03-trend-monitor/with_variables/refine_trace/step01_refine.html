@@ -1,0 +1,190 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const ParameterCard = ({ title, value, change, unit, borderColor, textColor }) => {
+            return (
+                <div className={`border-l-4 ${borderColor} rounded-lg p-4 bg-white shadow-sm`}>
+                    <div className="text-gray-600 text-sm mb-1">{title}</div>
+                    <div className={`${textColor} text-3xl font-bold`}>{value}</div>
+                    <div className="text-gray-500 text-xs mt-2">
+                        <span className="mr-1">{change}</span>
+                        <span>{unit}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-slate-900 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-2xl font-semibold">Parameter Trend Monitor</h1>
+                                <p className="text-gray-300 text-sm">Trend Window: 60 min · Sample: 1 s</p>
+                            </div>
+                            <div className="bg-slate-800 px-4 py-2 rounded text-blue-300 text-sm">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="p-6 space-y-6">
+                        {/* Parameter Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <ParameterCard 
+                                title="Temperature" 
+                                value="72.4" 
+                                change="+1.2" 
+                                unit="sa cmEHY" 
+                                borderColor="border-green-600" 
+                                textColor="text-gray-800"
+                            />
+                            <ParameterCard 
+                                title="Pressure" 
+                                value="3.21" 
+                                change="+0.04" 
+                                unit="sa cmEHY" 
+                                borderColor="border-green-600" 
+                                textColor="text-gray-800"
+                            />
+                            <ParameterCard 
+                                title="Flow" 
+                                value="184" 
+                                change="-3" 
+                                unit="sa cmEHY" 
+                                borderColor="border-orange-500" 
+                                textColor="text-gray-800"
+                            />
+                            <ParameterCard 
+                                title="Setpoint dev" 
+                                value="1.8" 
+                                change="+0.2" 
+                                unit="sa cmEHY" 
+                                borderColor="border-green-600" 
+                                textColor="text-gray-800"
+                            />
+                        </div>
+
+                        {/* Trend Chart */}
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-gray-800 font-semibold">Trend window — 14:00 to 15:00</h2>
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex items-center">
+                                        <div className="w-3 h-2 bg-green-700 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Temp (°C)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-3 h-2 bg-orange-500 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Pressure (bar)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-3 h-2 bg-red-700 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Flow (L/min)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-6 h-2 bg-red-700 mr-2"></div>
+                                        <span className="text-xs text-gray-600">band: ±2σ</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Chart Area */}
+                            <div className="relative h-64 border border-gray-200 bg-gray-50">
+                                {/* Y-axis labels */}
+                                <div className="absolute left-0 top-0 bottom-0 w-8 flex flex-col justify-between text-xs text-gray-500 py-2">
+                                    <div>100</div>
+                                    <div>90</div>
+                                    <div>80</div>
+                                    <div>70</div>
+                                    <div>60</div>
+                                    <div>50</div>
+                                    <div>40</div>
+                                </div>
+                                
+                                {/* Chart Grid */}
+                                <div className="ml-8 mr-4 h-full w-full grid grid-rows-6 border-l border-b border-gray-300">
+                                    {[...Array(7)].map((_, i) => (
+                                        <div key={i} className="border-t border-gray-200 w-full"></div>
+                                    ))}
+                                    
+                                    {/* Chart Lines */}
+                                    <svg className="absolute inset-0 w-full h-full overflow-visible">
+                                        {/* Green line (Temperature) */}
+                                        <path d="M0,100 L50,105 L100,110 L150,120 L200,110 L250,120 L300,125 L350,110 L400,115 L450,120 L500,110 L550,125 L600,130 L650,120 L700,115 L750,120 L800,130 L850,120 L900,110 L950,115 L1000,110" 
+                                              stroke="#22c55e" strokeWidth="2" fill="none" />
+                                        
+                                        {/* Orange line (Pressure) */}
+                                        <path d="M0,160 L50,150 L100,170 L150,165 L200,160 L250,150 L300,165 L350,155 L400,160 L450,165 L500,155 L550,160 L600,150 L650,165 L700,155 L750,160 L800,165 L850,160 L900,150 L950,160 L1000,155" 
+                                              stroke="#f97316" strokeWidth="2" fill="none" />
+                                        
+                                        {/* Red line (Flow) */}
+                                        <path d="M0,180 L50,185 L100,175 L150,170 L200,175 L250,180 L300,175 L350,180 L400,175 L450,190 L500,185 L550,190 L600,185 L650,180 L700,185 L750,180 L800,185 L850,180 L900,185 L950,190 L1000,185" 
+                                              stroke="#ef4444" strokeWidth="2" fill="none" />
+                                        
+                                        {/* Red band line */}
+                                        <path d="M0,200 L50,195 L100,190 L150,195 L200,190 L250,195 L300,190 L350,195 L400,190 L450,195 L500,190 L550,195 L600,190 L650,195 L700,190 L750,195 L800,190 L850,195 L900,190 L950,195 L1000,190" 
+                                              stroke="#ef4444" strokeWidth="2" fill="none" />
+                                    </svg>
+                                </div>
+                                
+                                {/* X-axis labels */}
+                                <div className="absolute left-8 right-4 bottom-0 flex justify-between text-xs text-gray-500 pb-2">
+                                    <div>14:00</div>
+                                    <div>14:05</div>
+                                    <div>14:10</div>
+                                    <div>14:15</div>
+                                    <div>14:20</div>
+                                    <div>14:25</div>
+                                    <div>14:30</div>
+                                    <div>14:35</div>
+                                    <div>14:40</div>
+                                    <div>14:45</div>
+                                    <div>14:50</div>
+                                    <div>14:55</div>
+                                    <div>14:60</div>
+                                </div>
+                            </div>
+                            
+                            {/* Bottom Info */}
+                            <div className="mt-4 border border-gray-200 rounded-md p-3 bg-gray-50">
+                                <div className="flex justify-between items-center text-sm">
+                                    <div className="text-gray-700">14:22 — Flow rate deviation > 12 % (FT-401)</div>
+                                    <div className="text-gray-500">Operator: A. Petrov</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="px-6 py-4 border-t border-gray-200">
+                        <div className="text-gray-500 text-xs">
+                            Connection: OK · Latency: 18 ms · Logging: enabled · Export to CSV available via toolbar
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

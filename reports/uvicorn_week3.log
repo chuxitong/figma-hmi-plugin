@@ -1,0 +1,243 @@
+INFO:     Started server process [20227]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:48756 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43106 - "GET / HTTP/1.1" 404 Not Found
+INFO:app:Loading real UI2Code^N (first call can take a while)...
+INFO:model_wrapper:loading /root/autodl-tmp/UI2Code_N in quant=none (this may take several minutes on first run)
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.36s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.34s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.28s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.31s/it]
+INFO:model_wrapper:model loaded: /root/autodl-tmp/UI2Code_N (ui2coden-9b-none)
+INFO:app:UI2Code^N loaded.
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+INFO:     127.0.0.1:59258 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35818 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35830 - "POST /edit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38784 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38790 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38802 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35948 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35954 - "POST /render HTTP/1.1" 200 OK
+WARNING:app:Preview rendering failed: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmp8i8yjdzq.html", waiting until "load"
+
+INFO:     127.0.0.1:43246 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38608 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38616 - "POST /render HTTP/1.1" 200 OK
+WARNING:app:Preview rendering failed: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmpwrxzlsc_.html", waiting until "load"
+
+INFO:     127.0.0.1:60642 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48846 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48852 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48856 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48856 - "GET /openapi.json HTTP/1.1" 200 OK
+WARNING:app:Preview rendering failed: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmpi9qplrd6.html", waiting until "load"
+
+INFO:     127.0.0.1:57592 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38974 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57606 - "GET /health HTTP/1.1" 200 OK
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/app.py", line 366, in render
+    image_bytes = await render_html_to_png(req.html_code, req.width, req.height)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/renderer.py", line 103, in render_html_to_png
+    await page.goto(file_url, wait_until="load", timeout=120_000)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/async_api/_generated.py", line 9045, in goto
+    await self._impl_obj.goto(
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py", line 552, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 153, in goto
+    await self._channel.send(
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmp1rjalv6u.html", waiting until "load"
+
+INFO:     127.0.0.1:52274 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49238 - "POST /render HTTP/1.1" 200 OK
+WARNING:app:Preview rendering failed: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmpgwwa6c3m.html", waiting until "load"
+
+INFO:     127.0.0.1:49248 - "POST /edit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42166 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42180 - "POST /render HTTP/1.1" 200 OK
+WARNING:app:Preview rendering failed: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmpb_y1vh3l.html", waiting until "load"
+
+INFO:     127.0.0.1:60830 - "POST /edit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48954 - "POST /render HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/app.py", line 366, in render
+    image_bytes = await render_html_to_png(req.html_code, req.width, req.height)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/renderer.py", line 103, in render_html_to_png
+    await page.goto(file_url, wait_until="load", timeout=120_000)
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/async_api/_generated.py", line 9045, in goto
+    await self._impl_obj.goto(
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_page.py", line 552, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_frame.py", line 153, in goto
+    await self._channel.send(
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/figma-hmi-plugin/local-service/.venv/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "file:///tmp/tmpmkriwe7o.html", waiting until "load"
+
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [20227]
+INFO:     Started server process [27952]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49838 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37552 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56892 - "GET /health HTTP/1.1" 200 OK
+INFO:app:Loading real UI2Code^N (first call can take a while)...
+INFO:model_wrapper:loading /root/autodl-tmp/UI2Code_N in quant=none (this may take several minutes on first run)
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.33s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.33s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.28s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.30s/it]
+INFO:model_wrapper:model loaded: /root/autodl-tmp/UI2Code_N (ui2coden-9b-none)
+INFO:app:UI2Code^N loaded.
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+INFO:     127.0.0.1:33380 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41194 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41210 - "POST /edit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34120 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34122 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33554 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51338 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51340 - "POST /render HTTP/1.1" 200 OK
+WARNING:renderer:Paint wait timed out (CDN/JS may be slow or blocked); extra delay then screenshot: Page.wait_for_function: Timeout 180000ms exceeded.
+INFO:     127.0.0.1:43566 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37706 - "GET /health HTTP/1.1" 200 OK
+WARNING:renderer:Paint wait timed out (CDN/JS may be slow or blocked); extra delay then screenshot: Page.wait_for_function: Timeout 180000ms exceeded.
+INFO:     127.0.0.1:37712 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56948 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38894 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38904 - "POST /generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37564 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37580 - "POST /edit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48414 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48416 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48418 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54240 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54254 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54264 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51954 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51960 - "POST /render HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51976 - "POST /refine HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33064 - "GET /health HTTP/1.1" 200 OK

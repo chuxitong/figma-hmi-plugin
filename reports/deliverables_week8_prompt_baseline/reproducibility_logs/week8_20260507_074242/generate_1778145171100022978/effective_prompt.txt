@@ -1,0 +1,23 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 05 Production Overview — HMI
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--good": "#2e7d32",
+  "--attention": "#f9a825"
+}
+</design_variables>
+
+<css_hints>
+{
+  "Frame": {
+    "width": "1440px",
+    "height": "900px"
+  },
+  "KPI_Block": {
+    "min-width": "160px"
+  }
+}
+</css_hints>

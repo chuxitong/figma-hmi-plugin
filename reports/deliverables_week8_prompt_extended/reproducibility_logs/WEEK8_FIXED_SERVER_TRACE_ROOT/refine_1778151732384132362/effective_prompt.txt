@@ -1,0 +1,190 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Status Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-grow p-6 bg-gray-50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <StatusCard 
+                                name="Pump P-101" 
+                                value="1480" 
+                                trend="+12" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Pump P-102" 
+                                value="1492" 
+                                trend="+8" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Compressor C-201" 
+                                value="3.21" 
+                                trend="+0.04" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Motor M-301" 
+                                value="94.2" 
+                                trend="+5.1" 
+                                status="ALARM"
+                                borderColor="border-red-600"
+                            />
+                            <StatusCard 
+                                name="Valve V-102" 
+                                value="CLOSED" 
+                                trend="—" 
+                                status="ALARM"
+                                borderColor="border-red-600"
+                            />
+                            <StatusCard 
+                                name="Conveyor CV-401" 
+                                value="0.00" 
+                                trend="—" 
+                                status="MAINT"
+                                borderColor="border-orange-500"
+                            />
+                            <StatusCard 
+                                name="Mixer MX-501" 
+                                value="240" 
+                                trend="—" 
+                                status="IDLE"
+                                borderColor="border-gray-500"
+                            />
+                            <StatusCard 
+                                name="Heater H-201" 
+                                value="62.0" 
+                                trend="-1.2" 
+                                status="WARN"
+                                borderColor="border-orange-500"
+                            />
+                            <StatusCard 
+                                name="Tank T-101" 
+                                value="72" 
+                                trend="+2" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Tank T-102" 
+                                value="41" 
+                                trend="-1" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Sensor T-405" 
+                                value="38.5" 
+                                trend="+0.4" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                            <StatusCard 
+                                name="Sensor F-902" 
+                                value="180" 
+                                trend="+3" 
+                                status="OK"
+                                borderColor="border-green-700"
+                            />
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#0a2847] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-bold">Equipment Status Dashboard</h1>
+                            <p className="text-sm text-gray-300">Facility 2 · Line A · Shift B</p>
+                        </div>
+                        <div className="bg-[#1a3b6b] px-4 py-2 rounded text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const StatusCard = ({ name, value, trend, status }) => {
+            const getStatusStyles = () => {
+                switch(status) {
+                    case 'OK':
+                        return 'bg-green-700 text-white';
+                    case 'ALARM':
+                        return 'bg-red-700 text-white';
+                    case 'MAINT':
+                        return 'bg-orange-500 text-white';
+                    case 'IDLE':
+                        return 'bg-gray-500 text-white';
+                    case 'WARN':
+                        return 'bg-orange-600 text-white';
+                    default:
+                        return 'bg-gray-700 text-white';
+                }
+            };
+
+            return (
+                <div className={`bg-white rounded-md border-l-4 ${status === 'ALARM' ? 'border-red-600' : status === 'MAINT' ? 'border-orange-500' : status === 'IDLE' ? 'border-gray-500' : 'border-green-700'} shadow-sm p-4`}>
+                    <div className="text-gray-600 text-sm mb-2">{name}</div>
+                    <div className="text-4xl font-bold text-gray-900 mb-2">{value}</div>
+                    <div className="text-gray-500 text-xs mb-2">trend: {trend}</div>
+                    <div>
+                        <span className={`text-xs px-3 py-1 rounded ${getStatusStyles()}`}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 py-3 px-6 border-t border-gray-200">
+                    <div className="text-gray-500 text-sm">
+                        Connection: OK · Items: 12 · Critical: 2 · Warning: 2
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

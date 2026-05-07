@@ -1,0 +1,222 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--bar-good": "#2e7d32",
+  "--bar-use": "#1976d2",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Monitoring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <div className="flex-grow p-6 bg-slate-50">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                            <MetricCard 
+                                title="Total kWh" 
+                                value="12 845" 
+                                change="+340 за смену" 
+                                icon="▲" 
+                                borderColor="border-l-green-600"
+                                iconColor="text-green-600"
+                            />
+                            <MetricCard 
+                                title="Peak load" 
+                                value="742" 
+                                change="+18 за смену" 
+                                icon="▲" 
+                                borderColor="border-l-orange-500"
+                                iconColor="text-orange-500"
+                            />
+                            <MetricCard 
+                                title="Cost (today)" 
+                                value="€ 1 932" 
+                                change="+78 за смену" 
+                                icon="▲" 
+                                borderColor="border-l-green-600"
+                                iconColor="text-green-600"
+                            />
+                            <MetricCard 
+                                title="Power factor" 
+                                value="0.92" 
+                                change="+0.01 за смену" 
+                                icon="▲" 
+                                borderColor="border-l-green-600"
+                                iconColor="text-green-600"
+                            />
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <ZoneConsumption />
+                            <SourceBreakdown />
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-slate-900 text-white px-6 py-4">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-semibold">Energy Monitoring Dashboard</h1>
+                            <p className="text-slate-300 text-sm">Industrial-2 - Day shift - All zones</p>
+                        </div>
+                        <div className="bg-slate-800 px-4 py-2 rounded-md text-slate-300 text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const MetricCard = ({ title, value, change, icon, borderColor, iconColor }) => {
+            return (
+                <div className="bg-white rounded-md border-t border-r border-b border-gray-200 p-4">
+                    <div className="text-gray-500 text-sm mb-1">{title}</div>
+                    <div className="text-3xl font-bold text-gray-800 mb-2">{value}</div>
+                    <div className={`text-xs ${iconColor} flex items-center`}>
+                        <span className="mr-1">{icon}</span>
+                        <span>{change}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const ZoneConsumption = () => {
+            const zones = [
+                { name: 'Zone A', percentage: 62, status: 'OK', color: 'bg-green-700' },
+                { name: 'Zone B', percentage: 48, status: 'OK', color: 'bg-green-700' },
+                { name: 'Zone C', percentage: 81, status: 'WARN', color: 'bg-orange-500' },
+                { name: 'Zone D', percentage: 35, status: 'OK', color: 'bg-green-700' },
+                { name: 'Zone E', percentage: 90, status: 'ALARM', color: 'bg-red-600' },
+                { name: 'Zone F', percentage: 27, status: 'OK', color: 'bg-green-700' },
+            ];
+
+            return (
+                <div className="bg-white rounded-md border border-gray-200 p-6">
+                    <h2 className="text-gray-800 font-semibold mb-6">Power consumption by zone</h2>
+                    <div className="space-y-6">
+                        {zones.map((zone) => (
+                            <ZoneRow key={zone.name} zone={zone} />
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const ZoneRow = ({ zone }) => {
+            return (
+                <div className="flex items-center justify-between">
+                    <div className="w-1/6 text-gray-700 font-medium">{zone.name}</div>
+                    <div className="flex-grow mx-6">
+                        <div className="bg-gray-100 rounded-full h-6 w-full">
+                            <div 
+                                className={`${zone.color} h-6 rounded-full`} 
+                                style={{ width: `${zone.percentage}%` }}
+                            ></div>
+                        </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                        <div className="w-12 text-right text-gray-600 text-sm">{zone.percentage}%</div>
+                        <div className={`px-4 py-1 rounded-sm text-xs font-medium text-white ${
+                            zone.status === 'OK' ? 'bg-green-700' : 
+                            zone.status === 'WARN' ? 'bg-orange-500' : 'bg-red-600'
+                        }`}>
+                            {zone.status.toUpperCase()}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const SourceBreakdown = () => {
+            return (
+                <div className="bg-white rounded-md border border-gray-200 p-6">
+                    <h2 className="text-gray-800 font-semibold mb-6">Source breakdown</h2>
+                    <div className="flex items-center justify-center">
+                        <div className="relative w-64 h-64">
+                            {/* Donut chart */}
+                            <div className="w-full h-full rounded-full" style={{ 
+                                background: `conic-gradient(
+                                    #2e7d32 0% 57%, 
+                                    #1976d2 57% 75%, 
+                                    #e65100 75% 100%
+                                )`, 
+                                clipPath: 'circle(50%)'
+                            }}></div>
+                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-40 h-40 flex items-center justify-center">
+                                <div className="text-center">
+                                    <div className="text-4xl font-bold text-gray-800">100%</div>
+                                    <div className="text-gray-500 text-sm mt-1">today</div>
+                                </div>
+                            </div>
+                            
+                            {/* Legend */}
+                            <div className="absolute right-4 top-4 space-y-2">
+                                <div className="flex items-center">
+                                    <div className="w-4 h-4 bg-green-700 mr-2"></div>
+                                    <span className="text-gray-700 text-sm">Электроэнергия · 57 %</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-4 h-4 bg-orange-500 mr-2"></div>
+                                    <span className="text-gray-700 text-sm">Газ · 25 %</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-4 h-4 bg-blue-500 mr-2"></div>
+                                    <span className="text-gray-700 text-sm">Утилизация тепла · 18 %</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                    <div className="text-gray-500 text-sm">
+                        Connection: OK · Tariff plan: Industrial-2 · Compliance: ANSI/ISA-101.01
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

@@ -1,0 +1,151 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--pipe-stroke": "#3a4756",
+  "--tank-fill": "#eaeef3",
+  "--highlight": "#1976d2",
+  "--surface-0": "#f3f5f8"
+}
+</design_variables>
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Farm Synoptic</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <Header />
+                    <main className="p-6 bg-gray-50">
+                        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-6">Levels and connections</h2>
+                            <div className="grid grid-cols-5 gap-4">
+                                <TankIndicator id="T-101" percentage={72} status="OK" color="green" />
+                                <TankIndicator id="T-102" percentage={41} status="OK" color="green" />
+                                <TankIndicator id="T-103" percentage={88} status="WARN" color="orange" />
+                                <TankIndicator id="T-104" percentage={12} status="ALARM" color="red" />
+                                <TankIndicator id="T-201" percentage={64} status="OK" color="green" />
+                                <TankIndicator id="T-202" percentage={95} status="ALARM" color="red" />
+                                <TankIndicator id="T-203" percentage={33} status="OK" color="green" />
+                                <TankIndicator id="T-204" percentage={58} status="OK" color="green" />
+                                <TankIndicator id="T-301" percentage={47} status="OK" color="green" />
+                                <TankIndicator id="T-302" percentage={22} status="WARN" color="orange" />
+                            </div>
+                        </div>
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <h3 className="text-md font-semibold text-gray-800 mb-4">Status legend</h3>
+                            <div className="flex items-center space-x-6">
+                                <div className="flex items-center">
+                                    <span className="bg-green-600 text-white px-4 py-0.5 text-sm rounded-sm mr-2">OK</span>
+                                    <span className="text-sm text-gray-600">в норме</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="bg-orange-500 text-white px-4 py-0.5 text-sm rounded-sm mr-2">WARN</span>
+                                    <span className="text-sm text-gray-600">отключение, нужно вмешательство</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="bg-red-600 text-white px-4 py-0.5 text-sm rounded-sm mr-2">ALARM</span>
+                                    <span className="text-sm text-gray-600">критическое отключение, требуется ACK</span>
+                                </div>
+                            </div>
+                            <p className="text-xs text-gray-500 mt-4">
+                                Сообщение закодировано терما независимыми признаками: цвет state-fill, текстовая белёж state-badge, форма state-shape.
+                            </p>
+                        </div>
+                    </main>
+                    <footer className="bg-gray-100 py-3 px-6 border-t border-gray-200">
+                        <div className="text-xs text-gray-500">
+                            Connection: OK - Tanks online: 10/10 - Critical: 2 - Warning: 2
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <header className="bg-slate-900 text-white py-3 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-xl font-semibold">Tank Farm Synoptic</h1>
+                            <p className="text-sm text-gray-300">Facility 2 - Tank yard A - 10 tanks</p>
+                        </div>
+                        <div className="bg-slate-800 rounded-md px-4 py-2 text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        function TankIndicator({ id, percentage, status, color }) {
+            const getStatusColor = () => {
+                switch(status) {
+                    case 'OK': return 'bg-green-600';
+                    case 'WARN': return 'bg-orange-500';
+                    case 'ALARM': return 'bg-red-600';
+                    default: return 'bg-gray-500';
+                }
+            };
+
+            const getFillColor = () => {
+                switch(color) {
+                    case 'green': return 'bg-green-600';
+                    case 'orange': return 'bg-orange-500';
+                    case 'red': return 'bg-red-600';
+                    default: return 'bg-gray-500';
+                }
+            };
+
+            return (
+                <div className="flex flex-col items-center">
+                    <div className="relative w-24 h-48">
+                        <div className="absolute w-full h-full border-2 border-gray-400 rounded-sm bg-gray-100"></div>
+                        <div 
+                            className={`absolute bottom-0 w-full ${getFillColor()}`} 
+                            style={{height: `${percentage}%`}}
+                        ></div>
+                        <div className="absolute top-1/2 w-16 h-0.5 bg-gray-400" style={{left: '70%'}}></div>
+                        <div className="absolute top-1/2 transform -translate-y-1/2 text-xs text-gray-500" style={{right: '0', textAlign: 'right'}}>
+                            {percentage}%
+                        </div>
+                    </div>
+                    <div className="mt-2 text-sm font-semibold text-gray-800">{id}</div>
+                    <div className="mt-1">
+                        <span className={`${getStatusColor()} text-white px-4 py-0.5 text-sm rounded-sm`}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

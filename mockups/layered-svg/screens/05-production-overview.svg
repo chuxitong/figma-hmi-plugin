@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900"
+     viewBox="0 0 1440 900" font-family="Inter, system-ui, sans-serif">
+  <title>Production Overview</title>
+  <defs>
+    <style>
+      .h1 { font-size: 18px; font-weight: 700; fill: #1b2630; }
+      .h2 { font-size: 14px; font-weight: 700; fill: #1b2630; }
+      .small { font-size: 11px; fill: #5a6675; }
+      .meta  { font-size: 10px; fill: #5a6675; }
+      .num   { font-size: 26px; font-weight: 700; fill: #1b2630; }
+      .cell  { font-size: 12px; fill: #1b2630; }
+      .badge-text { font-size: 10px; font-weight: 700; fill: white; }
+      .header-title { font-size: 18px; font-weight: 700; fill: #ffffff; }
+      .header-meta  { font-size: 11px; fill: #c8d3e2; }
+      .button-text  { font-size: 11px; font-weight: 600; fill: #1b2630; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1440" height="900" fill="#f3f5f8"/>
+<g id="layout-guide" opacity="0.6"><line x1="24" y1="80" x2="24" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="110" y1="80" x2="110" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="196" y1="80" x2="196" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="282" y1="80" x2="282" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="368" y1="80" x2="368" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="454" y1="80" x2="454" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="540" y1="80" x2="540" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="626" y1="80" x2="626" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="712" y1="80" x2="712" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="798" y1="80" x2="798" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="884" y1="80" x2="884" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="970" y1="80" x2="970" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1056" y1="80" x2="1056" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/></g>
+<g id="header">
+  <rect x="0" y="0" width="1440" height="64" fill="#13314f"/>
+  <text x="24" y="40" class="header-title">Production Line A — Overview</text>
+  <text x="24" y="56" class="header-meta">Plant: Refinery 2  ·  Shift B  ·  Operator: A. Petrov</text>
+  <g id="header-clock">
+    <rect x="1240" y="14" width="180" height="36" rx="4" fill="#1d4067" stroke="#1d4067"/>
+    <text x="1330" y="38" text-anchor="middle" class="header-meta">2026-04-19  14:32:07 MSK</text>
+  </g>
+  <g id="header-tabs">
+    <rect x="380" y="32" width="92" height="22" rx="11" fill="#1d4067"/>
+    <text x="426" y="48" text-anchor="middle" fill="white" font-size="11" font-weight="600">Overview</text>
+    <text x="500" y="48" text-anchor="middle" fill="#9eb3cd" font-size="11">Alarms</text>
+    <text x="572" y="48" text-anchor="middle" fill="#9eb3cd" font-size="11">Trends</text>
+    <text x="660" y="48" text-anchor="middle" fill="#9eb3cd" font-size="11">Operator</text>
+  </g>
+</g>
+<g id="alarm-sidebar">
+  <rect x="1080" y="80" width="340" height="540" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<g id="alarm-sidebar-header">
+  <text x="1100" y="106" class="h2">Active alarms</text>
+  <text x="1392" y="106" text-anchor="end" class="meta">3 of 14</text>
+</g>
+<g id="alarm-row" data-severity="alarm">
+  <rect x="1096" y="124" width="312" height="74" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="1108" y="142" class="meta">14:31</text>
+  <text x="1160" y="142" class="meta">TT-301</text>
+  <text x="1108" y="162" class="cell">Motor temperature high</text>
+  <g id="badge"><rect x="1108" y="172" width="58" height="16" rx="3" fill="#c62828"/>
+    <text x="1137" y="184" text-anchor="middle" class="badge-text">ALARM</text></g>
+  <g id="ack-button">
+    <rect x="1330" y="168" width="68" height="22" rx="3" fill="white" stroke="#3a4756"/>
+    <text x="1364" y="183" text-anchor="middle" class="button-text">ACK</text>
+  </g>
+</g>
+<g id="alarm-row" data-severity="alarm">
+  <rect x="1096" y="210" width="312" height="74" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="1108" y="228" class="meta">14:28</text>
+  <text x="1160" y="228" class="meta">PT-102</text>
+  <text x="1108" y="248" class="cell">Discharge pressure</text>
+  <g id="badge"><rect x="1108" y="258" width="58" height="16" rx="3" fill="#c62828"/>
+    <text x="1137" y="270" text-anchor="middle" class="badge-text">ALARM</text></g>
+  <g id="ack-button">
+    <rect x="1330" y="254" width="68" height="22" rx="3" fill="white" stroke="#3a4756"/>
+    <text x="1364" y="269" text-anchor="middle" class="button-text">ACK</text>
+  </g>
+</g>
+<g id="alarm-row" data-severity="warn">
+  <rect x="1096" y="296" width="312" height="74" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="1108" y="314" class="meta">14:22</text>
+  <text x="1160" y="314" class="meta">FT-401</text>
+  <text x="1108" y="334" class="cell">Flow rate deviation</text>
+  <g id="badge"><rect x="1108" y="344" width="58" height="16" rx="3" fill="#ef6c00"/>
+    <text x="1137" y="356" text-anchor="middle" class="badge-text">WARN</text></g>
+  <g id="ack-button">
+    <rect x="1330" y="340" width="68" height="22" rx="3" fill="white" stroke="#3a4756"/>
+    <text x="1364" y="355" text-anchor="middle" class="button-text">ACK</text>
+  </g>
+</g>
+<g id="alarm-row" data-severity="warn">
+  <rect x="1096" y="382" width="312" height="74" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="1108" y="400" class="meta">14:15</text>
+  <text x="1160" y="400" class="meta">CT-502</text>
+  <text x="1108" y="420" class="cell">Cooling water temp</text>
+  <g id="badge"><rect x="1108" y="430" width="58" height="16" rx="3" fill="#ef6c00"/>
+    <text x="1137" y="442" text-anchor="middle" class="badge-text">WARN</text></g>
+  <g id="ack-button">
+    <rect x="1330" y="426" width="68" height="22" rx="3" fill="white" stroke="#3a4756"/>
+    <text x="1364" y="441" text-anchor="middle" class="button-text">ACK</text>
+  </g>
+</g>
+<g id="alarm-row" data-severity="info">
+  <rect x="1096" y="468" width="312" height="74" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="1108" y="486" class="meta">14:05</text>
+  <text x="1160" y="486" class="meta">PDT-201</text>
+  <text x="1108" y="506" class="cell">Filter ΔP</text>
+  <g id="badge"><rect x="1108" y="516" width="58" height="16" rx="3" fill="#1976d2"/>
+    <text x="1137" y="528" text-anchor="middle" class="badge-text">INFO</text></g>
+  <g id="ack-button">
+    <rect x="1330" y="512" width="68" height="22" rx="3" fill="white" stroke="#3a4756"/>
+    <text x="1364" y="527" text-anchor="middle" class="button-text">ACK</text>
+  </g>
+</g>
+<g id="pipeline-area">
+  <rect x="24" y="80" width="1040" height="410" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<g id="pipeline-title">
+  <text x="44" y="106" class="h2">Process flow — Line A</text>
+  <text x="44" y="124" class="meta">Source: ThingsBoard SCADA symbol library — fluid system pack</text>
+</g>
+<g id="tank-instance" data-state="normal" data-level="72" transform="translate(80 220)">
+  <rect x="0" y="0" width="58" height="100" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="2" y="30" width="54" height="70" fill="#2e7d32" opacity="0.8"/>
+  <rect x="22" y="100" width="14" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <text x="29" y="-4" text-anchor="middle" class="meta">72%</text>
+</g>
+<g id="pipe">
+  <line x1="150" y1="270" x2="230" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="150" y1="270" x2="230" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="pump-instance" data-state="normal" transform="translate(230 246)">
+  <rect x="0" y="22" width="14" height="12" fill="#cdd5df" stroke="#3a4756"/>
+  <rect x="62" y="22" width="14" height="12" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="38" cy="28" r="22" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <circle cx="38" cy="28" r="14" fill="#2e7d32" opacity="0.85"/>
+  <polygon points="38,14 50,28 38,42 26,28" fill="#cdd5df" stroke="#3a4756"/>
+</g>
+<g id="pipe">
+  <line x1="310" y1="270" x2="380" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="310" y1="270" x2="380" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="valve-instance" data-state="normal" transform="translate(380 246)">
+  <rect x="-8" y="20" width="12" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <rect x="56" y="20" width="12" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <polygon points="4,24 30,4 30,46 4,24" fill="#cdd5df" stroke="#3a4756"/>
+  <polygon points="56,24 30,4 30,46 56,24" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="30" cy="24" r="6" fill="#2e7d32"/>
+  <line x1="30" y1="6" x2="30" y2="-6" stroke="#3a4756" stroke-width="2"/>
+  <circle cx="30" cy="-6" r="2.5" fill="#3a4756"/>
+
+</g>
+<g id="pipe">
+  <line x1="450" y1="270" x2="540" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="450" y1="270" x2="540" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="pump-instance" data-state="warning" transform="translate(540 246)">
+  <rect x="0" y="22" width="14" height="12" fill="#cdd5df" stroke="#3a4756"/>
+  <rect x="62" y="22" width="14" height="12" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="38" cy="28" r="22" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <circle cx="38" cy="28" r="14" fill="#ef6c00" opacity="0.85"/>
+  <polygon points="38,14 50,28 38,42 26,28" fill="#cdd5df" stroke="#3a4756"/>
+</g>
+<g id="pipe">
+  <line x1="620" y1="270" x2="690" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="620" y1="270" x2="690" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="valve-instance" data-state="alarm" transform="translate(690 246)">
+  <rect x="-8" y="20" width="12" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <rect x="56" y="20" width="12" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <polygon points="4,24 30,4 30,46 4,24" fill="#cdd5df" stroke="#3a4756"/>
+  <polygon points="56,24 30,4 30,46 56,24" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="30" cy="24" r="6" fill="#c62828"/>
+  <line x1="30" y1="6" x2="30" y2="-6" stroke="#3a4756" stroke-width="2"/>
+  <circle cx="30" cy="-6" r="2.5" fill="#3a4756"/>
+
+</g>
+<g id="pipe">
+  <line x1="760" y1="270" x2="840" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="760" y1="270" x2="840" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="separator-block">
+  <ellipse cx="900" cy="270" rx="60" ry="32" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <path d="M850,272 q50,-22 100,0 v22 q-50,16 -100,0 z" fill="#2e7d32" opacity="0.55"/>
+  <text x="900" y="320" text-anchor="middle" class="meta">SEPARATOR S-1</text>
+</g>
+<g id="pipe">
+  <line x1="960" y1="270" x2="1020" y2="270" stroke="#7d8b9c" stroke-width="10" opacity="0.7"/>
+  <line x1="960" y1="270" x2="1020" y2="270" stroke="#3a4756" stroke-width="1"/>
+</g>
+<g id="tank-instance" data-state="normal" data-level="41" transform="translate(1020 220)">
+  <rect x="0" y="0" width="58" height="100" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="2" y="61" width="54" height="39" fill="#2e7d32" opacity="0.8"/>
+  <rect x="22" y="100" width="14" height="10" fill="#cdd5df" stroke="#3a4756"/>
+  <text x="29" y="-4" text-anchor="middle" class="meta">41%</text>
+</g>
+  <text x="110" y="356" text-anchor="middle" class="meta">T-101</text>
+  <text x="262" y="356" text-anchor="middle" class="meta">P-101</text>
+  <text x="412" y="356" text-anchor="middle" class="meta">V-201</text>
+  <text x="572" y="356" text-anchor="middle" class="meta">P-102</text>
+  <text x="722" y="356" text-anchor="middle" class="meta">V-202</text>
+  <text x="1052" y="356" text-anchor="middle" class="meta">T-102</text>
+<g id="sensor-instance" data-state="normal" transform="translate(150 382)">
+  <circle cx="20" cy="20" r="18" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="20" cy="20" r="10" fill="#2e7d32"/>
+  <text x="20" y="24" text-anchor="middle" fill="white" font-size="11" font-weight="700">T</text>
+  <text x="20" y="56" text-anchor="middle" class="meta">72 °C</text>
+</g>
+<g id="sensor-instance" data-state="normal" transform="translate(450 382)">
+  <circle cx="20" cy="20" r="18" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="20" cy="20" r="10" fill="#2e7d32"/>
+  <text x="20" y="24" text-anchor="middle" fill="white" font-size="11" font-weight="700">T</text>
+  <text x="20" y="56" text-anchor="middle" class="meta">3.4 bar</text>
+</g>
+<g id="sensor-instance" data-state="alarm" transform="translate(700 382)">
+  <circle cx="20" cy="20" r="18" fill="#cdd5df" stroke="#3a4756"/>
+  <circle cx="20" cy="20" r="10" fill="#c62828"/>
+  <text x="20" y="24" text-anchor="middle" fill="white" font-size="11" font-weight="700">T</text>
+  <text x="20" y="56" text-anchor="middle" class="meta">94 °C</text>
+</g>
+<g id="kpi-card" data-state="ok">
+  <rect x="24" y="510" width="246" height="92" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="24" y="510" width="4" height="92" fill="#2e7d32"/>
+  <text x="40" y="532" class="small">OEE</text>
+  <text x="40" y="562" class="num">82.5</text>
+  <text x="80" y="562" class="small">%</text>
+  <text x="40" y="584" class="meta">▲ +1.2 за смену</text>
+</g>
+<g id="kpi-card" data-state="ok">
+  <rect x="280" y="510" width="246" height="92" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="280" y="510" width="4" height="92" fill="#2e7d32"/>
+  <text x="296" y="532" class="small">Units / h</text>
+  <text x="296" y="562" class="num">12480</text>
+  <text x="344" y="562" class="small"></text>
+  <text x="296" y="584" class="meta">▲ +340 за смену</text>
+</g>
+<g id="kpi-card" data-state="warn">
+  <rect x="536" y="510" width="246" height="92" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="536" y="510" width="4" height="92" fill="#ef6c00"/>
+  <text x="552" y="532" class="small">Reject</text>
+  <text x="552" y="562" class="num">0.6</text>
+  <text x="584" y="562" class="small">%</text>
+  <text x="552" y="584" class="meta">▼ -0.1 за смену</text>
+</g>
+<g id="kpi-card" data-state="warn">
+  <rect x="792" y="510" width="272" height="92" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="792" y="510" width="4" height="92" fill="#ef6c00"/>
+  <text x="808" y="532" class="small">Energy</text>
+  <text x="808" y="562" class="num">742</text>
+  <text x="840" y="562" class="small">kW</text>
+  <text x="808" y="584" class="meta">▲ +18 за смену</text>
+</g>
+<g id="trend-card">
+  <rect x="24" y="614" width="1040" height="156" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<g id="trend-card-header">
+  <text x="44" y="640" class="h2">Real-time trend — last 60 min</text>
+  <g id="trend-legend">
+    <rect x="800" y="628" width="10" height="10" fill="#2e7d32"/>
+    <text x="816" y="638" class="meta">Temp</text>
+    <rect x="860" y="628" width="10" height="10" fill="#ef6c00"/>
+    <text x="876" y="638" class="meta">Pressure</text>
+    <rect x="930" y="628" width="10" height="10" fill="#c62828"/>
+    <text x="946" y="638" class="meta">Flow</text>
+  </g>
+</g>
+<g id="trend-grid">
+  <line x1="44" y1="660" x2="1040" y2="660" stroke="#d6dae0"/>
+  <line x1="44" y1="700" x2="1040" y2="700" stroke="#d6dae0"/>
+  <line x1="44" y1="740" x2="1040" y2="740" stroke="#d6dae0"/>
+</g>
+<g id="trend-curves">
+  <polyline fill="none" stroke="#2e7d32" stroke-width="1.6"
+            points="44,720 140,712 220,696 320,704 420,690 520,668 620,684 720,652 820,672 920,640 1020,648"/>
+  <polyline fill="none" stroke="#ef6c00" stroke-width="1.6"
+            points="44,738 140,732 220,720 320,716 420,712 520,706 620,704 720,696 820,690 920,686 1020,680"/>
+  <polyline fill="none" stroke="#c62828" stroke-width="1.6"
+            points="44,750 140,744 220,748 320,742 420,750 520,754 620,748 720,738 820,742 920,734 1020,720"/>
+</g>
+<g id="footer-status">
+  <rect x="0" y="864" width="1440" height="36" fill="#eaeef3" stroke="#d6dae0"/>
+  <text x="24" y="886" class="meta">Connection: OK   ·   Latency: 18 ms   ·   Logged in as A. Petrov   ·   ThingsBoard SCADA glyphs imported via 00_raw_svg</text>
+</g>
+</svg>

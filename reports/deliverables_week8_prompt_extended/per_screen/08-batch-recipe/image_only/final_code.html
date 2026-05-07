@@ -1,0 +1,221 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <div className="flex-1 p-6 bg-gray-50">
+                        <div className="flex gap-6">
+                            <StepsPanel />
+                            <ParametersPanel />
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#0a356e] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                            <i className="fas fa-flask mr-3"></i>
+                            <h1 className="text-2xl font-semibold">Batch Recipe Management</h1>
+                            <div className="ml-4 text-sm text-gray-300">
+                                Recipe R-204 · Lot 2026-017 · Batch operator: A. Petrov
+                            </div>
+                        </div>
+                        <div className="bg-[#1a2c4d] px-4 py-2 rounded-md text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const StepsPanel = () => {
+            const steps = [
+                { id: 1, name: "Pre-heat", duration: "10 min", status: "DONE" },
+                { id: 2, name: "Fill base", duration: "8 min", status: "DONE" },
+                { id: 3, name: "Mix", duration: "15 min", status: "ACTIVE" },
+                { id: 4, name: "Add catalyst", duration: "4 min", status: "PENDING" },
+                { id: 5, name: "Hold", duration: "20 min", status: "PENDING" },
+                { id: 6, name: "Cool down", duration: "12 min", status: "PENDING" },
+                { id: 7, name: "Discharge", duration: "6 min", status: "PENDING" }
+            ];
+
+            return (
+                <div className="w-2/3 bg-white rounded-lg border border-gray-200 p-6">
+                    <h2 className="text-lg font-semibold mb-4 text-gray-800">Steps</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">#</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Step</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Duration</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {steps.map((step) => (
+                                    <tr key={step.id} className="border-b">
+                                        <td className="px-4 py-3 text-gray-800">{step.id}</td>
+                                        <td className="px-4 py-3 text-gray-800 font-medium">{step.name}</td>
+                                        <td className="px-4 py-3 text-gray-600">{step.duration}</td>
+                                        <td className="px-4 py-3">
+                                            <span className={`px-6 py-1 text-white text-xs rounded ${
+                                                step.status === "DONE" ? "bg-green-700" :
+                                                step.status === "ACTIVE" ? "bg-blue-600" : "bg-gray-500"
+                                            }`}>
+                                                {step.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            <button className="px-6 py-1 border border-gray-400 rounded text-gray-800 hover:bg-gray-50">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        };
+
+        const ParametersPanel = () => {
+            return (
+                <div className="w-1/3 space-y-6">
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                        <h2 className="text-lg font-semibold mb-4 text-gray-800">Live parameters</h2>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="border border-gray-200 rounded-lg p-4">
+                                <div className="text-sm text-gray-500 mb-2">Temperature</div>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-gray-800">65.4</span>
+                                    <span className="text-2xl text-gray-600 ml-2">°C</span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                                </div>
+                            </div>
+                            
+                            <div className="border border-gray-200 rounded-lg p-4">
+                                <div className="text-sm text-gray-500 mb-2">pH</div>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-gray-800">7.1</span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                                </div>
+                            </div>
+                            
+                            <div className="border border-gray-200 rounded-lg p-4">
+                                <div className="text-sm text-gray-500 mb-2">RPM</div>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-gray-800">240</span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                                </div>
+                            </div>
+                            
+                            <div className="border border-gray-200 rounded-lg p-4">
+                                <div className="text-sm text-gray-500 mb-2">Pressure</div>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-gray-800">1.18</span>
+                                    <span className="text-2xl text-gray-600 ml-2">bar</span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className="bg-orange-500 text-white text-xs px-8 py-1 rounded">WARN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                        <h2 className="text-lg font-semibold mb-6 text-gray-800">Timeline</h2>
+                        <div className="flex justify-between items-center mb-8">
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-sm font-medium">1</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-sm font-medium">2</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-medium">3</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">4</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">5</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">6</div>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">7</div>
+                            </div>
+                        </div>
+                        <div className="flex justify-between text-xs text-gray-500 mb-8">
+                            <span>10m</span>
+                            <span>8m</span>
+                            <span>15m</span>
+                            <span>4m</span>
+                            <span>20m</span>
+                            <span>12m</span>
+                            <span>6m</span>
+                        </div>
+                        
+                        <div className="flex space-x-4 mt-8">
+                            <button className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded">
+                                RESUME
+                            </button>
+                            <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded">
+                                HOLD
+                            </button>
+                            <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded">
+                                ABORT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="py-4 px-6 bg-gray-100 border-t">
+                    <div className="text-sm text-gray-500">
+                        Recipe R-204 · Step 3 of 7 ACTIVE · Compliance: ANSI/ISA-101.01
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

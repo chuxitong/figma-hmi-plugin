@@ -1,0 +1,29 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 93000,
+      "sha256_prefix": "5f2bd0b8beffd19d9a6ec81f665d7814"
+    },
+    "frame_name": "08 Batch Recipe — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": {
+      "StepList": {},
+      "Frame": {
+        "width": "1440px",
+        "height": "900px"
+      }
+    },
+    "variables": {
+      "--surface-0": "#f3f5f8",
+      "--header-bar": "#13314f",
+      "--step-active": "#1976d2",
+      "--step-done": "#2e7d32"
+    },
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "baseline"
+  }
+}

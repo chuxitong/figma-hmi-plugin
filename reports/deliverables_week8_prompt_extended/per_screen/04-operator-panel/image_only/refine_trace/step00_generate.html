@@ -1,0 +1,167 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Panel HMI</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header */}
+                    <header className="bg-[#0a3561] text-white py-4 px-6">
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center space-x-2">
+                                <i className="fas fa-cog text-xl"></i>
+                                <div>
+                                    <h1 className="text-2xl font-bold">Operator Control Panel</h1>
+                                    <div className="text-sm text-gray-300">Process loop: Mixer MX-501 · Operator: A. Petrov</div>
+                                </div>
+                            </div>
+                            <div className="bg-[#1c3b5a] px-4 py-2 rounded-md text-sm">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="flex-grow p-6 bg-gray-50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Left Panel - Manual Control */}
+                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                                <h2 className="text-lg font-bold mb-6 text-gray-800">Manual control</h2>
+                                
+                                {/* Control Buttons */}
+                                <div className="flex space-x-4 mb-6">
+                                    <button className="bg-[#27ae60] text-white px-8 py-4 rounded-md text-xl font-bold hover:bg-[#219955]">
+                                        START
+                                    </button>
+                                    <button className="bg-[#e74c3c] text-white px-8 py-4 rounded-md text-xl font-bold hover:bg-[#c0392b]">
+                                        STOP
+                                    </button>
+                                    <button className="border-2 border-gray-800 text-[#2c3e50] px-8 py-4 rounded-md text-xl font-bold hover:bg-gray-100">
+                                        RESET
+                                    </button>
+                                </div>
+
+                                {/* Operating Mode */}
+                                <h3 className="text-md font-bold mb-4 text-gray-800">Operating mode</h3>
+                                <div className="flex space-x-4 mb-6">
+                                    <button className="bg-[#0f2c52] text-white px-6 py-3 rounded-md text-md font-bold border border-[#0f2c52] flex-1">
+                                        AUTO
+                                    </button>
+                                    <button className="border-2 border-gray-400 text-[#2c3e50] px-6 py-3 rounded-md text-md font-bold hover:bg-gray-100 flex-1">
+                                        MANUAL
+                                    </button>
+                                    <button className="border-2 border-gray-400 text-[#2c3e50] px-6 py-3 rounded-md text-md font-bold hover:bg-gray-100 flex-1">
+                                        SERVICE
+                                    </button>
+                                </div>
+
+                                {/* Setpoints */}
+                                <h3 className="text-md font-bold mb-4 text-gray-800">Setpoints</h3>
+                                <div className="space-y-4">
+                                    <div className="flex space-x-4 items-center">
+                                        <label className="text-xs text-gray-500 w-24">Temperature</label>
+                                        <input type="text" value="75.0 °C" className="border border-gray-300 rounded-md px-4 py-2 flex-grow" />
+                                        <button className="bg-[#27ae60] text-white px-6 py-2 rounded-md font-bold hover:bg-[#219955]">
+                                            SET
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="flex space-x-4 items-center">
+                                        <label className="text-xs text-gray-500 w-24">Flow rate</label>
+                                        <input type="text" value="180 L/min" className="border border-gray-300 rounded-md px-4 py-2 flex-grow" />
+                                        <button className="bg-[#27ae60] text-white px-6 py-2 rounded-md font-bold hover:bg-[#219955]">
+                                            SET
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="flex space-x-4 items-center">
+                                        <label className="text-xs text-gray-500 w-24">Mixer RPM</label>
+                                        <input type="text" value="240 rpm" className="border border-gray-300 rounded-md px-4 py-2 flex-grow" />
+                                        <button className="bg-[#27ae60] text-white px-6 py-2 rounded-md font-bold hover:bg-[#219955]">
+                                            SET
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Panel - Live Readouts */}
+                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                                <h2 className="text-lg font-bold mb-6 text-gray-800">Live readouts</h2>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Temperature Readout */}
+                                    <div className="border border-gray-200 rounded-lg p-4">
+                                        <div className="text-sm text-gray-500 mb-2">Temperature out</div>
+                                        <div className="text-6xl font-bold text-gray-800 mb-2">74.6</div>
+                                        <div className="text-xs text-gray-500 mb-4">°C</div>
+                                        <button className="bg-[#27ae60] text-white px-16 py-1 rounded text-sm font-bold">
+                                            OK
+                                        </button>
+                                    </div>
+
+                                    {/* Flow Rate Readout */}
+                                    <div className="border border-gray-200 rounded-lg p-4">
+                                        <div className="text-sm text-gray-500 mb-2">Flow out</div>
+                                        <div className="text-6xl font-bold text-gray-800 mb-2">178</div>
+                                        <div className="text-xs text-gray-500 mb-4">L/min</div>
+                                        <button className="bg-[#27ae60] text-white px-16 py-1 rounded text-sm font-bold">
+                                            OK
+                                        </button>
+                                    </div>
+
+                                    {/* Mixer RPM Readout */}
+                                    <div className="border border-gray-200 rounded-lg p-4">
+                                        <div className="text-sm text-gray-500 mb-2">Mixer RPM</div>
+                                        <div className="text-6xl font-bold text-gray-800 mb-2">238</div>
+                                        <div className="text-xs text-gray-500 mb-4">rpm</div>
+                                        <button className="bg-[#27ae60] text-white px-16 py-1 rounded text-sm font-bold">
+                                            OK
+                                        </button>
+                                    </div>
+
+                                    {/* Pressure Readout */}
+                                    <div className="border border-gray-200 rounded-lg p-4">
+                                        <div className="text-sm text-gray-500 mb-2">Pressure</div>
+                                        <div className="text-6xl font-bold text-gray-800 mb-2">3.18</div>
+                                        <div className="text-xs text-gray-500 mb-4">bar</div>
+                                        <button className="bg-[#e67e22] text-white px-16 py-1 rounded text-sm font-bold">
+                                            WARN
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                        <div className="text-sm text-gray-500">
+                            Connection: OK · Loop status: closed-loop AUTO · Compliance: ANSI/ISA-101.01
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

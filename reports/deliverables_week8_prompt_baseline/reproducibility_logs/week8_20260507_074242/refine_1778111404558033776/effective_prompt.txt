@@ -1,0 +1,208 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--surface-card": "#ffffff",
+  "--text-primary": "#1b2630",
+  "--text-secondary": "#5a6675",
+  "--accent-running": "#2e7d32",
+  "--accent-warning": "#f9a825",
+  "--accent-fault": "#c62828",
+  "--radius-md": "6px",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Status Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const StatusCard = ({ title, value, trend, status, borderColor }) => {
+            const getStatusStyle = () => {
+                switch(status) {
+                    case 'OK':
+                        return 'bg-green-700 text-white';
+                    case 'ALARM':
+                        return 'bg-red-700 text-white';
+                    case 'MAINT':
+                        return 'bg-orange-500 text-white';
+                    case 'IDLE':
+                        return 'bg-gray-400 text-white';
+                    case 'WARN':
+                        return 'bg-orange-500 text-white';
+                    default:
+                        return 'bg-green-700 text-white';
+                }
+            };
+
+            return (
+                <div className={`border rounded-lg bg-white shadow-sm overflow-hidden border-l-4 ${borderColor}`}>
+                    <div className="p-4">
+                        <div className="text-gray-600 text-sm mb-2">{title}</div>
+                        <div className="text-4xl font-bold text-gray-900 mb-2">{value}</div>
+                        <div className="text-gray-500 text-xs mb-2">trend: {trend}</div>
+                        <div className={`px-3 py-1 rounded text-xs font-medium ${getStatusStyle()}`}>
+                            {status}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const equipmentData = [
+                {
+                    title: "Pump P-101",
+                    value: "1480",
+                    trend: "+12",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Pump P-102",
+                    value: "1492",
+                    trend: "+8",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Compressor C-201",
+                    value: "3.21",
+                    trend: "+0.04",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Motor M-301",
+                    value: "94.2",
+                    trend: "+5.1",
+                    status: "ALARM",
+                    borderColor: "border-l-red-600"
+                },
+                {
+                    title: "Valve V-102",
+                    value: "CLOSED",
+                    trend: "-",
+                    status: "ALARM",
+                    borderColor: "border-l-red-600"
+                },
+                {
+                    title: "Conveyor CV-401",
+                    value: "0.00",
+                    trend: "-",
+                    status: "MAINT",
+                    borderColor: "border-l-orange-500"
+                },
+                {
+                    title: "Mixer MX-501",
+                    value: "240",
+                    trend: "-",
+                    status: "IDLE",
+                    borderColor: "border-l-gray-500"
+                },
+                {
+                    title: "Heater H-201",
+                    value: "62.0",
+                    trend: "-1.2",
+                    status: "WARN",
+                    borderColor: "border-l-orange-600"
+                },
+                {
+                    title: "Tank T-101",
+                    value: "72",
+                    trend: "+2",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Tank T-102",
+                    value: "41",
+                    trend: "-1",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Sensor T-405",
+                    value: "38.5",
+                    trend: "+0.4",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                },
+                {
+                    title: "Sensor F-902",
+                    value: "180",
+                    trend: "+3",
+                    status: "OK",
+                    borderColor: "border-l-green-600"
+                }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-[#13314f] text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <div className="flex items-center space-x-2">
+                                    <i className="fas fa-industry"></i>
+                                    <span className="text-xl font-semibold">Equipment Status Dashboard</span>
+                                </div>
+                                <div className="text-sm text-gray-300 mt-1">Facility 2 • Line A • Shift B</div>
+                            </div>
+                            <div className="bg-[#1e3a8a] px-4 py-2 rounded text-sm text-gray-300">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="p-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {equipmentData.map((equipment, index) => (
+                                <StatusCard 
+                                    key={index}
+                                    title={equipment.title}
+                                    value={equipment.value}
+                                    trend={equipment.trend}
+                                    status={equipment.status}
+                                    borderColor={equipment.borderColor}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="border-t bg-gray-50 py-4 px-6">
+                        <div className="text-gray-500 text-sm">
+                            Connection: OK • Items: 12 • Critical: 2 • Warning: 2
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

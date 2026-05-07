@@ -1,0 +1,197 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Recipe Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-1 p-6">
+                        <div className="flex gap-6">
+                            <div className="w-2/3 bg-white rounded-lg border border-gray-300 p-6">
+                                <StepsTable />
+                            </div>
+                            <div className="w-1/3 space-y-6">
+                                <LiveParameters />
+                                <Timeline />
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#13314f] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-bold">Batch Recipe Management</h1>
+                            <div className="text-sm text-gray-300">
+                                Recipe R-204 · Lot 2026-017 · Batch operator: A. Petrov
+                            </div>
+                        </div>
+                        <div className="bg-[#1d4e8c] text-white px-4 py-2 rounded-md text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const StepsTable = () => {
+            const steps = [
+                { id: 1, name: 'Pre-heat', duration: '10 min', status: 'DONE', statusColor: 'bg-[#2e7d32]' },
+                { id: 2, name: 'Fill base', duration: '8 min', status: 'DONE', statusColor: 'bg-[#2e7d32]' },
+                { id: 3, name: 'Mix', duration: '15 min', status: 'ACTIVE', statusColor: 'bg-[#1976d2]' },
+                { id: 4, name: 'Add catalyst', duration: '4 min', status: 'PENDING', statusColor: 'bg-[#4f6b79]' },
+                { id: 5, name: 'Hold', duration: '20 min', status: 'PENDING', statusColor: 'bg-[#4f6b79]' },
+                { id: 6, name: 'Cool down', duration: '12 min', status: 'PENDING', statusColor: 'bg-[#4f6b79]' },
+                { id: 7, name: 'Discharge', duration: '6 min', status: 'PENDING', statusColor: 'bg-[#4f6b79]' }
+            ];
+
+            return (
+                <div>
+                    <h2 className="text-lg font-bold mb-4 text-gray-800">Steps</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">#</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Step</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Duration</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Status</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {steps.map((step) => (
+                                    <tr key={step.id} className="border-b border-gray-200">
+                                        <td className="px-4 py-4 text-sm text-gray-800">{step.id}</td>
+                                        <td className="px-4 py-4 text-sm font-medium text-gray-800">{step.name}</td>
+                                        <td className="px-4 py-4 text-sm text-gray-600">{step.duration}</td>
+                                        <td className="px-4 py-4">
+                                            <span className={`${step.statusColor} text-white text-xs px-8 py-1 rounded capitalize font-medium`}>
+                                                {step.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            <button className="border border-gray-400 text-gray-800 px-6 py-1 rounded text-sm font-medium hover:bg-gray-50">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        };
+
+        const LiveParameters = () => {
+            const parameters = [
+                { label: 'Temperature', value: '65.4', unit: '°C', status: 'OK', statusColor: 'bg-[#2e7d32]' },
+                { label: 'pH', value: '7.1', unit: '', status: 'OK', statusColor: 'bg-[#2e7d32]' },
+                { label: 'RPM', value: '240', unit: '', status: 'OK', statusColor: 'bg-[#2e7d32]' },
+                { label: 'Pressure', value: '1.18', unit: 'bar', status: 'WARN', statusColor: 'bg-[#e65100]' }
+            ];
+
+            return (
+                <div className="bg-white rounded-lg border border-gray-300 p-6">
+                    <h2 className="text-lg font-bold mb-4 text-gray-800">Live parameters</h2>
+                    <div className="grid grid-cols-2 gap-4">
+                        {parameters.map((param, index) => (
+                            <div key={index} className="border border-gray-300 rounded-lg p-4">
+                                <div className="text-sm text-gray-500 mb-2">{param.label}</div>
+                                <div className="flex items-end">
+                                    <span className="text-3xl font-medium text-gray-800">{param.value}</span>
+                                    <span className="text-lg text-gray-500 ml-2">{param.unit}</span>
+                                </div>
+                                <div className="mt-2">
+                                    <span className={`${param.statusColor} text-white text-xs px-8 py-1 rounded capitalize font-medium`}>
+                                        {param.status}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const Timeline = () => {
+            const timelineItems = [
+                { number: 1, time: '10m', isActive: true },
+                { number: 2, time: '8m', isActive: true },
+                { number: 3, time: '15m', isActive: true },
+                { number: 4, time: '4m', isActive: false },
+                { number: 5, time: '20m', isActive: false },
+                { number: 6, time: '12m', isActive: false },
+                { number: 7, time: '6m', isActive: false }
+            ];
+
+            return (
+                <div className="bg-white rounded-lg border border-gray-300 p-6">
+                    <h2 className="text-lg font-bold mb-6 text-gray-800">Timeline</h2>
+                    <div className="flex items-center justify-between mb-8">
+                        {timelineItems.map((item) => (
+                            <div key={item.number} className="flex flex-col items-center">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
+                                    item.number <= 3 ? 'bg-green-700' : 'bg-gray-500'
+                                }`}>
+                                    {item.number}
+                                </div>
+                                <div className="text-xs text-gray-500 mt-2">{item.time}</div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex gap-4">
+                        <button className="flex-1 bg-green-700 text-white py-3 px-4 rounded-md font-bold text-lg hover:bg-green-800">
+                            RESUME
+                        </button>
+                        <button className="flex-1 bg-orange-500 text-white py-3 px-4 rounded-md font-bold text-lg hover:bg-orange-600">
+                            HOLD
+                        </button>
+                        <button className="flex-1 bg-red-600 text-white py-3 px-4 rounded-md font-bold text-lg hover:bg-red-700">
+                            ABORT
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                    <div className="text-xs text-gray-500">
+                        Recipe R-204 · Step 3 of 7 ACTIVE · Compliance: ANSI/ISA-101.01
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

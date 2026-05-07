@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900"
+     viewBox="0 0 1440 900" font-family="Inter, system-ui, sans-serif">
+  <title>Real-Time Trend Monitor</title>
+  <defs>
+    <style>
+      .h1 { font-size: 18px; font-weight: 700; fill: #1b2630; }
+      .h2 { font-size: 14px; font-weight: 700; fill: #1b2630; }
+      .small { font-size: 11px; fill: #5a6675; }
+      .meta  { font-size: 10px; fill: #5a6675; }
+      .num   { font-size: 26px; font-weight: 700; fill: #1b2630; }
+      .cell  { font-size: 12px; fill: #1b2630; }
+      .badge-text { font-size: 10px; font-weight: 700; fill: white; }
+      .header-title { font-size: 18px; font-weight: 700; fill: #ffffff; }
+      .header-meta  { font-size: 11px; fill: #c8d3e2; }
+      .button-text  { font-size: 11px; font-weight: 600; fill: #1b2630; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1440" height="900" fill="#f3f5f8"/>
+<g id="layout-guide" opacity="0.6"><line x1="24.0" y1="80" x2="24.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="140.0" y1="80" x2="140.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="256.0" y1="80" x2="256.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="372.0" y1="80" x2="372.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="488.0" y1="80" x2="488.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="604.0" y1="80" x2="604.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="720.0" y1="80" x2="720.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="836.0" y1="80" x2="836.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="952.0" y1="80" x2="952.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1068.0" y1="80" x2="1068.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1184.0" y1="80" x2="1184.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1300.0" y1="80" x2="1300.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1416.0" y1="80" x2="1416.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/></g>
+<g id="header">
+  <rect x="0" y="0" width="1440" height="64" fill="#13314f"/>
+  <text x="24" y="40" class="header-title">Real-Time Trend Monitor</text>
+  <text x="24" y="56" class="header-meta">Loop: U2  ·  Window: 60 min  ·  Sample: 1 s</text>
+  <g id="header-clock">
+    <rect x="1240" y="14" width="180" height="36" rx="4" fill="#1d4067" stroke="#1d4067"/>
+    <text x="1330" y="38" text-anchor="middle" class="header-meta">2026-04-19  14:32:07 MSK</text>
+  </g>
+</g>
+<g id="kpi-card" data-state="ok">
+  <rect x="24" y="88" width="312" height="96" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="24" y="88" width="4" height="96" fill="#2e7d32"/>
+  <text x="40" y="110" class="small">Temperature</text>
+  <text x="40" y="140" class="num">72.4</text>
+  <text x="80" y="140" class="small">°C</text>
+  <text x="40" y="162" class="meta">▲ +1.2 за смену</text>
+</g>
+<g id="kpi-card" data-state="ok">
+  <rect x="360" y="88" width="312" height="96" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="360" y="88" width="4" height="96" fill="#2e7d32"/>
+  <text x="376" y="110" class="small">Pressure</text>
+  <text x="376" y="140" class="num">3.21</text>
+  <text x="416" y="140" class="small">bar</text>
+  <text x="376" y="162" class="meta">▲ +0.04 за смену</text>
+</g>
+<g id="kpi-card" data-state="warn">
+  <rect x="696" y="88" width="312" height="96" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="696" y="88" width="4" height="96" fill="#ef6c00"/>
+  <text x="712" y="110" class="small">Flow</text>
+  <text x="712" y="140" class="num">184</text>
+  <text x="744" y="140" class="small">L/min</text>
+  <text x="712" y="162" class="meta">▼ -3 за смену</text>
+</g>
+<g id="kpi-card" data-state="ok">
+  <rect x="1032" y="88" width="384" height="96" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+  <rect x="1032" y="88" width="4" height="96" fill="#2e7d32"/>
+  <text x="1048" y="110" class="small">Setpoint dev</text>
+  <text x="1048" y="140" class="num">1.8</text>
+  <text x="1080" y="140" class="small">%</text>
+  <text x="1048" y="162" class="meta">▲ +0.2 за смену</text>
+</g>
+<g id="trend-chart">
+  <rect x="24" y="200" width="1392" height="480" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<g id="trend-chart-header">
+  <text x="44" y="226" class="h2">Trend window — 14:00 to 15:00</text>
+  <g id="trend-legend">
+    <rect x="900" y="216" width="10" height="10" fill="#2e7d32"/>
+    <text x="916" y="226" class="meta">Temp (°C)</text>
+    <rect x="990" y="216" width="10" height="10" fill="#ef6c00"/>
+    <text x="1006" y="226" class="meta">Pressure (bar)</text>
+    <rect x="1110" y="216" width="10" height="10" fill="#c62828"/>
+    <text x="1126" y="216" class="meta">Flow (L/min)</text>
+    <text x="1126" y="228" class="meta">band: ±2σ</text>
+  </g>
+</g>
+<g id='trend-grid'>
+<line x1="80" y1="270" x2="1392" y2="270" stroke="#d6dae0"/>
+<text x="60" y="274" text-anchor="end" class="meta">100</text>
+<line x1="80" y1="325" x2="1392" y2="325" stroke="#d6dae0"/>
+<text x="60" y="329" text-anchor="end" class="meta">90</text>
+<line x1="80" y1="380" x2="1392" y2="380" stroke="#d6dae0"/>
+<text x="60" y="384" text-anchor="end" class="meta">80</text>
+<line x1="80" y1="435" x2="1392" y2="435" stroke="#d6dae0"/>
+<text x="60" y="439" text-anchor="end" class="meta">70</text>
+<line x1="80" y1="490" x2="1392" y2="490" stroke="#d6dae0"/>
+<text x="60" y="494" text-anchor="end" class="meta">60</text>
+<line x1="80" y1="545" x2="1392" y2="545" stroke="#d6dae0"/>
+<text x="60" y="549" text-anchor="end" class="meta">50</text>
+<line x1="80" y1="600" x2="1392" y2="600" stroke="#d6dae0"/>
+<text x="60" y="604" text-anchor="end" class="meta">40</text>
+<line x1="80" y1="270" x2="80" y2="600" stroke="#eef1f5"/>
+<text x="80" y="618" text-anchor="middle" class="meta">14:00</text>
+<line x1="190" y1="270" x2="190" y2="600" stroke="#eef1f5"/>
+<text x="190" y="618" text-anchor="middle" class="meta">14:05</text>
+<line x1="300" y1="270" x2="300" y2="600" stroke="#eef1f5"/>
+<text x="300" y="618" text-anchor="middle" class="meta">14:10</text>
+<line x1="410" y1="270" x2="410" y2="600" stroke="#eef1f5"/>
+<text x="410" y="618" text-anchor="middle" class="meta">14:15</text>
+<line x1="520" y1="270" x2="520" y2="600" stroke="#eef1f5"/>
+<text x="520" y="618" text-anchor="middle" class="meta">14:20</text>
+<line x1="630" y1="270" x2="630" y2="600" stroke="#eef1f5"/>
+<text x="630" y="618" text-anchor="middle" class="meta">14:25</text>
+<line x1="740" y1="270" x2="740" y2="600" stroke="#eef1f5"/>
+<text x="740" y="618" text-anchor="middle" class="meta">14:30</text>
+<line x1="850" y1="270" x2="850" y2="600" stroke="#eef1f5"/>
+<text x="850" y="618" text-anchor="middle" class="meta">14:35</text>
+<line x1="960" y1="270" x2="960" y2="600" stroke="#eef1f5"/>
+<text x="960" y="618" text-anchor="middle" class="meta">14:40</text>
+<line x1="1070" y1="270" x2="1070" y2="600" stroke="#eef1f5"/>
+<text x="1070" y="618" text-anchor="middle" class="meta">14:45</text>
+<line x1="1180" y1="270" x2="1180" y2="600" stroke="#eef1f5"/>
+<text x="1180" y="618" text-anchor="middle" class="meta">14:50</text>
+<line x1="1290" y1="270" x2="1290" y2="600" stroke="#eef1f5"/>
+<text x="1290" y="618" text-anchor="middle" class="meta">14:55</text>
+<line x1="1400" y1="270" x2="1400" y2="600" stroke="#eef1f5"/>
+<text x="1400" y="618" text-anchor="middle" class="meta">14:60</text>
+</g>
+<g id='trend-curves'>
+<polyline fill="none" stroke="#2e7d32" stroke-width="1.6" points="80,368 124,369 168,369 212,381 256,379 300,358 344,346 388,351 432,346 476,339 520,353 564,374 608,374 652,370 696,377 740,375 784,353 828,341 872,348 916,349 960,344 1004,357 1048,378 1092,378 1136,369 1180,372 1224,370 1268,349 1312,337 1356,347 1400,352"/>
+<polyline fill="none" stroke="#ef6c00" stroke-width="1.6" points="80,451 124,446 168,439 212,453 256,474 300,474 344,470 388,477 432,475 476,453 520,441 564,448 608,449 652,444 696,457 740,478 784,478 828,469 872,472 916,470 960,449 1004,437 1048,447 1092,452 1136,449 1180,462 1224,482 1268,481 1312,467 1356,466 1400,464"/>
+<polyline fill="none" stroke="#c62828" stroke-width="1.6" points="80,550 124,557 168,555 212,533 256,521 300,528 344,529 388,524 432,537 476,558 520,558 564,549 608,552 652,550 696,529 740,517 784,527 828,532 872,529 916,542 960,562 1004,561 1048,547 1092,546 1136,544 1180,525 1224,515 1268,527 1312,538 1356,536 1400,546"/>
+</g>
+<g id="trend-annotations">
+  <rect x="44" y="640" width="1352" height="30" rx="4" fill="#fafbfd" stroke="#d6dae0"/>
+  <text x="60" y="660" class="cell">14:22 — Flow rate deviation > 12 % (FT-401)</text>
+  <text x="900" y="660" class="meta">Operator: A. Petrov</text>
+</g>
+<g id="footer-status">
+  <rect x="0" y="864" width="1440" height="36" fill="#eaeef3" stroke="#d6dae0"/>
+  <text x="24" y="886" class="meta">Connection: OK  ·  Latency: 18 ms  ·  Logging: enabled  ·  Export to CSV available via toolbar</text>
+</g>
+</svg>

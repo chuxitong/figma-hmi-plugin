@@ -1,0 +1,12 @@
+{
+  "iso_utc": "2026-05-06T23:36:52.584305+00:00",
+  "week": 7,
+  "deliver": "deliverables_week7",
+  "api_base": "http://127.0.0.1:8000",
+  "git_commit": "333885cc38deca1734aa3644d61b04ad56fb58ee",
+  "server_trace_dir_repo_relative": "reports/deliverables_week7/reproducibility_logs/week7_from-json_20260507_072807",
+  "ui2coden_prompt_profile_observed_via_health_at_start": "baseline",
+  "ui2coden_prompt_profile_env_client_shell": "baseline",
+  "week7_context_mode": "from-json",
+  "week7_context_source": "figma_plugin"
+}

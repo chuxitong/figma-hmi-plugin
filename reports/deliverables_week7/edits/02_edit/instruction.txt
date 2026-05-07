@@ -1,0 +1,1 @@
+Increase the main page title font size so the title reads as the clearest headline.

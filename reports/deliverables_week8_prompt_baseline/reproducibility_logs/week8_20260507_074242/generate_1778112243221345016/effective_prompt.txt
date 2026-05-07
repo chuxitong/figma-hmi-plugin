@@ -1,0 +1,12 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 02 Alarm Event — HMI
+
+<design_variables>
+{
+  "--surface-bg": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--sev-critical": "#c62828",
+  "--sev-high": "#ef6c00",
+  "--accent-tab": "#1976d2"
+}
+</design_variables>

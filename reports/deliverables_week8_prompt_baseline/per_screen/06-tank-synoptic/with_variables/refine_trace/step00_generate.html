@@ -1,0 +1,229 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Farm Synoptic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const TankIndicator = ({ level, percentage, name, status }) => {
+            const getStatusStyle = (status) => {
+                switch(status) {
+                    case 'OK':
+                        return 'bg-green-600';
+                    case 'WARN':
+                        return 'bg-orange-500';
+                    case 'ALARM':
+                        return 'bg-red-600';
+                    default:
+                        return 'bg-gray-300';
+                }
+            };
+
+            return (
+                <div className="flex flex-col items-center">
+                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                        <div className={`w-full h-${level} bg-${color}`}></div>
+                        <div className="absolute right-0 top-2 text-sm text-gray-600">{percentage}</div>
+                    </div>
+                    <div className="mt-2 text-sm font-bold text-gray-800">{name}</div>
+                    <div className="mt-1 bg-gray-500 text-white text-xs px-3 py-0.5 rounded">
+                        {status}
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-blue-900 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-2xl font-bold">Tank Farm Synoptic</h1>
+                                <p className="text-sm text-gray-300">Facility 2 - Tank yard A - 10 tanks</p>
+                            </div>
+                            <div className="text-sm bg-blue-800 px-4 py-2 rounded">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="p-6">
+                        {/* Levels and Connections Section */}
+                        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-6">Levels and connections</h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {/* First row of tanks */}
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-1/1 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/4 text-sm text-gray-600">72%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-101</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-3/12 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/3 text-sm text-gray-600">41%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-102</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-4/5 bg-orange-500"></div>
+                                        <div className="absolute right-0 top-1/4 text-sm text-gray-600">88%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-103</div>
+                                        <div className="mt-1 bg-orange-500 text-white text-xs px-3 py-0.5 rounded">WARN</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-1/8 bg-red-600"></div>
+                                        <div className="absolute right-0 top-1/4 text-sm text-gray-600">12%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-104</div>
+                                        <div className="mt-1 bg-red-600 text-white text-xs px-3 py-0.5 rounded">ALARM</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-5/8 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/3 text-sm text-gray-600">64%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-201</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+                                {/* Second row of tanks */}
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-9/10 bg-red-600"></div>
+                                        <div className="absolute right-0 top-1/5 text-sm text-gray-600">95%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-202</div>
+                                        <div className="mt-1 bg-red-600 text-white text-xs px-3 py-0.5 rounded">ALARM</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-1/3 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/3 text-sm text-gray-600">33%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-203</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-5/12 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/3 text-sm text-gray-600">58%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-204</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-1/2 bg-green-600"></div>
+                                        <div className="absolute right-0 top-1/3 text-sm text-gray-600">47%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-301</div>
+                                        <div className="mt-1 bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-start items-start space-x-8">
+                                    <div className="relative w-24 h-44 border-2 border-gray-500 bg-gray-100">
+                                        <div className="w-full h-1/5 bg-orange-500"></div>
+                                        <div className="absolute right-0 top-1/2 text-sm text-gray-600">22%</div>
+                                    </div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-sm font-bold text-gray-800">T-302</div>
+                                        <div className="mt-1 bg-orange-500 text-white text-xs px-3 py-0.5 rounded">WARN</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Connection Line */}
+                            <div className="mt-6 w-full h-2 bg-gray-400 rounded-full"></div>
+                        </div>
+
+                        {/* Status Legend */}
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Status legend</h2>
+                            <div className="flex items-center space-x-6">
+                                <div className="flex items-center space-x-2">
+                                    <div className="bg-green-600 text-white text-xs px-3 py-0.5 rounded">OK</div>
+                                    <span className="text-sm text-gray-600">в норме</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="bg-orange-500 text-white text-xs px-3 py-0.5 rounded">WARN</div>
+                                    <span className="text-sm text-gray-600">отключение, нужно вмешательство</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="bg-red-600 text-white text-xs px-3 py-0.5 rounded">ALARM</div>
+                                    <span className="text-sm text-gray-600">критическое отключение, требуется ACK</span>
+                                </div>
+                            </div>
+                            <p className="mt-4 text-xs text-gray-500">
+                                Сообщение закодировано терма независимыми признаками: цвет state-fill, текстовая белёж state-badge, форма state-shape.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="bg-gray-100 border-t border-gray-200 py-4 px-6">
+                        <div className="text-xs text-gray-500">
+                            Connection: OK - Tanks online: 10/10 - Critical: 2 - Warning: 2
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+
+<answer><answer>

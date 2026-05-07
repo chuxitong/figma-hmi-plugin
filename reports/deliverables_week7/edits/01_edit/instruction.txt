@@ -1,0 +1,1 @@
+Change the most prominent primary action button to a secondary style (flatter, neutral gray, less visually dominant).

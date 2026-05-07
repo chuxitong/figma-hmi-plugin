@@ -1,0 +1,71 @@
+{
+    "endpoint": "POST /generate",
+    "savedAtUtc": "2026-05-06T22:31:42.507Z",
+    "body": {
+      "image_base64": "<<truncated 158124 chars>>",
+      "frame_name": "04-operator-panel",
+      "width": 1440,
+      "height": 900,
+      "task_description": null,
+      "css_hints": {
+        "04-operator-panel": {
+          "width": "1440px",
+          "height": "900px",
+          "background": "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, var(--Color-6, #C62828) 0%, var(--Color-6, #C62828) 100%), linear-gradient(0deg, var(--Color-4, #EF6C00) 0%, var(--Color-4, #EF6C00) 100%), linear-gradient(0deg, var(--Color-7, #2E7D32) 0%, var(--Color-7, #2E7D32) 100%), var(--Color-9, #13314F)"
+        },
+        "Vector": {
+          "width": "1440px",
+          "height": "900px",
+          "fill": "#F3F5F8"
+        },
+        "layout-guide": {
+          "width": "1392px",
+          "height": "780px",
+          "opacity": "0.6"
+        },
+        "header": {
+          "width": "1440px",
+          "height": "64px"
+        },
+        "actions-panel": {
+          "width": "680px",
+          "height": "520px"
+        },
+        "actions-header": {
+          "width": "103px",
+          "height": "17px"
+        },
+        "action-buttons": {
+          "width": "580px",
+          "height": "80px"
+        },
+        "mode-selector": {
+          "width": "580px",
+          "height": "78px"
+        },
+        "setpoints": {
+          "width": "370px",
+          "height": "240px"
+        },
+        "readouts-panel": {
+          "width": "696px",
+          "height": "520px"
+        },
+        "readouts-header": {
+          "width": "93px",
+          "height": "17px"
+        }
+      },
+      "variables": {
+        "--Color 4": "#ef6c00",
+        "--Color 6": "#c62828",
+        "--Color 7": "#2e7d32",
+        "--Color 9": "#13314f",
+        "--Color": "#ffffff",
+        "--Color 2": "#5a6675",
+        "--Color 3": "#dadae0",
+        "--Color 5": "#1d4067",
+        "--Color 8": "#1b2630"
+      }
+    }
+  }

@@ -1,0 +1,19 @@
+{
+  "name": "Figma HMI Plugin",
+  "id": "figma-hmi-plugin",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "src/ui.html",
+  "documentAccess": "dynamic-page",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["*"],
+    "reasoning": "Fetches the user-typed Service URL in the plugin for the HMI HTTP API: generate, refine, edit, render, and health. Wildcard is required because the host is not known at build time.",
+    "devAllowedDomains": [
+      "http://localhost:8000",
+      "http://localhost"
+    ]
+  }
+}

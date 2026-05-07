@@ -1,0 +1,109 @@
+{
+  "api_base": "http://127.0.0.1:8000",
+  "model_backend": "ui2coden",
+  "operator_panel_png": "mockups/png/04-operator-panel.png",
+  "viewport_from_png": {
+    "width": 1440,
+    "height": 900
+  },
+  "context_compare_mode": "from-json",
+  "context_source": "figma_plugin",
+  "context_compare_subdir": "reports/deliverables_week7/context_compare/figma_native_context",
+  "sequential_edits_context_source": "synthetic_script",
+  "sequential_edits_note_zh": "四步 /edit 链路仍使用 mockup PNG + 脚本合成 variables/css，与 context 对照段来源可能不同；以本 manifest 字段为准。",
+  "qualitative_dimensions_template": {
+    "dimensions_en": [
+      "alignment_and_padding_vs_reference",
+      "typographic_hierarchy",
+      "missing_or_extraneous_widgets",
+      "charts_trends_synoptic_quality",
+      "edit_side_effects_when_using_post_edit"
+    ],
+    "note_zh_student": "与 SSIM 并列填写；允许「SSIM 几乎不变但布局更合理」或「SSIM 上升但语义变差」。"
+  },
+  "figma_payload_import_meta": {
+    "clipboard_truncation_repair_applied": true,
+    "repaired_payload_files": [
+      "05-production-overview.image_only.payload.json",
+      "05-production-overview.with_variables_css.payload.json"
+    ],
+    "mockup_png_used_repo_relative": "mockups/png/04-operator-panel.png",
+    "repair_note_zh": "`image_base64` 曾因插件导出被替换为占位符：已改用列表中的 mockup PNG；variables / css_hints / variables 仍以 JSON（Figma 导出）为准。论文与答辩须明确写出本条。"
+  },
+  "baseline_generate_seconds": 70.73,
+  "instructions_en": [
+    "Change the most prominent primary action button to a secondary style (flatter, neutral gray, less visually dominant).",
+    "Increase the main page title font size so the title reads as the clearest headline.",
+    "Make the alarm/summary strip in the top area more visually prominent (e.g. stronger background contrast).",
+    "Slightly reduce horizontal padding or margins in the main content so controls feel tighter."
+  ],
+  "edit_qualitative_template_for_thesis_zh": {
+    "advisor_requirement": "对四条 /edit 分别填写：成功 / 部分成功 / 明显连带改写；配合 edits/*/after_edit.preview.png 与 instruction.txt，不得只写 SSIM。",
+    "columns_suggested": [
+      "步骤",
+      "指令(英)",
+      "分档",
+      "主观观察(中)",
+      "副作用(中)"
+    ]
+  },
+  "baseline_preview_used_render_fallback": false,
+  "runs": [
+    {
+      "index": 1,
+      "instruction": "Change the most prominent primary action button to a secondary style (flatter, neutral gray, less visually dominant).",
+      "seconds": 67.33,
+      "code_len": 9247,
+      "preview_used_render_fallback": false
+    },
+    {
+      "index": 2,
+      "instruction": "Increase the main page title font size so the title reads as the clearest headline.",
+      "seconds": 118.69,
+      "code_len": 9246,
+      "preview_used_render_fallback": false
+    },
+    {
+      "index": 3,
+      "instruction": "Make the alarm/summary strip in the top area more visually prominent (e.g. stronger background contrast).",
+      "seconds": 61.93,
+      "code_len": 8046,
+      "preview_used_render_fallback": false
+    },
+    {
+      "index": 4,
+      "instruction": "Slightly reduce horizontal padding or margins in the main content so controls feel tighter.",
+      "seconds": 64.78,
+      "code_len": 8054,
+      "preview_used_render_fallback": false
+    }
+  ],
+  "context_compare": {
+    "reference_png": "reports/deliverables_week7/context_compare/figma_native_context/figma_plugin_reference_from_payload.png",
+    "timings_seconds": {
+      "image_only_generate": 71.76,
+      "full_context_generate": 68.31
+    },
+    "ssim_vs_reference": {
+      "image_only": 0.7622577620076851,
+      "variables_css": 0.7420548467543897
+    },
+    "preview_used_render_fallback": {
+      "image_only": false,
+      "variables_css": false
+    },
+    "png_for_report_thesis_slide_image_only_relative": "reports/deliverables_week7/context_compare/figma_native_context/figma_plugin_THESIS_slide_image_only_context.png",
+    "png_for_report_thesis_slide_full_context_relative": "reports/deliverables_week7/context_compare/figma_native_context/figma_plugin_THESIS_slide_full_figma_context.png",
+    "input_payload_snapshots_relative": [
+      "reports/deliverables_week7/context_compare/figma_native_context/figma_plugin_input_image_only.payload.json",
+      "reports/deliverables_week7/context_compare/figma_native_context/figma_plugin_input_with_variables_css.payload.json"
+    ],
+    "input_note_zh": "from-json：已把插件导出的两份 `*.payload.json` 复制进本目录，便于与 PNG 一齐打包进答辩材料。",
+    "artifact_prefix": "figma_plugin",
+    "recommended_for_thesis_zh": "答辩/ВКР：**两张独立**全宽投影片 `THESIS_slide_*`（各为「参考帧 | 生成预览」），不要使用三栏拼图以免字号过小；仅在方法学附录中可提及旧版 triptych。"
+  },
+  "experiment_api_trace_dir_relative": "reports/deliverables_week7/reproducibility_logs/week7_from-json_20260507_072807",
+  "purpose_en": "Week 7 deliverables: four sequential natural-language edits (mockup+synthetic ctx) plus side-by-side of image-only vs image with variables/CSS; context slice labelled `figma_plugin`.",
+  "reproducibility_bundle_relative": "reports/deliverables_week7/reproducibility_complete",
+  "reproducibility_readme_zh_relative": "reports/deliverables_week7/reproducibility_complete/README_REPRODUCIBILITY.zh.md"
+}

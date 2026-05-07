@@ -1,0 +1,31 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 95024,
+      "sha256_prefix": "0313580e84883e8fbe6fe6700cf33c90"
+    },
+    "frame_name": "07 Energy Dashboard — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": {
+      "EnergyBar": {
+        "height": "22px"
+      },
+      "Frame": {
+        "width": "1440px",
+        "height": "900px"
+      }
+    },
+    "variables": {
+      "--surface-0": "#f3f5f8",
+      "--bar-good": "#2e7d32",
+      "--bar-use": "#1976d2",
+      "--header-bar": "#13314f"
+    },
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "baseline"
+  }
+}

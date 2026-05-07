@@ -1,0 +1,72 @@
+2026-04-17 20:43:48,106 [INFO] ============================================================
+2026-04-17 20:43:48,107 [INFO] UI2Code^N Baseline Test Run
+2026-04-17 20:43:48,107 [INFO] Started at: 2026-04-17T20:43:48.107407
+2026-04-17 20:43:48,107 [INFO] ============================================================
+2026-04-17 20:43:48,110 [INFO] Using rule-based stand-in model (set USE_REAL_MODEL=1 for real).
+2026-04-17 20:43:48,110 [INFO] 
+============================================================
+2026-04-17 20:43:48,110 [INFO] PHASE 1: Generation Tests
+2026-04-17 20:43:48,110 [INFO] ============================================================
+2026-04-17 20:43:48,110 [INFO] 
+--- test1: Equipment Status Dashboard ---
+2026-04-17 20:43:48,110 [INFO] Input image: mockups/png/01-equipment-status.png
+2026-04-17 20:43:48,110 [INFO] Prompt: Generate a complete single-file HTML page with inline CSS that reproduces this industrial equipment status dashboard. Use a dark background, colored status indicator dots, and card-based layout.
+2026-04-17 20:43:48,110 [INFO] Viewport: 1280x720
+2026-04-17 20:43:48,161 [INFO] Generated HTML saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-generated.html
+2026-04-17 20:43:48,161 [INFO] Generation time: 0.05s
+2026-04-17 20:43:48,161 [INFO] Output length: 2589 chars
+2026-04-17 20:43:50,135 [INFO] Rendered screenshot saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-generated.png
+2026-04-17 20:43:50,135 [INFO] 
+--- test2: Alarm & Event Monitor ---
+2026-04-17 20:43:50,135 [INFO] Input image: mockups/png/02-alarm-event.png
+2026-04-17 20:43:50,135 [INFO] Prompt: Generate a complete single-file HTML page with inline CSS that reproduces this alarm and event monitoring screen. Include a summary bar with severity counts, tab navigation, and a data table with severity badges, timestamps, descriptions, and acknowledge buttons.
+2026-04-17 20:43:50,135 [INFO] Viewport: 1280x720
+2026-04-17 20:43:50,186 [INFO] Generated HTML saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test2-generated.html
+2026-04-17 20:43:50,186 [INFO] Generation time: 0.05s
+2026-04-17 20:43:50,186 [INFO] Output length: 3010 chars
+2026-04-17 20:43:50,811 [INFO] Rendered screenshot saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test2-generated.png
+2026-04-17 20:43:50,811 [INFO] 
+--- test3: Operator Control Panel ---
+2026-04-17 20:43:50,811 [INFO] Input image: mockups/png/04-operator-panel.png
+2026-04-17 20:43:50,811 [INFO] Prompt: Generate a complete single-file HTML page with inline CSS that reproduces this operator control panel. Include start/stop/reset buttons, operating mode selector (Auto/Manual/Service), setpoint input fields, and live readout displays.
+2026-04-17 20:43:50,811 [INFO] Viewport: 1280x720
+2026-04-17 20:43:50,862 [INFO] Generated HTML saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test3-generated.html
+2026-04-17 20:43:50,862 [INFO] Generation time: 0.05s
+2026-04-17 20:43:50,862 [INFO] Output length: 3137 chars
+2026-04-17 20:43:51,495 [INFO] Rendered screenshot saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test3-generated.png
+2026-04-17 20:43:51,495 [INFO] 
+============================================================
+2026-04-17 20:43:51,495 [INFO] PHASE 2: Refinement Test (Polishing)
+2026-04-17 20:43:51,495 [INFO] ============================================================
+2026-04-17 20:43:51,495 [INFO] 
+--- test1_refine ---
+2026-04-17 20:43:51,495 [INFO] Reference: mockups/png/01-equipment-status.png
+2026-04-17 20:43:51,495 [INFO] Prompt: Compare the rendered code screenshot with the original reference image. Improve spacing, font size hierarchy, status indicator styling, and card proportions to make the output closer to the reference mockup.
+2026-04-17 20:43:51,495 [INFO] Iterations: 2
+2026-04-17 20:43:51,496 [INFO] 
+  Refinement iteration 1...
+2026-04-17 20:43:51,546 [INFO]   Iteration 1 time: 0.05s
+2026-04-17 20:43:52,166 [INFO]   Saved: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-refined-iter1.png
+2026-04-17 20:43:52,167 [INFO] 
+  Refinement iteration 2...
+2026-04-17 20:43:52,218 [INFO]   Iteration 2 time: 0.05s
+2026-04-17 20:43:52,842 [INFO]   Saved: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-refined-iter2.png
+2026-04-17 20:43:52,842 [INFO] 
+============================================================
+2026-04-17 20:43:52,842 [INFO] PHASE 3: Edit Test (Natural Language)
+2026-04-17 20:43:52,843 [INFO] ============================================================
+2026-04-17 20:43:52,843 [INFO] 
+--- test1_edit ---
+2026-04-17 20:43:52,843 [INFO] Instruction: Make the warning card border thicker and add a pulsing animation to the fault status indicator.
+2026-04-17 20:43:52,894 [INFO] Edit time: 0.05s
+2026-04-17 20:43:52,894 [INFO] Edited HTML saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-edited.html
+2026-04-17 20:43:53,519 [INFO] Saved: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test1-edited.png
+2026-04-17 20:43:53,519 [INFO] 
+Prompts saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\prompts.json
+2026-04-17 20:43:53,520 [INFO] 
+============================================================
+2026-04-17 20:43:53,520 [INFO] TEST RUN COMPLETE
+2026-04-17 20:43:53,520 [INFO] Finished at: 2026-04-17T20:43:53.520895
+2026-04-17 20:43:53,520 [INFO] Log saved to: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs\test-run.log
+2026-04-17 20:43:53,521 [INFO] All outputs in: D:\cursorwork\figma-hmi-plugin\baseline-tests\outputs
+2026-04-17 20:43:53,521 [INFO] ============================================================

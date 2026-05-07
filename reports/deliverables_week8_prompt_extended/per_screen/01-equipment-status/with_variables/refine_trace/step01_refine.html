@@ -1,0 +1,165 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const StatusCard = ({ title, value, trend, status, borderColor }) => {
+            const getStatusBadge = () => {
+                const baseClasses = "text-white text-xs font-medium px-3 py-1 rounded";
+                
+                switch(status) {
+                    case 'OK':
+                        return `${baseClasses} bg-green-700`;
+                    case 'ALARM':
+                        return `${baseClasses} bg-red-700`;
+                    case 'MAINT':
+                        return `${baseClasses} bg-orange-500`;
+                    case 'IDLE':
+                        return `${baseClasses} bg-gray-500`;
+                    case 'WARN':
+                        return `${baseClasses} bg-orange-500`;
+                    default:
+                        return `${baseClasses} bg-green-700`;
+                }
+            };
+
+            return (
+                <div className={`bg-white rounded-lg border-l-4 ${borderColor} p-4 shadow-sm`}>
+                    <div className="text-gray-600 text-sm mb-2">{title}</div>
+                    <div className="text-4xl font-bold text-gray-900 mb-2">{value}</div>
+                    <div className="text-gray-500 text-xs mb-2">trend: {trend}</div>
+                    <div>
+                        <span className={getStatusBadge()}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <header className="bg-slate-800 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-xl font-bold">Equipment Status Dashboard</h1>
+                                <div className="text-gray-300 text-sm">Facility 2 • Line A • Shift B</div>
+                            </div>
+                            <div className="bg-slate-700 px-4 py-2 rounded text-sm text-gray-300">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="p-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <StatusCard 
+                                title="Pump P-101" 
+                                value="1480" 
+                                trend="+12" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Pump P-102" 
+                                value="1492" 
+                                trend="+8" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Compressor C-201" 
+                                value="3.21" 
+                                trend="+0.04" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Motor M-301" 
+                                value="94.2" 
+                                trend="+5.1" 
+                                status="ALARM" 
+                                borderColor="border-l-red-600"
+                            />
+                            <StatusCard 
+                                title="Valve V-102" 
+                                value="CLOSED" 
+                                trend="—" 
+                                status="ALARM" 
+                                borderColor="border-l-red-600"
+                            />
+                            <StatusCard 
+                                title="Conveyor CV-401" 
+                                value="0.00" 
+                                trend="—" 
+                                status="MAINT" 
+                                borderColor="border-l-orange-500"
+                            />
+                            <StatusCard 
+                                title="Mixer MX-501" 
+                                value="240" 
+                                trend="—" 
+                                status="IDLE" 
+                                borderColor="border-l-gray-500"
+                            />
+                            <StatusCard 
+                                title="Heater H-201" 
+                                value="62.0" 
+                                trend="-1.2" 
+                                status="WARN" 
+                                borderColor="border-l-orange-500"
+                            />
+                            <StatusCard 
+                                title="Tank T-101" 
+                                value="72" 
+                                trend="+2" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Tank T-102" 
+                                value="41" 
+                                trend="-1" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Sensor T-405" 
+                                value="38.5" 
+                                trend="+0.4" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                            <StatusCard 
+                                title="Sensor F-902" 
+                                value="180" 
+                                trend="+3" 
+                                status="OK" 
+                                borderColor="border-l-green-700"
+                            />
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

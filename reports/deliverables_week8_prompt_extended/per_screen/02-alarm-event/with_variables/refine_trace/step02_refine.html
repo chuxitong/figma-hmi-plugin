@@ -1,0 +1,260 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const StatusCard = ({ title, number, subtitle, change, color, colorClass }) => (
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+                <div className="flex items-start">
+                    <div className={`${colorClass} w-1 h-16 mr-3`}></div>
+                    <div>
+                        <div className="text-gray-600 text-sm">{title}</div>
+                        <div className="text-3xl font-bold text-gray-900">{number}</div>
+                        <div className="text-gray-500 text-xs mt-1">{change}</div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const AlarmRow = ({ severity, time, tag, description, value, unit, source }) => {
+            const getSeverityStyle = (sev) => {
+                switch(sev.toLowerCase()) {
+                    case 'critical':
+                        return 'bg-red-700 text-white';
+                    case 'warning':
+                        return 'bg-orange-500 text-white';
+                    case 'info':
+                        return 'bg-blue-500 text-white';
+                    default:
+                        return 'bg-gray-500 text-white';
+                }
+            };
+
+            return (
+                <tr className="border-b border-gray-100">
+                    <td className="py-3 px-4">
+                        <span className={`${getSeverityStyle(severity)} text-xs px-3 py-1 rounded`}>
+                            {severity.toUpperCase()}
+                        </span>
+                    </td>
+                    <td className="py-3 px-4 text-gray-700">{time}</td>
+                    <td className="py-3 px-4 text-gray-900 font-medium">{tag}</td>
+                    <td className="py-3 px-4 text-gray-700">{description}</td>
+                    <td className="py-3 px-4">
+                        <span className="text-gray-700">{value}</span>
+                        <span className="text-gray-500 ml-2">{unit}</span>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 text-sm">{source}</td>
+                    <td className="py-3 px-4">
+                        <div className="flex space-x-2">
+                            <button className="border border-gray-300 text-gray-700 px-4 py-1 rounded text-sm font-medium hover:bg-gray-50">
+                                ACK
+                            </button>
+                            <button className="border border-gray-300 text-gray-700 px-4 py-1 rounded text-sm font-medium hover:bg-gray-50">
+                                View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-slate-800 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-xl font-bold">Alarm & Events Monitor</h1>
+                                <div className="text-sm text-gray-300">Refinery 2 · Shift B · All sites</div>
+                            </div>
+                            <div className="text-sm text-gray-300 bg-slate-700 px-4 py-2 rounded">
+                                2026-04-19 14:34:55 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Status Cards */}
+                    <div className="px-6 py-6">
+                        <div className="grid grid-cols-5 gap-4 mb-6">
+                            <StatusCard 
+                                title="Critical"
+                                number="2"
+                                change="+1 за смену"
+                                colorClass="bg-red-500"
+                            />
+                            <StatusCard 
+                                title="Warning"
+                                number="5"
+                                change="-1 за смену"
+                                colorClass="bg-orange-500"
+                            />
+                            <StatusCard 
+                                title="Information"
+                                number="11"
+                                change="+3 за смену"
+                                colorClass="bg-green-600"
+                            />
+                            <StatusCard 
+                                title="Acknowledged"
+                                number="34"
+                                change="+7 за смену"
+                                colorClass="bg-green-600"
+                            />
+                            <StatusCard 
+                                title="MTBA"
+                                number="1h 42m"
+                                change="-12m за смену"
+                                colorClass="bg-orange-500"
+                            />
+                        </div>
+
+                        {/* Filter Section */}
+                        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+                            <div className="flex items-center space-x-4">
+                                <span className="text-gray-600 text-sm">Severity</span>
+                                <div className="flex space-x-2">
+                                    <button className="bg-red-700 text-white text-xs px-4 py-1 rounded font-medium">
+                                        CRITICAL
+                                    </button>
+                                    <button className="bg-orange-500 text-white text-xs px-4 py-1 rounded font-medium">
+                                        WARNING
+                                    </button>
+                                    <button className="bg-blue-500 text-white text-xs px-4 py-1 rounded font-medium">
+                                        INFO
+                                    </button>
+                                </div>
+                                <span className="text-gray-600 text-sm ml-4">Tag / описание</span>
+                                <input 
+                                    type="text" 
+                                    placeholder="Введите тер или часть описания..." 
+                                    className="border border-gray-300 rounded px-3 py-1 text-sm flex-1 max-w-md"
+                                />
+                                <button className="bg-green-700 text-white text-sm px-6 py-1 rounded font-medium">
+                                    ACK ALL
+                                </button>
+                                <button className="border border-gray-300 text-gray-700 text-sm px-4 py-1 rounded font-medium hover:bg-gray-50">
+                                    Export...
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Alarms Table */}
+                        <div className="bg-white rounded-lg border border-gray-200">
+                            <table className="w-full">
+                                <thead className="bg-gray-100">
+                                    <tr>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Severity</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Time</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Tag</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Description</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Value</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Source</th>
+                                        <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <AlarmRow 
+                                        severity="critical"
+                                        time="14:31:42"
+                                        tag="TT-301"
+                                        description="Motor temperature exceeds high-high limit"
+                                        value="94.2"
+                                        unit="°C"
+                                        source="Refinery2/U2/M-301"
+                                    />
+                                    <AlarmRow 
+                                        severity="critical"
+                                        time="14:28:15"
+                                        tag="PT-102"
+                                        description="Discharge pressure too high"
+                                        value="5.8"
+                                        unit="bar"
+                                        source="Refinery2/U1/P-102"
+                                    />
+                                    <AlarmRow 
+                                        severity="warning"
+                                        time="14:22:10"
+                                        tag="FT-401"
+                                        description="Flow rate deviation > 12 %"
+                                        value="23.1"
+                                        unit="m³/h"
+                                        source="Refinery2/U4/F-401"
+                                    />
+                                    <AlarmRow 
+                                        severity="warning"
+                                        time="14:15:30"
+                                        tag="CT-502"
+                                        description="Cooling water temperature rising"
+                                        value="38.5"
+                                        unit="°C"
+                                        source="Utilities/CW-502"
+                                    />
+                                    <AlarmRow 
+                                        severity="warning"
+                                        time="14:09:54"
+                                        tag="LT-301"
+                                        description="Tank level above setpoint"
+                                        value="88.4"
+                                        unit="%"
+                                        source="Refinery2/U2/T-301"
+                                    />
+                                    <AlarmRow 
+                                        severity="info"
+                                        time="14:05:18"
+                                        tag="PDT-201"
+                                        description="Filter differential pressure"
+                                        value="0.8"
+                                        unit="bar"
+                                        source="Refinery2/U2/F-201"
+                                    />
+                                    <AlarmRow 
+                                        severity="info"
+                                        time="14:01:09"
+                                        tag="FT-902"
+                                        description="Flow within tolerance — restored"
+                                        value="180"
+                                        unit="m³/h"
+                                        source="Refinery2/U9/F-902"
+                                    />
+                                    <AlarmRow 
+                                        severity="info"
+                                        time="13:54:22"
+                                        tag="CT-101"
+                                        description="Communication restored"
+                                        value="—"
+                                        unit=""
+                                        source="Bus/CT-101"
+                                    />
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="mt-8 py-4 px-6 text-xs text-gray-500">
+                        Connection: OK · Latency: 22 ms · Compliance: ANSI/ISA-101.01-2015 — colour + text + shape encoding for every state
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

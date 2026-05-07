@@ -1,0 +1,215 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Status Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <header className="bg-[#13314f] text-white py-4 px-6">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-2xl font-bold flex items-center">
+                                    <i className="fas fa-industry mr-2"></i> Equipment Status Dashboard
+                                </h1>
+                                <p className="text-sm text-gray-300 mt-1">Facility 2 • Line A • Shift B</p>
+                            </div>
+                            <div className="bg-[#1a2942] px-4 py-2 rounded text-sm text-gray-300">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <div className="container mx-auto py-6 px-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {/* Pump P-101 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Pump P-101</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">1480</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +12</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Pump P-102 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Pump P-102</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">1492</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +8</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Compressor C-201 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Compressor C-201</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">3.21</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +0.04</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Motor M-301 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-700"></div>
+                                <div className="border-2 border-red-700 rounded-lg p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Motor M-301</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">94.2</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +5.1</div>
+                                    <div className="bg-red-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        ALARM
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Valve V-102 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-700"></div>
+                                <div className="border-2 border-red-700 rounded-lg p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Valve V-102</div>
+                                    <div className="text-5xl font-bold text-gray-900 mb-2">CLOSED</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: —</div>
+                                    <div className="bg-red-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        ALARM
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Conveyor CV-401 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Conveyor CV-401</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">0.00</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: —</div>
+                                    <div className="bg-orange-500 text-white text-xs px-2 py-1 rounded inline-block">
+                                        MAINT
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Mixer MX-501 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gray-500"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Mixer MX-501</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">240</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: —</div>
+                                    <div className="bg-gray-500 text-white text-xs px-2 py-1 rounded inline-block">
+                                        IDLE
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Heater H-201 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Heater H-201</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">62.0</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: -1.2</div>
+                                    <div className="bg-orange-500 text-white text-xs px-2 py-1 rounded inline-block">
+                                        WARN
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Tank T-101 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Tank T-101</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">72</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +2</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Tank T-102 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Tank T-102</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">41</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: -1</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Sensor T-405 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Sensor T-405</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">38.5</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +0.4</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Sensor F-902 */}
+                            <div className="bg-white rounded-lg border border-gray-200 shadow-sm relative">
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-700"></div>
+                                <div className="p-4">
+                                    <div className="text-gray-600 text-sm mb-2">Sensor F-902</div>
+                                    <div className="text-4xl font-bold text-gray-900 mb-2">180</div>
+                                    <div className="text-gray-500 text-sm mb-2">trend: +3</div>
+                                    <div className="bg-green-700 text-white text-xs px-2 py-1 rounded inline-block">
+                                        OK
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <footer className="bg-gray-100 py-4 px-6 border-t">
+                        <div className="container mx-auto">
+                            <div className="text-gray-500 text-sm">
+                                Connection: OK • Items: 12 • Critical: 2 • Warning: 2
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

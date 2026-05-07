@@ -1,0 +1,1 @@
+Make the alarm/summary strip in the top area more visually prominent (e.g. stronger background contrast).

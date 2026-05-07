@@ -1,0 +1,229 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--bar-good": "#2e7d32",
+  "--bar-use": "#1976d2",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+<css_hints>
+{
+  "EnergyBar": {
+    "height": "22px"
+  },
+  "Frame": {
+    "width": "1440px",
+    "height": "900px"
+  }
+}
+</css_hints>
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Monitoring Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const MetricCard = ({ title, value, change, color = "green" }) => {
+            return (
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                    <div className="text-xs text-gray-500 mb-1">{title}</div>
+                    <div className="text-3xl font-bold text-gray-800 mb-2">{value}</div>
+                    <div className="text-xs text-gray-500">
+                        <span className={`text-${color}-600`}>▲ ${change}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const ZoneRow = ({ zone, percentage, status }) => {
+            const getStatusColor = () => {
+                switch (status) {
+                    case 'OK': return 'bg-green-600';
+                    case 'WARN': return 'bg-orange-500';
+                    case 'ALARM': return 'bg-red-600';
+                    default: return 'bg-green-600';
+                }
+            };
+
+            return (
+                <div className="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                    <div className="w-16 text-sm font-medium text-gray-800">{zone}</div>
+                    <div className="flex-1 mx-6">
+                        <div className="w-full bg-gray-100 rounded-full h-6">
+                            <div 
+                                className="h-6 rounded-full bg-green-600" 
+                                style={{width: `${percentage}%`}}
+                            ></div>
+                        </div>
+                    </div>
+                    <div className="w-16 text-right">
+                        <span className="text-sm text-gray-600">{percentage}%</span>
+                    </div>
+                    <div className="w-20 ml-4">
+                        <span className={`px-4 py-1 rounded text-xs text-white ${getStatusColor()}`}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+
+        const DonutChart = () => {
+            return (
+                <div className="relative w-64 h-64 mx-auto">
+                    <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 160 160">
+                        <circle
+                            cx="80"
+                            cy="80"
+                            r="60"
+                            fill="none"
+                            stroke="#2e7d32"
+                            strokeWidth="16"
+                            strokeDasharray="269.28 0"
+                            strokeDashoffset="0"
+                        />
+                        <circle
+                            cx="80"
+                            cy="80"
+                            r="60"
+                            fill="none"
+                            stroke="#1976d2"
+                            strokeWidth="16"
+                            strokeDasharray="133.64 135.64"
+                            strokeDashoffset="-269.28"
+                        />
+                        <circle
+                            cx="80"
+                            cy="80"
+                            r="60"
+                            fill="none"
+                            stroke="#ff9800"
+                            strokeWidth="16"
+                            strokeDasharray="47.12 314.36"
+                            strokeDashoffset="-402.92"
+                        />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                            <div className="text-4xl font-bold text-gray-800">100%</div>
+                            <div className="text-sm text-gray-500 mt-1">today</div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const zoneData = [
+                { zone: 'Zone A', percentage: 62, status: 'OK' },
+                { zone: 'Zone B', percentage: 48, status: 'OK' },
+                { zone: 'Zone C', percentage: 81, status: 'WARN' },
+                { zone: 'Zone D', percentage: 35, status: 'OK' },
+                { zone: 'Zone E', percentage: 90, status: 'ALARM' },
+                { zone: 'Zone F', percentage: 27, status: 'OK' }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-slate-800 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-2xl font-bold">Energy Monitoring Dashboard</h1>
+                                <p className="text-sm text-slate-300 mt-1">Industrial-2 - Day shift - All zones</p>
+                            </div>
+                            <div className="bg-slate-700 rounded-md px-4 py-2 text-sm text-slate-300">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Metrics Cards */}
+                    <div className="p-6 bg-gray-50">
+                        <div className="grid grid-cols-4 gap-6 mb-6">
+                            <MetricCard title="Total kWh" value="12 845" change="+340 за смену" color="green" />
+                            <MetricCard title="Peak load" value="742" change="+18 за смену" color="orange" />
+                            <MetricCard title="Cost (today)" value="€ 1 932" change="+78 за смену" color="orange" />
+                            <MetricCard title="Power factor" value="0.92" change="+0.01 за смену" color="green" />
+                        </div>
+
+                        {/* Main Content Grid */}
+                        <div className="grid grid-cols-2 gap-6">
+                            {/* Power Consumption by Zone */}
+                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                                <h2 className="text-lg font-semibold text-gray-800 mb-4">Power consumption by zone</h2>
+                                <div>
+                                    {zoneData.map((item, index) => (
+                                        <ZoneRow 
+                                            key={index}
+                                            zone={item.zone}
+                                            percentage={item.percentage}
+                                            status={item.status}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Source Breakdown */}
+                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                                <h2 className="text-lg font-semibold text-gray-800 mb-6">Source breakdown</h2>
+                                <div className="flex items-center justify-center">
+                                    <DonutChart />
+                                </div>
+                                <div className="mt-6 space-y-2">
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-4 h-4 bg-green-700"></div>
+                                        <span className="text-sm text-gray-700">Электроэнергия · 57 %</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-4 h-4 bg-orange-500"></div>
+                                        <span className="text-sm text-gray-700">Газ · 25 %</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-4 h-4 bg-blue-500"></div>
+                                        <span className="text-sm text-gray-700">Утилизация тепла · 18 %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="bg-gray-100 border-t border-gray-200 py-4 px-6">
+                        <div className="text-xs text-gray-500">
+                            Connection: OK · Tariff plan: Industrial-2 · Compliance: ANSI/ISA-101.01
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

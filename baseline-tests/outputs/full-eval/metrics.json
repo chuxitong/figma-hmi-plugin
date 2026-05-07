@@ -1,0 +1,395 @@
+{
+  "model": "rule-based-v0.1",
+  "trials_per_phase": 3,
+  "refine_iterations": 2,
+  "started_at": "2026-04-17T20:43:53",
+  "finished_at": "2026-04-17T20:44:19",
+  "per_mockup": {
+    "m1_equipment_status": {
+      "frame_name": "Equipment Status Dashboard",
+      "complexity": "simple",
+      "generate": [
+        0.05067070000222884,
+        0.05041409999830648,
+        0.050333999999566004
+      ],
+      "refine_iter_1": [
+        0.05075059999944642,
+        0.05016440000326838,
+        0.05034670000168262
+      ],
+      "refine_iter_2": [
+        0.05052129999967292,
+        0.05031249999956344,
+        0.050329099998634774
+      ],
+      "edit": [
+        0.05063279999740189
+      ]
+    },
+    "m2_alarm_event": {
+      "frame_name": "Alarm & Event Monitor",
+      "complexity": "simple",
+      "generate": [
+        0.0502195999979449,
+        0.050447400000848575,
+        0.05056659999900148
+      ],
+      "refine_iter_1": [
+        0.050445199998648604,
+        0.050156600002082996,
+        0.050507500000094296
+      ],
+      "refine_iter_2": [
+        0.05030909999914002,
+        0.050461599999835016,
+        0.050195300002087606
+      ],
+      "edit": [
+        0.050607299999683164
+      ]
+    },
+    "m3_trend_monitor": {
+      "frame_name": "Real-Time Trend Monitor",
+      "complexity": "medium",
+      "generate": [
+        0.05044920000000275,
+        0.05013830000098096,
+        0.050372200003039325
+      ],
+      "refine_iter_1": [
+        0.05058880000069621,
+        0.05035379999753786,
+        0.05056440000043949
+      ],
+      "refine_iter_2": [
+        0.05016080000132206,
+        0.05034240000168211,
+        0.050556800000777
+      ],
+      "edit": [
+        0.050362800000584684
+      ]
+    },
+    "m4_operator_panel": {
+      "frame_name": "Operator Control Panel",
+      "complexity": "medium",
+      "generate": [
+        0.05024469999989378,
+        0.05022879999887664,
+        0.050176300002931384
+      ],
+      "refine_iter_1": [
+        0.050164100000984035,
+        0.05040250000092783,
+        0.050271000000066124
+      ],
+      "refine_iter_2": [
+        0.05044600000110222,
+        0.05010709999987739,
+        0.050437500001862645
+      ],
+      "edit": [
+        0.0501272000001336
+      ]
+    },
+    "m5_production_overview": {
+      "frame_name": "Production Line Overview",
+      "complexity": "medium",
+      "generate": [
+        0.05053119999865885,
+        0.050352800000837306,
+        0.050583000000187894
+      ],
+      "refine_iter_1": [
+        0.050137300000642426,
+        0.050162299998191884,
+        0.05110029999923427
+      ],
+      "refine_iter_2": [
+        0.05021300000225892,
+        0.050379500000417465,
+        0.05062829999951646
+      ],
+      "edit": [
+        0.05057990000204882
+      ]
+    },
+    "m6_tank_synoptic": {
+      "frame_name": "Tank Farm Synoptic",
+      "complexity": "medium-hard",
+      "generate": [
+        0.05043800000203191,
+        0.05029099999956088,
+        0.050437499998224666
+      ],
+      "refine_iter_1": [
+        0.05054980000204523,
+        0.05034410000007483,
+        0.050766799999109935
+      ],
+      "refine_iter_2": [
+        0.05042450000109966,
+        0.050260800002433825,
+        0.050355799998214934
+      ],
+      "edit": [
+        0.050186299999040784
+      ]
+    },
+    "m7_energy_dashboard": {
+      "frame_name": "Energy Monitoring Dashboard",
+      "complexity": "medium-hard",
+      "generate": [
+        0.050400900003296556,
+        0.05025329999989481,
+        0.05025900000327965
+      ],
+      "refine_iter_1": [
+        0.050387100000079954,
+        0.05031550000057905,
+        0.05044160000034026
+      ],
+      "refine_iter_2": [
+        0.050370299999485724,
+        0.05056210000111605,
+        0.050316400000156136
+      ],
+      "edit": [
+        0.05052539999815053
+      ]
+    },
+    "m8_batch_recipe": {
+      "frame_name": "Batch Recipe Management",
+      "complexity": "hard",
+      "generate": [
+        0.05029300000023795,
+        0.05015179999827524,
+        0.05017940000107046
+      ],
+      "refine_iter_1": [
+        0.050415600002452265,
+        0.05028690000108327,
+        0.050522199999250006
+      ],
+      "refine_iter_2": [
+        0.05018209999980172,
+        0.05014889999802108,
+        0.05029319999812287
+      ],
+      "edit": [
+        0.05033430000185035
+      ]
+    }
+  },
+  "summary": {
+    "m1_equipment_status": {
+      "generate": {
+        "mean_s": 0.0505,
+        "min_s": 0.0503,
+        "max_s": 0.0507,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0504,
+        "min_s": 0.0502,
+        "max_s": 0.0508,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0504,
+        "min_s": 0.0503,
+        "max_s": 0.0505,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0506,
+        "min_s": 0.0506,
+        "max_s": 0.0506,
+        "trials": 1
+      }
+    },
+    "m2_alarm_event": {
+      "generate": {
+        "mean_s": 0.0504,
+        "min_s": 0.0502,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0504,
+        "min_s": 0.0502,
+        "max_s": 0.0505,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0503,
+        "min_s": 0.0502,
+        "max_s": 0.0505,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0506,
+        "min_s": 0.0506,
+        "max_s": 0.0506,
+        "trials": 1
+      }
+    },
+    "m3_trend_monitor": {
+      "generate": {
+        "mean_s": 0.0503,
+        "min_s": 0.0501,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0505,
+        "min_s": 0.0504,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0504,
+        "min_s": 0.0502,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0504,
+        "min_s": 0.0504,
+        "max_s": 0.0504,
+        "trials": 1
+      }
+    },
+    "m4_operator_panel": {
+      "generate": {
+        "mean_s": 0.0502,
+        "min_s": 0.0502,
+        "max_s": 0.0502,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0503,
+        "min_s": 0.0502,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0503,
+        "min_s": 0.0501,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0501,
+        "min_s": 0.0501,
+        "max_s": 0.0501,
+        "trials": 1
+      }
+    },
+    "m5_production_overview": {
+      "generate": {
+        "mean_s": 0.0505,
+        "min_s": 0.0504,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0505,
+        "min_s": 0.0501,
+        "max_s": 0.0511,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0504,
+        "min_s": 0.0502,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0506,
+        "min_s": 0.0506,
+        "max_s": 0.0506,
+        "trials": 1
+      }
+    },
+    "m6_tank_synoptic": {
+      "generate": {
+        "mean_s": 0.0504,
+        "min_s": 0.0503,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0506,
+        "min_s": 0.0503,
+        "max_s": 0.0508,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0503,
+        "min_s": 0.0503,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0502,
+        "min_s": 0.0502,
+        "max_s": 0.0502,
+        "trials": 1
+      }
+    },
+    "m7_energy_dashboard": {
+      "generate": {
+        "mean_s": 0.0503,
+        "min_s": 0.0503,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0504,
+        "min_s": 0.0503,
+        "max_s": 0.0504,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0504,
+        "min_s": 0.0503,
+        "max_s": 0.0506,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0505,
+        "min_s": 0.0505,
+        "max_s": 0.0505,
+        "trials": 1
+      }
+    },
+    "m8_batch_recipe": {
+      "generate": {
+        "mean_s": 0.0502,
+        "min_s": 0.0502,
+        "max_s": 0.0503,
+        "trials": 3
+      },
+      "refine_iter_1": {
+        "mean_s": 0.0504,
+        "min_s": 0.0503,
+        "max_s": 0.0505,
+        "trials": 3
+      },
+      "refine_iter_2": {
+        "mean_s": 0.0502,
+        "min_s": 0.0501,
+        "max_s": 0.0503,
+        "trials": 3
+      },
+      "edit": {
+        "mean_s": 0.0503,
+        "min_s": 0.0503,
+        "max_s": 0.0503,
+        "trials": 1
+      }
+    }
+  }
+}

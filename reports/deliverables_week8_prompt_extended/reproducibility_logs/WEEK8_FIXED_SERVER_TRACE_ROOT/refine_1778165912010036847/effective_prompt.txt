@@ -1,0 +1,226 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--step-active": "#1976d2",
+  "--step-done": "#2e7d32"
+}
+</design_variables>
+
+<css_hints>
+{
+  "StepList": {},
+  "Frame": {
+    "width": "1440px",
+    "height": "900px"
+  }
+}
+</css_hints>
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Recipe Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <Header />
+                    <div className="container mx-auto p-6">
+                        <div className="flex flex-col md:flex-row gap-6">
+                            <div className="w-full md:w-2/3 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div className="p-6">
+                                    <StepsTable />
+                                </div>
+                            </div>
+                            <div className="w-full md:w-1/3 space-y-6">
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-bold text-gray-800 mb-4">Live parameters</h2>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="p-4 border rounded-lg">
+                                            <div className="text-sm text-gray-500">Temperature</div>
+                                            <div className="flex items-baseline">
+                                                <span className="text-4xl font-medium text-gray-800">65.4</span>
+                                                <span className="ml-2 text-xl text-gray-600">°C</span>
+                                            </div>
+                                            <div className="mt-2">
+                                                <span className="bg-green-700 text-white text-xs px-8 py-0.5 rounded uppercase">OK</span>
+                                            </div>
+                                        </div>
+                                        <div className="p-4 border rounded-lg">
+                                            <div className="text-sm text-gray-500">pH</div>
+                                            <div className="text-4xl font-medium text-gray-800">7.1</div>
+                                            <div className="mt-2">
+                                                <span className="bg-green-700 text-white text-xs px-8 py-0.5 rounded uppercase">OK</span>
+                                            </div>
+                                        </div>
+                                        <div className="p-4 border rounded-lg">
+                                            <div className="text-sm text-gray-500">RPM</div>
+                                            <div className="text-4xl font-medium text-gray-800">240</div>
+                                            <div className="mt-2">
+                                                <span className="bg-green-700 text-white text-xs px-8 py-0.5 rounded uppercase">OK</span>
+                                            </div>
+                                        </div>
+                                        <div className="p-4 border rounded-lg">
+                                            <div className="text-sm text-gray-500">Pressure</div>
+                                            <div className="flex items-baseline">
+                                                <span className="text-4xl font-medium text-gray-800">1.18</span>
+                                                <span className="ml-2 text-xl text-gray-600">bar</span>
+                                            </div>
+                                            <div className="mt-2">
+                                                <span className="bg-orange-500 text-white text-xs px-8 py-0.5 rounded uppercase">WARN</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-bold text-gray-800 mb-6">Timeline</h2>
+                                    <div className="flex items-center justify-between mb-8">
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-sm font-medium">
+                                                1
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">10m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-sm font-medium">
+                                                2
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">8m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-sm font-medium">
+                                                3
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">15m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">
+                                                4
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">4m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">
+                                                5
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">20m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">
+                                                6
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">12m</span>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center text-sm font-medium">
+                                                7
+                                            </div>
+                                            <span className="text-xs text-gray-500 mt-1">6m</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <button className="flex-1 bg-green-700 hover:bg-green-800 text-white font-medium py-3 px-4 rounded">
+                                            RESUME
+                                        </button>
+                                        <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded">
+                                            HOLD
+                                        </button>
+                                        <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded">
+                                            ABORT
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer className="bg-gray-100 py-4 px-6 border-t">
+                        <div className="container mx-auto">
+                            <p className="text-xs text-gray-500">Recipe R-204 · Step 3 of 7 ACTIVE · Compliance: ANSI/ISA-101.01</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        function StepsTable() {
+            const steps = [
+                { id: 1, name: 'Pre-heat', duration: '10 min', status: 'DONE' },
+                { id: 2, name: 'Fill base', duration: '8 min', status: 'DONE' },
+                { id: 3, name: 'Mix', duration: '15 min', status: 'ACTIVE' },
+                { id: 4, name: 'Add catalyst', duration: '4 min', status: 'PENDING' },
+                { id: 5, name: 'Hold', duration: '20 min', status: 'PENDING' },
+                { id: 6, name: 'Cool down', duration: '12 min', status: 'PENDING' },
+                { id: 7, name: 'Discharge', duration: '6 min', status: 'PENDING' }
+            ];
+
+            return (
+                <div>
+                    <h2 className="text-lg font-bold text-gray-800 mb-4">Steps</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">#</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Step</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Duration</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {steps.map((step) => (
+                                    <tr key={step.id} className="border-b hover:bg-gray-50">
+                                        <td className="px-4 py-4 text-sm text-gray-800">{step.id}</td>
+                                        <td className="px-4 py-4 text-sm font-medium text-gray-800">{step.name}</td>
+                                        <td className="px-4 py-4 text-sm text-gray-600">{step.duration}</td>
+                                        <td className="px-4 py-4">
+                                            <span className={`px-6 py-0.5 rounded uppercase text-white text-sm font-medium ${
+                                                step.status === 'DONE' ? 'bg-green-700' : 
+                                                step.status === 'ACTIVE' ? 'bg-blue-600' : 'bg-gray-500'
+                                            }`}>
+                                                {step.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            <button className="border border-gray-400 rounded px-6 py-1 text-sm text-gray-700 hover:bg-gray-50">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

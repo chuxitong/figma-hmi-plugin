@@ -1,0 +1,1 @@
+Slightly reduce horizontal padding or margins in the main content so controls feel tighter.

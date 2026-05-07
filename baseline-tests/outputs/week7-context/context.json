@@ -1,0 +1,20 @@
+[
+  {
+    "config": "A_image_only",
+    "html": "baseline-tests\\outputs\\week7-context\\A_image_only.html",
+    "png": "baseline-tests\\outputs\\week7-context\\A_image_only.png",
+    "bytes": 2589
+  },
+  {
+    "config": "B_image_variables",
+    "html": "baseline-tests\\outputs\\week7-context\\B_image_variables.html",
+    "png": "baseline-tests\\outputs\\week7-context\\B_image_variables.png",
+    "bytes": 2493
+  },
+  {
+    "config": "C_image_variables_css",
+    "html": "baseline-tests\\outputs\\week7-context\\C_image_variables_css.html",
+    "png": "baseline-tests\\outputs\\week7-context\\C_image_variables_css.png",
+    "bytes": 2493
+  }
+]

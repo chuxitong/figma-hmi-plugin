@@ -1,0 +1,222 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Recipe Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-grow p-6">
+                        <div className="flex gap-6">
+                            <div className="w-2/3 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                <StepsTable />
+                            </div>
+                            <div className="w-1/3 space-y-6">
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Live parameters</h2>
+                                    <divParameters />
+                                </div>
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Timeline</h2>
+                                    <Timeline />
+                                    <div className="mt-8 flex justify-between gap-4">
+                                        <button className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded-md">
+                                            RESUME
+                                        </button>
+                                        <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-md">
+                                            HOLD
+                                        </button>
+                                        <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">
+                                            ABORT
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <header className="bg-[#13314f] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-xl font-bold flex items-center gap-2">
+                                <i className="fas fa-microchip"></i> Batch Recipe Management
+                            </h1>
+                            <p className="text-xs text-gray-300 mt-1">
+                                Recipe: R-204 · Lot 2026-017 · Batch operator: A. Petrov
+                            </p>
+                        </div>
+                        <div className="bg-[#1e3a7a] text-gray-300 py-2 px-4 rounded-md text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        function StepsTable() {
+            const steps = [
+                { id: 1, name: 'Pre-heat', duration: '10 min', status: 'DONE' },
+                { id: 2, name: 'Fill base', duration: '8 min', status: 'DONE' },
+                { id: 3, name: 'Mix', duration: '15 min', status: 'ACTIVE' },
+                { id: 4, name: 'Add catalyst', duration: '4 min', status: 'PENDING' },
+                { id: 5, name: 'Hold', duration: '20 min', status: 'PENDING' },
+                { id: 6, name: 'Cool down', duration: '12 min', status: 'PENDING' },
+                { id: 7, name: 'Discharge', duration: '6 min', status: 'PENDING' }
+            ];
+
+            return (
+                <div>
+                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Steps</h2>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">#</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Step</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Duration</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Status</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {steps.map((step) => (
+                                    <tr key={step.id} className="border-b border-gray-200">
+                                        <td className="px-4 py-3 text-gray-800">{step.id}</td>
+                                        <td className="px-4 py-3 text-gray-800 font-medium">{step.name}</td>
+                                        <td className="px-4 py-3 text-gray-800">{step.duration}</td>
+                                        <td className="px-4 py-3">
+                                            <span className={`px-8 py-1 rounded text-white text-xs font-medium ${
+                                                step.status === 'DONE' ? 'bg-green-700' :
+                                                step.status === 'ACTIVE' ? 'bg-blue-600' :
+                                                'bg-gray-500'
+                                            }`}>
+                                                {step.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            <button className="border border-gray-400 rounded px-6 py-1 text-gray-800 hover:bg-gray-50 font-medium">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        function DivParameters() {
+            return (
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="border rounded-lg p-4">
+                        <div className="text-gray-500 text-sm">Temperature</div>
+                        <div className="flex items-end gap-2">
+                            <span className="text-4xl font-medium text-gray-800">65.4</span>
+                            <span className="text-2xl text-gray-600">°C</span>
+                        </div>
+                        <div className="mt-2">
+                            <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                        </div>
+                    </div>
+                    
+                    <div className="border rounded-lg p-4">
+                        <div className="text-gray-500 text-sm">pH</div>
+                        <div className="flex items-end gap-2">
+                            <span className="text-4xl font-medium text-gray-800">7.1</span>
+                        </div>
+                        <div className="mt-2">
+                            <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                        </div>
+                    </div>
+                    
+                    <div className="border rounded-lg p-4">
+                        <div className="text-gray-500 text-sm">RPM</div>
+                        <div className="flex items-end">
+                            <span className="text-4xl font-medium text-gray-800">240</span>
+                        </div>
+                        <div className="mt-2">
+                            <span className="bg-green-700 text-white text-xs px-8 py-1 rounded">OK</span>
+                        </div>
+                    </div>
+                    
+                    <div className="border rounded-lg p-4">
+                        <div className="text-gray-500 text-sm">Pressure</div>
+                        <div className="flex items-end gap-2">
+                            <span className="text-4xl font-medium text-gray-800">1.18</span>
+                            <span className="text-2xl text-gray-600">bar</span>
+                        </div>
+                        <div className="mt-2">
+                            <span className="bg-orange-500 text-white text-xs px-8 py-1 rounded">WARN</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function Timeline() {
+            const timelineItems = [
+                { id: 1, active: true, time: '10m' },
+                { id: 2, active: true, time: '8m' },
+                { id: 3, active: true, time: '15m' },
+                { id: 4, active: false, time: '4m' },
+                { id: 5, active: false, time: '20m' },
+                { id: 6, active: false, time: '12m' },
+                { id: 7, active: false, time: '6m' }
+            ];
+
+            return (
+                <div className="flex items-center justify-between">
+                    {timelineItems.map((item) => (
+                        <div key={item.id} className="flex flex-col items-center">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
+                                item.id <= 3 ? 'bg-green-700' : 'bg-gray-500'
+                            }`}>
+                                {item.id}
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">{item.time}</div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                    <div className="text-xs text-gray-500">
+                        Recipe R-204 · Step 3 of 7 ACTIVE · Compliance: ANSI/ISA-101.01
+                    </div>
+                </footer>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

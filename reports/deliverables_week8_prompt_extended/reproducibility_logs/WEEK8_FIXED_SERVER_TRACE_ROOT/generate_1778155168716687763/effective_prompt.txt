@@ -1,0 +1,28 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 03 Trend Monitor — HMI
+
+<design_variables>
+{
+  "--surface-bg": "#f3f5f8",
+  "--plot-grid": "#dde3ea",
+  "--plot-line": "#1976d2",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+<css_hints>
+{
+  "TrendCard": {
+    "min-height": "320px"
+  },
+  "ChartArea": {
+    "background-color": "#ffffff"
+  }
+}
+</css_hints>
+
+Additional engineering constraints for industrial HMI operator views:
+- Keep alarms, status indicators, and critical metrics visually distinct from decorative chrome.
+- Prefer predictable layout (flex or grid) with consistent spacing in control panels.
+- Do not omit major equipment or trend regions that appear in the screenshot.
+- If multiple buttons are visible, reflect primary vs secondary / neutral roles in styling.

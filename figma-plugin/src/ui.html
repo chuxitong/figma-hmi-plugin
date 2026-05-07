@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, system-ui, sans-serif; font-size: 12px; color: #e0e0e0; background: #2c2c2c; padding: 12px; }
+  h3 { font-size: 13px; margin-bottom: 8px; color: #fff; }
+  .section { margin-bottom: 14px; }
+  button {
+    background: #0d99ff; color: #fff; border: none; border-radius: 6px;
+    padding: 8px 14px; cursor: pointer; font-size: 12px; width: 100%;
+    margin-bottom: 6px; transition: background 0.15s;
+  }
+  button:hover { background: #0b85e0; }
+  button.secondary { background: #444; }
+  button.secondary:hover { background: #555; }
+  textarea, input[type="text"] {
+    width: 100%; background: #1e1e1e; color: #e0e0e0; border: 1px solid #555;
+    border-radius: 4px; padding: 6px 8px; font-family: monospace; font-size: 11px;
+    resize: vertical;
+  }
+  textarea { height: 120px; }
+  .preview-area {
+    width: 100%; min-height: 80px; background: #1e1e1e; border: 1px dashed #555;
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: #888; font-style: italic; overflow: hidden;
+  }
+  .preview-area img { max-width: 100%; }
+  .toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .toggle-row input { accent-color: #0d99ff; }
+  .ctx-note { color: #888; font-size: 10px; margin: -2px 0 8px 0; }
+  #log { font-family: monospace; font-size: 10px; color: #aaa; white-space: pre-wrap;
+         max-height: 200px; overflow-y: auto; background: #1a1a1a; padding: 6px; border-radius: 4px; }
+  .log-sticky {
+    position: sticky; bottom: 0; z-index: 20; background: #2a2a2a;
+    padding-top: 8px; margin-top: 8px; border-top: 1px solid #444;
+  }
+  .howto { color: #e8b84a; font-size: 11px; line-height: 1.45; margin-bottom: 10px; }
+  textarea.readonly-meta { min-height: 48px; max-height: 140px; font-size: 11px; line-height: 1.35; }
+  textarea.readonly-json { min-height: 100px; max-height: 200px; font-size: 10px; line-height: 1.3; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <h3>Service URL</h3>
+  <input type="text" id="serviceUrl" placeholder="http://localhost:8000" inputmode="url" autocapitalize="off" spellcheck="false" />
+  <div class="ctx-note">
+    Base URL must be plain ASCII (no “。” after the port). Local default or SSH port-forward target.
+  </div>
+  <button type="button" class="secondary" id="btnSaveUrl">Save URL</button>
+</div>
+
+<div class="section">
+  <h3>Figma HMI Plugin</h3>
+  <div class="howto">
+    <strong>How to run:</strong> In the canvas or layers, select <strong>one</strong> Frame (or Component / Instance). Then click <strong>Generate Code</strong> below — the plugin exports the frame for you (no need for File → Export). Scroll to the bottom <strong>Log</strong> to see progress. Use <strong>Apply Edit</strong> only <em>after</em> code exists.
+  </div>
+  <div class="ctx-note" style="margin-bottom:8px;">
+    Optional service fields (Week-4): only sent when the matching box is checked at click time.
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkTaskDesc" /> <label for="chkTaskDesc">Include task description</label>
+  </div>
+  <div class="ctx-note" style="margin-top:-4px;">
+    If checked: <code>task_description</code> is sent on <code>POST /generate</code> (or <code>null</code> when the box below is empty). If unchecked: always <code>null</code>.
+  </div>
+  <textarea id="taskDescription" rows="2" placeholder='e.g. "Emphasize alarm cards and use a dark header bar"'></textarea>
+  <div class="toggle-row" style="margin-top:8px;">
+    <input type="checkbox" id="chkVars" /> <label for="chkVars">Include design variables</label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkCss" /> <label for="chkCss">Include CSS hints</label>
+  </div>
+  <div class="ctx-note">
+    Variables and CSS apply to Generate, Refine and Edit when checked (sandbox collects them on each action).
+  </div>
+  <div class="toggle-row" style="margin-top:8px;">
+    <input type="checkbox" id="chkSendCurrentCode" checked /> <label for="chkSendCurrentCode">Include current HTML in Refine / Edit</label>
+  </div>
+  <div class="ctx-note" style="margin-top:-4px;">
+    Sends <code>current_code</code> to the service. Required for <code>/refine</code> and <code>/edit</code>; uncheck to withhold code (actions will be blocked).
+  </div>
+  <button type="button" id="btnGenerate">Generate Code</button>
+  <button type="button" id="btnRefine" class="secondary">Make It Closer to the Mockup</button>
+  <button type="button" id="btnSelfTest" class="secondary" style="margin-top:6px;background:#7c4dff;">Run Self-Test (no network)</button>
+  <div class="ctx-note">Click Self-Test to confirm UI ↔ sandbox messaging works. You should see a Figma toast from the bottom of the screen and a new line in the Log below.</div>
+</div>
+
+<div class="section">
+  <h3>Edit by Request</h3>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkEditInstruction" checked /> <label for="chkEditInstruction">Include edit instruction</label>
+  </div>
+  <div class="ctx-note" style="margin-top:-4px;">
+    If checked: sends your text as <code>instruction</code> on <code>POST /edit</code>. If unchecked: Apply Edit is blocked.
+  </div>
+  <input type="text" id="editInstruction" placeholder='e.g. "Make the button secondary"' />
+  <button type="button" id="btnEdit" class="secondary" style="margin-top:6px;">Apply Edit</button>
+</div>
+
+<div class="section">
+  <h3>Generated Code</h3>
+  <textarea id="codeOutput" readonly placeholder="Generated HTML/CSS will appear here..."></textarea>
+  <button type="button" id="btnCopy" class="secondary">Copy Code</button>
+  <button type="button" id="btnCopyLastRequest" class="secondary" style="margin-top:6px;">Copy last API request (JSON, base64 truncated)</button>
+  <label for="lastRequestExport" class="ctx-note" style="display:block;margin-top:10px;color:#bbb;">Last API request snapshot (truncated JSON) — if Copy fails, click here and use Ctrl+A / Ctrl+C</label>
+  <textarea id="lastRequestExport" class="readonly-json" readonly rows="8" spellcheck="false" aria-label="Last API request JSON snapshot"></textarea>
+</div>
+
+<div class="section">
+  <h3>Service response (optional fields)</h3>
+  <div class="ctx-note">
+    Server always returns <code>explanation</code> and <code>metadata</code> when it can; use the boxes below to show or hide them in the panel.
+  </div>
+  <div class="toggle-row" style="margin-top:8px;">
+    <input type="checkbox" id="chkShowExpl" checked /> <label for="chkShowExpl">Show explanation in panel</label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkShowMeta" checked /> <label for="chkShowMeta">Show metadata (JSON) in panel</label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="chkShowPreview" checked /> <label for="chkShowPreview">Show preview image from service</label>
+  </div>
+  <div class="ctx-note" style="margin-top:-4px;">
+    If off, the Preview area is not updated from <code>preview_base64</code> (code and log still update).
+  </div>
+  <label for="explanationOutput" class="ctx-note" style="display:block;margin-top:8px;color:#bbb;">Explanation</label>
+  <textarea id="explanationOutput" class="readonly-meta" readonly rows="3" placeholder="—"></textarea>
+  <label for="metadataOutput" class="ctx-note" style="display:block;margin-top:6px;color:#bbb;">Metadata (JSON)</label>
+  <textarea id="metadataOutput" class="readonly-json" readonly rows="10" placeholder="—"></textarea>
+</div>
+
+<div class="section">
+  <h3>Preview</h3>
+  <div class="preview-area" id="previewArea">No preview yet</div>
+</div>
+
+<div class="section log-sticky" id="logSection">
+  <h3>Log</h3>
+  <div id="log">Ready.</div>
+  <p id="buildStamp" class="ctx-note" style="margin-top:6px;color:#a8c8ff;font-weight:bold;">Build: 2026-05-07-r1-clipboard-fallback · Copy uses Clipboard API + execCommand fallback; last request also mirrored in the snapshot box above.</p>
+</div>
+
+<script>
+const LS_SERVICE_KEY = "figmaHmiServiceBaseUrl";
+
+/** Figma may load plugin UI in a context where localStorage is blocked (data: / sandbox). */
+function storageGet(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (e) {
+    return null;
+  }
+}
+function storageSet(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {
+    /* no-op: URL is not persisted */
+  }
+}
+
+/**
+ * Figma only forwards the pluginMessage part to code.ts. Target origin:
+ * Figma’s examples use the wildcard — desktop app / some embeds do not always
+ * deliver to https://www.figma.com; a bare pluginMessage + "*" is the most
+ * reliable. Do not add extra keys beside pluginMessage.
+ */
+function postToSandbox(pluginMessage) {
+  var packet = { pluginMessage: pluginMessage };
+  var origins = ["*", "https://www.figma.com", "https://figma.com"];
+  var lastErr = null;
+  for (var i = 0; i < origins.length; i++) {
+    try {
+      parent.postMessage(packet, origins[i]);
+      return;
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  var el = document.getElementById("log");
+  if (el) {
+    el.textContent +=
+      "postMessage error (tried * and figma origins): " +
+      (lastErr && lastErr.message ? lastErr.message : String(lastErr)) +
+      "\n";
+  }
+}
+
+/**
+ * Pasted URLs often pick up a CJK / fullwidth period (e.g. 8000。), which
+ * makes `fetch("http://127.0.0.1:8000。/generate")` throw "Failed to parse URL".
+ */
+function normalizeServiceBaseUrl(s) {
+  if (s == null || typeof s !== "string") return "";
+  var t = s.trim();
+  t = t.replace(/[\u200B-\u200D\uFEFF\u00A0]/g, "");
+  t = t.replace(/\u3002/g, "");
+  t = t.replace(/\uFF0E/g, ".");
+  t = t.replace(/\uFF0C/g, ",");
+  t = t.replace(/\u30FB/g, "-");
+  t = t.replace(/\uFF61/g, "");
+  t = t.replace(/\/+$/g, "");
+  for (var i = 0; i < 8 && t.length; i++) {
+    var c = t.charCodeAt(t.length - 1);
+    if (c < 0x7f) break;
+    if (c === 0x3002 || c === 0xff0c || c === 0x3001 || c === 0xff1a) {
+      t = t.slice(0, -1);
+    } else {
+      break;
+    }
+  }
+  return t;
+}
+
+/**
+ * Resolves the API base, normalizes, writes back to the input + localStorage
+ * so fetch() and the visible field can never disagree (fixes stale "8000。").
+ */
+function getServiceUrl() {
+  const el = document.getElementById("serviceUrl");
+  var fromInput = (el && el.value != null && String(el.value).trim() !== "")
+    ? String(el.value)
+    : "";
+  var fromStore = storageGet(LS_SERVICE_KEY) || "";
+  var prefer = fromInput || fromStore || "http://localhost:8000";
+  var norm = normalizeServiceBaseUrl(prefer) || "http://localhost:8000";
+  var base = norm.replace(/\/$/, "");
+  if (el) {
+    if (el.value !== base) el.value = base;
+  }
+  try {
+    storageSet(LS_SERVICE_KEY, base);
+  } catch (e) {
+    /* ignore */
+  }
+  return base;
+}
+(function initServiceUrlField() {
+  const el = document.getElementById("serviceUrl");
+  if (!el) return;
+  const saved = storageGet(LS_SERVICE_KEY);
+  el.value = (saved && String(saved).trim() !== "" ? String(saved) : "http://localhost:8000");
+  try {
+    getServiceUrl();
+  } catch (e) {
+    /* no-op */
+  }
+})();
+let currentCode = "";
+let referenceImageBase64 = "";
+let referenceWidth = 1280;
+let referenceHeight = 720;
+
+/** Last outbound service request for experiment logging (clipboard export). */
+let lastApiEnvelope = null;
+
+const B64_TRUNC_LEN = 260;
+
+function truncateBase64Fields(obj, maxLen, depth) {
+  if (depth > 24) return obj;
+  if (obj === null || obj === undefined) return obj;
+  if (Array.isArray(obj)) {
+    return obj.map(function (x) { return truncateBase64Fields(x, maxLen, depth + 1); });
+  }
+  if (typeof obj === "object") {
+    var out = {};
+    for (var key in obj) {
+      if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
+      var v = obj[key];
+      var lk = key.toLowerCase();
+      if (typeof v === "string" && lk.indexOf("base64") >= 0 && v.length > maxLen) {
+        out[key] = "<<truncated " + v.length + " chars>>";
+      } else {
+        out[key] = truncateBase64Fields(v, maxLen, depth + 1);
+      }
+    }
+    return out;
+  }
+  return obj;
+}
+
+function recordLastApiEnvelope(endpointMethod, parsedBodyObj) {
+  lastApiEnvelope = {
+    endpoint: endpointMethod,
+    savedAtUtc: new Date().toISOString(),
+    body: parsedBodyObj,
+  };
+  updateLastRequestExportField();
+}
+
+function updateLastRequestExportField() {
+  var el = document.getElementById("lastRequestExport");
+  if (!el) return;
+  try {
+    el.value = stringifyLastEnvelopeForClipboard();
+  } catch (_e) {
+    el.value = '{"error":"stringify_failed"}';
+  }
+}
+
+/**
+ * Figma plugin UI often has no navigator.clipboard (opaque origin / WebView).
+ * Sync writeText on undefined throws — must not rely on .catch alone.
+ */
+function copyTextUsingExecCommand(text) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "readonly");
+  ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;width:1px;height:1px;";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    ta.setSelectionRange(0, text.length);
+  } catch (_e) {}
+  var ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch (_e2) {}
+  document.body.removeChild(ta);
+  return ok;
+}
+
+/** @returns {Promise<{ ok: boolean, how?: string }>} */
+function copyTextToClipboardRobust(text) {
+  if (text == null) text = "";
+  return new Promise(function (resolve) {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(text).then(function () {
+        resolve({ ok: true, how: "Clipboard API" });
+      }).catch(function () {
+        if (copyTextUsingExecCommand(text)) {
+          resolve({ ok: true, how: "execCommand (Clipboard API declined)" });
+        } else {
+          resolve({ ok: false });
+        }
+      });
+      return;
+    }
+    if (copyTextUsingExecCommand(text)) {
+      resolve({ ok: true, how: "execCommand (no Clipboard API)" });
+      return;
+    }
+    resolve({ ok: false });
+  });
+}
+
+function stringifyLastEnvelopeForClipboard() {
+  if (!lastApiEnvelope || !lastApiEnvelope.endpoint) {
+    return JSON.stringify({ error: "no_request_yet", hint_en: "Run Generate / Refine / Edit first." }, null, 2);
+  }
+  var safeBody = truncateBase64Fields(lastApiEnvelope.body, B64_TRUNC_LEN, 0);
+  return JSON.stringify(
+    { endpoint: lastApiEnvelope.endpoint, savedAtUtc: lastApiEnvelope.savedAtUtc, body: safeBody },
+    null,
+    2,
+  );
+}
+
+function log(text) {
+  const el = document.getElementById("log");
+  if (!el) return;
+  el.textContent += text + "\n";
+  el.scrollTop = el.scrollHeight;
+}
+
+function setPreviewImage(previewBase64) {
+  const area = document.getElementById("previewArea");
+  if (!area) return;
+  area.textContent = "";
+  if (!previewBase64 || typeof previewBase64 !== "string") {
+    area.textContent = "No preview yet";
+    return;
+  }
+  const cleaned = previewBase64.replace(/\s+/g, "");
+  if (!/^[A-Za-z0-9+/=]+$/.test(cleaned)) {
+    area.textContent = "Preview rejected: invalid base64.";
+    log("Preview rejected: service returned a non-base64 preview payload.");
+    return;
+  }
+  const img = document.createElement("img");
+  img.alt = "preview";
+  img.src = "data:image/png;base64," + cleaned;
+  area.appendChild(img);
+}
+
+async function readServiceJson(resp, opName) {
+  const text = await resp.text();
+  if (!resp.ok) {
+    const snippet = text.slice(0, 400).replace(/\s+/g, " ").trim();
+    throw new Error(`${opName} failed: HTTP ${resp.status} ${resp.statusText}${snippet ? " — " + snippet : ""}`);
+  }
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch (err) {
+    const snippet = text.slice(0, 400).replace(/\s+/g, " ").trim();
+    throw new Error(`${opName} returned non-JSON content${snippet ? " — " + snippet : ""}`);
+  }
+}
+
+/** Apply CodeResponse from /generate, /refine, /edit (code, preview, explanation, metadata). */
+function applyServiceCodeResponse(result, doneLogLine) {
+  if (!result || typeof result !== "object") return;
+  if (typeof result.code === "string") {
+    if (result.code.length > 0) currentCode = result.code;
+    document.getElementById("codeOutput").value = currentCode;
+  }
+  const showPrev =
+    document.getElementById("chkShowPreview") && document.getElementById("chkShowPreview").checked;
+  if (showPrev && result.preview_base64) {
+    setPreviewImage(result.preview_base64);
+  } else if (!showPrev && result.preview_base64) {
+    const pa = document.getElementById("previewArea");
+    if (pa && !pa.querySelector("img")) pa.textContent = "Preview hidden (checkbox off)";
+  }
+  const showExpl = document.getElementById("chkShowExpl") && document.getElementById("chkShowExpl").checked;
+  const showMeta = document.getElementById("chkShowMeta") && document.getElementById("chkShowMeta").checked;
+  const explEl = document.getElementById("explanationOutput");
+  if (explEl) {
+    if (!showExpl) {
+      explEl.value = "— (Show explanation is off)";
+    } else {
+      explEl.value =
+        result.explanation != null && String(result.explanation).trim() !== ""
+          ? String(result.explanation)
+          : "—";
+    }
+  }
+  const metaEl = document.getElementById("metadataOutput");
+  if (metaEl) {
+    if (!showMeta) {
+      metaEl.value = "— (Show metadata is off)";
+    } else {
+      const m = result.metadata;
+      if (m != null && typeof m === "object" && Object.keys(m).length > 0) {
+        try {
+          metaEl.value = JSON.stringify(m, null, 2);
+        } catch (e) {
+          metaEl.value = String(m);
+        }
+      } else {
+        metaEl.value = "—";
+      }
+    }
+  }
+  if (doneLogLine) log(doneLogLine);
+}
+
+function ctxFlags() {
+  return {
+    includeVariables: document.getElementById("chkVars").checked,
+    includeCssHints: document.getElementById("chkCss").checked,
+  };
+}
+
+const _ctxResolvers = new Map();
+function requestContext() {
+  // Asks the sandbox for variables / css hints based on current checkboxes.
+  // Returns { cssHints, variables }. If the user disabled both checkboxes,
+  // we still call and get empty objects, which is what the model should see.
+  return new Promise((resolve) => {
+    const requestId = String(Date.now()) + "-" + Math.random().toString(36).slice(2);
+    _ctxResolvers.set(requestId, resolve);
+    postToSandbox({ type: "request-context", payload: { ...ctxFlags(), requestId } });
+  });
+}
+
+async function renderCurrentCode() {
+  // Asks the local service to render currentCode → PNG (base64).
+  const resp = await fetch(getServiceUrl() + "/render", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      html_code: currentCode,
+      width: referenceWidth,
+      height: referenceHeight,
+    }),
+  });
+  const result = await readServiceJson(resp, "POST /render");
+  return result.image_base64 || "";
+}
+
+window.addEventListener("message", function (event) {
+  const msg = event.data && event.data.pluginMessage;
+  if (!msg || typeof msg.type !== "string") return;
+
+  if (msg.type === "pong") {
+    log("Sandbox connection OK: " + msg.message);
+  }
+
+  if (msg.type === "error") {
+    log("ERROR: " + msg.message);
+  }
+
+  if (msg.type === "status") {
+    log(typeof msg.message === "string" ? msg.message : "Status update.");
+  }
+
+  if (msg.type === "context-ready") {
+    const r = _ctxResolvers.get(msg.requestId);
+    if (r) { _ctxResolvers.delete(msg.requestId); r(msg.data || {}); }
+  }
+
+  if (msg.type === "frame-exported") {
+    const d = msg.data;
+    referenceImageBase64 = d.imageBase64;
+    referenceWidth = d.width;
+    referenceHeight = d.height;
+    log(`Frame "${d.frameName}" exported (${d.width}×${d.height}).`);
+    log("Sending to local service for code generation...");
+
+    (async function () {
+      try {
+        var genBodyObj = {
+            image_base64: d.imageBase64,
+            frame_name: d.frameName,
+            width: d.width,
+            height: d.height,
+            task_description: document.getElementById("chkTaskDesc").checked
+              ? (document.getElementById("taskDescription").value.trim() || null)
+              : null,
+            css_hints: d.cssHints || {},
+            variables: d.variables || {},
+          };
+        recordLastApiEnvelope("POST /generate", genBodyObj);
+        const resp = await fetch(getServiceUrl() + "/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(genBodyObj),
+        });
+        const result = await readServiceJson(resp, "POST /generate");
+        applyServiceCodeResponse(result, "Code generation complete.");
+      } catch (err) {
+        log("Service error: " + err.message);
+      }
+    })();
+  }
+});
+
+document.getElementById("btnSaveUrl").onclick = function () {
+  const base = getServiceUrl();
+  log("Service URL saved: " + base);
+};
+
+function flashClickedLabel(buttonId, originalText) {
+  const b = document.getElementById(buttonId);
+  if (!b) return;
+  const stamp = new Date().toLocaleTimeString();
+  b.textContent = `CLICKED ${stamp} — sending…`;
+  setTimeout(function () { try { if (b) b.textContent = originalText; } catch (_e) {} }, 2200);
+}
+
+document.getElementById("btnGenerate").onclick = () => {
+  flashClickedLabel("btnGenerate", "Generate Code");
+  log("Generate: UI click ok → postMessage to sandbox…");
+  try {
+    document.getElementById("logSection").scrollIntoView({ block: "end", behavior: "smooth" });
+  } catch (_e) {}
+  postToSandbox({ type: "export-frame", payload: ctxFlags() });
+};
+
+document.getElementById("btnSelfTest").onclick = () => {
+  try {
+    flashClickedLabel("btnSelfTest", "Run Self-Test (no network)");
+    log("Self-Test: UI click ok → postMessage 'self-test' (no network).");
+    try {
+      document.getElementById("logSection").scrollIntoView({ block: "end", behavior: "smooth" });
+    } catch (_e) {}
+    postToSandbox({ type: "self-test" });
+  } catch (e) {
+    log("Self-Test: UI error — " + (e && e.message ? e.message : String(e)));
+  }
+};
+
+document.getElementById("btnRefine").onclick = async () => {
+  if (!document.getElementById("chkSendCurrentCode").checked) {
+    log('Check "Include current HTML in Refine / Edit" to send current_code to the service.');
+    return;
+  }
+  if (!currentCode || !referenceImageBase64) {
+    log("Generate code first before refining.");
+    return;
+  }
+  log("Refine: rendering current code...");
+  let renderedB64 = "";
+  try {
+    renderedB64 = await renderCurrentCode();
+  } catch (err) {
+    log("Render error (continuing without rendered image): " + err.message);
+  }
+  log("Refine: collecting context...");
+  const ctx = await requestContext();
+  log("Refine: requesting model...");
+  try {
+    var refinePayload = {
+      reference_image_base64: referenceImageBase64,
+      rendered_image_base64: renderedB64,
+      current_code: currentCode,
+      width: referenceWidth,
+      height: referenceHeight,
+      css_hints: ctx.cssHints || {},
+      variables: ctx.variables || {},
+    };
+    recordLastApiEnvelope("POST /refine", refinePayload);
+    const resp = await fetch(getServiceUrl() + "/refine", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(refinePayload),
+    });
+    const result = await readServiceJson(resp, "POST /refine");
+    applyServiceCodeResponse(result, "Refinement complete.");
+  } catch (err) {
+    log("Service error: " + err.message);
+  }
+};
+
+document.getElementById("btnEdit").onclick = async () => {
+  if (!document.getElementById("chkSendCurrentCode").checked) {
+    log('Check "Include current HTML in Refine / Edit" to send current_code to the service.');
+    return;
+  }
+  if (!document.getElementById("chkEditInstruction").checked) {
+    log('Check "Include edit instruction" to send instruction on POST /edit.');
+    return;
+  }
+  const instruction = document.getElementById("editInstruction").value.trim();
+  if (!instruction) { log("Enter an edit instruction."); return; }
+  if (!currentCode) { log("Generate code first."); return; }
+  log("Edit: collecting context...");
+  const ctx = await requestContext();
+  log("Edit: applying \"" + instruction + "\"");
+  try {
+    var editPayload = {
+      current_code: currentCode,
+      instruction: instruction,
+      width: referenceWidth,
+      height: referenceHeight,
+      css_hints: ctx.cssHints || {},
+      variables: ctx.variables || {},
+    };
+    recordLastApiEnvelope("POST /edit", editPayload);
+    const resp = await fetch(getServiceUrl() + "/edit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editPayload),
+    });
+    const result = await readServiceJson(resp, "POST /edit");
+    applyServiceCodeResponse(result, "Edit applied.");
+  } catch (err) {
+    log("Service error: " + err.message);
+  }
+};
+
+document.getElementById("btnCopy").onclick = function () {
+  var ta = document.getElementById("codeOutput");
+  var text = ta && typeof ta.value === "string" ? ta.value : currentCode;
+  try {
+    copyTextToClipboardRobust(text).then(function (r) {
+      if (r.ok) {
+        log("Code copied (" + r.how + ").");
+      } else {
+        log("Clipboard not available — click the Generated Code box, Ctrl+A, Ctrl+C.");
+        try {
+          if (ta) {
+            ta.focus();
+            ta.select();
+          }
+        } catch (_e) {}
+      }
+    });
+  } catch (err) {
+    log("Copy code error: " + (err && err.message ? err.message : String(err)));
+  }
+};
+
+document.getElementById("btnCopyLastRequest").onclick = function () {
+  try {
+    var text = stringifyLastEnvelopeForClipboard();
+    updateLastRequestExportField();
+    var snap = document.getElementById("lastRequestExport");
+    copyTextToClipboardRobust(text).then(function (r) {
+      if (r.ok) {
+        log("Last API request JSON copied (" + r.how + "; base64 truncated).");
+      } else {
+        log("Clipboard blocked — use the \"Last API request snapshot\" box: click inside, Ctrl+A, Ctrl+C.");
+        try {
+          if (snap) {
+            snap.focus();
+            snap.select();
+          }
+        } catch (_e) {}
+      }
+    });
+  } catch (err) {
+    log("Copy last request error: " + (err && err.message ? err.message : String(err)));
+  }
+};
+
+updateLastRequestExportField();
+
+postToSandbox({ type: "ping" });
+</script>
+</body>
+</html>

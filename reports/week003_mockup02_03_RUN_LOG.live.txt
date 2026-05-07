@@ -1,0 +1,62 @@
+=== Week3 mockup 02 & 03 — 与 run_week3_verified 相同步骤 ===
+API_BASE=http://127.0.0.1:8000
+Edit instruction: 'Increase the main page title font size and make it more prominent.'
+Refine rounds: 3
+Reference 均来自 mockups/png（复制为各 stem 的 *_00_reference.png）
+
+========== week003_m02 ref=/root/autodl-tmp/figma-hmi-plugin/mockups/png/02-alarm-event.png frame='Alarm & Event Screen' ==========
+    copied mockup → screenshots/week003_m02_00_reference.png
+[1] POST /generate ...
+    elapsed 224.5s
+    saved: week003_m02_01_generate.html, week003_m02_01_generate_response.json, week003_m02_01_generate_preview.png|.b64
+
+--- POST /edit（week003_m02_02_after_edit*）---
+  instruction: 'Increase the main page title font size and make it more prominent.'
+
+[2] POST /edit ...
+    elapsed 70.6s
+    saved: week003_m02_02_after_edit*
+[3.1] render + refine ...
+    refine elapsed 200.1s
+    saved: week003_m02_refine_iter1_a_render_in.png, week003_m02_refine_iter1_b_preview.png, week003_m02_refine_iter1.html
+
+[3.2] render + refine ...
+    refine elapsed 302.3s
+    saved: week003_m02_refine_iter2_a_render_in.png, week003_m02_refine_iter2_b_preview.png, week003_m02_refine_iter2.html
+
+[3.3] render + refine ...
+    refine elapsed 214.0s
+    saved: week003_m02_refine_iter3_a_render_in.png, week003_m02_refine_iter3_b_preview.png, week003_m02_refine_iter3.html
+
+
+========== week003_m03 ref=/root/autodl-tmp/figma-hmi-plugin/mockups/png/03-trend-monitor.png frame='Trend Monitor' ==========
+    copied mockup → screenshots/week003_m03_00_reference.png
+[1] POST /generate ...
+    elapsed 198.0s
+    saved: week003_m03_01_generate.html, week003_m03_01_generate_response.json, week003_m03_01_generate_preview.png|.b64
+
+--- POST /edit（week003_m03_02_after_edit*）---
+  instruction: 'Increase the main page title font size and make it more prominent.'
+
+[2] POST /edit ...
+    elapsed 59.7s
+    saved: week003_m03_02_after_edit*
+[3.1] render + refine ...
+    refine elapsed 63.6s
+    saved: week003_m03_refine_iter1_a_render_in.png, week003_m03_refine_iter1_b_preview.png, week003_m03_refine_iter1.html
+
+[3.2] render + refine ...
+    refine elapsed 66.0s
+    saved: week003_m03_refine_iter2_a_render_in.png, week003_m03_refine_iter2_b_preview.png, week003_m03_refine_iter2.html
+
+[3.3] render + refine ...
+    refine elapsed 56.6s
+    saved: week003_m03_refine_iter3_a_render_in.png, week003_m03_refine_iter3_b_preview.png, week003_m03_refine_iter3.html
+
+
+=== POST /edit 指令（与 run_week3_verified.py 一致）===
+Increase the main page title font size and make it more prominent.
+
+各 mockup 的 current_code 为对应 week003_m02_01_generate.html / week003_m03_01_generate.html。
+
+Wrote /root/autodl-tmp/figma-hmi-plugin/reports/week003_mockup02_03_RUN_LOG.txt

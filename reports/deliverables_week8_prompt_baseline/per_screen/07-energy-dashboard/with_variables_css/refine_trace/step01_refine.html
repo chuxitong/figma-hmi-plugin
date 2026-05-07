@@ -1,0 +1,214 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Monitoring Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <Header />
+                    <div className="container mx-auto px-4 py-6">
+                        <MetricsSection />
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                            <PowerConsumptionZones />
+                            <SourceBreakdown />
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-slate-800 text-white py-4 px-6">
+                    <div className="container mx-auto flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-semibold">Energy Monitoring Dashboard</h1>
+                            <p className="text-slate-300 text-sm mt-1">Industrial-2 · Day shift · All zones</p>
+                        </div>
+                        <div className="bg-slate-700 rounded-md px-4 py-2 text-sm text-slate-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const MetricsSection = () => {
+            const metrics = [
+                {
+                    title: "Total kWh",
+                    value: "12 845",
+                    change: "+340 за смену",
+                    borderColor: "border-green-600",
+                    changeColor: "text-green-600",
+                    icon: "▲"
+                },
+                {
+                    title: "Peak load",
+                    value: "742",
+                    change: "+18 за смену",
+                    borderColor: "border-orange-500",
+                    changeColor: "text-orange-500",
+                    icon: "▲"
+                },
+                {
+                    title: "Cost (today)",
+                    value: "€ 1 932",
+                    change: "+78 за смену",
+                    borderColor: "border-orange-500",
+                    changeColor: "text-orange-500",
+                    icon: "▲"
+                },
+                {
+                    title: "Power factor",
+                    value: "0.92",
+                    change: "+0.01 за смену",
+                    borderColor: "border-green-600",
+                    changeColor: "text-green-600",
+                    icon: "▲"
+                }
+            ];
+
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {metrics.map((metric, index) => (
+                        <div key={index} className={`bg-white rounded-lg border-l-4 ${metric.borderColor} p-4 shadow-sm`}>
+                            <div className="text-gray-500 text-sm mb-1">{metric.title}</div>
+                            <div className="text-3xl font-bold text-gray-800 mb-2">{metric.value}</div>
+                            <div className="text-xs">
+                                <span className={metric.changeColor}>{metric.icon} {metric.change}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        const ZoneBar = ({ zone, percentage, status }) => {
+            const getStatusColor = () => {
+                switch(status) {
+                    case 'OK': return 'bg-green-600';
+                    case 'WARN': return 'bg-orange-500';
+                    case 'ALARM': return 'bg-red-600';
+                    default: return 'bg-green-600';
+                }
+            };
+
+            return (
+                <div className="flex items-center mb-6">
+                    <div className="w-16 text-sm font-medium text-gray-800">{zone}</div>
+                    <div className="flex-1 mx-4 bg-gray-100 rounded-full h-6">
+                        <div 
+                            className={`h-6 rounded-full ${getStatusColor()}`}
+                            style={{ width: `${percentage}%` }}
+                        ></div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <span className="text-sm text-gray-600">{percentage}%</span>
+                        <span className={`text-xs text-white px-3 py-1 rounded ${getStatusColor()}`}>{status}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const PowerConsumptionZones = () => {
+            const zones = [
+                { zone: "Zone A", percentage: 62, status: "OK" },
+                { zone: "Zone B", percentage: 48, status: "OK" },
+                { zone: "Zone C", percentage: 81, status: "WARN" },
+                { zone: "Zone D", percentage: 35, status: "OK" },
+                { zone: "Zone E", percentage: 90, status: "ALARM" },
+                { zone: "Zone F", percentage: 27, status: "OK" }
+            ];
+
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                    <h2 className="text-gray-800 font-semibold text-base mb-6">Power consumption by zone</h2>
+                    {zones.map((item, index) => (
+                        <ZoneBar 
+                            key={index}
+                            zone={item.zone}
+                            percentage={item.percentage}
+                            status={item.status}
+                        />
+                    ))}
+                </div>
+            );
+        };
+
+        const SourceBreakdown = () => {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                    <h2 className="text-gray-800 font-semibold text-base mb-6">Source breakdown</h2>
+                    <div className="flex items-center justify-center">
+                        <div className="relative w-64 h-64">
+                            {/* Donut chart */}
+                            <div className="w-64 h-64 rounded-full relative overflow-hidden">
+                                <div className="absolute inset-0" style={{
+                                    background: "conic-gradient(
+                                        #22c55e 0% 57%, 
+                                        #f97316 57% 82%, 
+                                        #3b82f6 82% 100%
+                                    )"
+                                }}></div>
+                                <div className="absolute inset-12 bg-white rounded-full"></div>
+                            </div>
+                            <div className="absolute inset-0 flex items-center justify-center flex-col">
+                                <div className="text-4xl font-bold text-gray-800">100%</div>
+                                <div className="text-gray-500 text-sm mt-1">today</div>
+                            </div>
+                        </div>
+                        <div className="ml-8">
+                            <div className="flex items-center mb-3">
+                                <div className="w-4 h-4 bg-green-600 mr-2"></div>
+                                <span className="text-sm text-gray-700">Электроэнергию · 57 %</span>
+                            </div>
+                            <div className="flex items-center mb-3">
+                                <div className="w-4 h-4 bg-orange-500 mr-2"></div>
+                                <span className="text-sm text-gray-700">Газ · 25 %</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-4 h-4 bg-blue-500 mr-2"></div>
+                                <span className="text-sm text-gray-700">Утилизация тепла · 18 %</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                    <div className="container mx-auto">
+                        <p className="text-xs text-gray-500">
+                            Connection: OK · Tariff plan: Industrial-2 · Compliance: ANSI/ISA-101.01
+                        </p>
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

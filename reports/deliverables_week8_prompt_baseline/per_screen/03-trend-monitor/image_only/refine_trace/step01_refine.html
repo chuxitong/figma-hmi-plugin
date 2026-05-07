@@ -1,0 +1,202 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameter Trend Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <div className="flex-grow p-4 bg-gray-50">
+                        <MetricCards />
+                        <TrendChart />
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#0b2746] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-bold">Parameter Trend Monitor</h1>
+                            <p className="text-sm text-gray-300">Window: 60 min · Sample: 1 s</p>
+                        </div>
+                        <div className="bg-[#1a3556] px-4 py-2 rounded text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const MetricCard = ({ title, value, change, unit, borderColor }) => {
+            return (
+                <div className={`bg-white rounded-lg border-l-4 ${borderColor} p-4 shadow-sm`}>
+                    <div className="text-gray-500 text-sm">{title}</div>
+                    <div className="text-4xl font-bold text-gray-800 my-2">{value}</div>
+                    <div className="flex items-center text-xs text-gray-600">
+                        <span className="mr-1">{"<"}</span>
+                        <span>{change} {unit}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const MetricCards = () => {
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <MetricCard 
+                        title="Temperature" 
+                        value="72.4" 
+                        change="+1.2" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                    <MetricCard 
+                        title="Pressure" 
+                        value="3.21" 
+                        change="+0.04" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                    <MetricCard 
+                        title="Flow" 
+                        value="184" 
+                        change="-3" 
+                        unit="за смени" 
+                        borderColor="border-orange-500" 
+                    />
+                    <MetricCard 
+                        title="Setpoint dev" 
+                        value="1.8" 
+                        change="+0.2" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                </div>
+            );
+        };
+
+        const TrendChart = () => {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-lg font-semibold text-gray-800">Trend window — 14:00 to 15:00</h2>
+                        <div className="flex space-x-4">
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-green-600 mr-2"></div>
+                                <span className="text-xs text-gray-600">Temp (°C)</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-orange-500 mr-2"></div>
+                                <span className="text-xs text-gray-600">Pressure (bar)</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-red-600 mr-2"></div>
+                                <span className="text-xs text-gray-600">Flow (L/min) band: ±2σ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="relative h-64 w-full">
+                        {/* Chart grid */}
+                        <div className="absolute inset-0 grid grid-cols-12 w-full h-full">
+                            {[...Array(12)].map((_, i) => (
+                                <div key={i} className="border-r border-gray-200 h-full"></div>
+                            ))}
+                        </div>
+                        <div className="absolute inset-0 grid grid-rows-6 w-full h-full">
+                            {[...Array(6)].map((_, i) => (
+                                <div key={i} className="border-t border-gray-200 w-full"></div>
+                            ))}
+                        </div>
+                        
+                        {/* Y-axis labels */}
+                        <div className="absolute -left-12 top-0 h-full flex flex-col justify-between text-xs text-gray-500">
+                            <div>100</div>
+                            <div>90</div>
+                            <div>80</div>
+                            <div>70</div>
+                            <div>60</div>
+                            <div>50</div>
+                            <div>40</div>
+                        </div>
+                        
+                        {/* Chart lines */}
+                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                            {/* Temperature line (green) */}
+                            <path d="M0,150 L100,155 L200,140 L300,170 L400,130 L500,140 L600,150 L700,140 L800,145 L900,140 L1000,160 L1100,130 L1200,140" 
+                                  stroke="#16a34a" strokeWidth="2" fill="none" />
+                            
+                            {/* Pressure line (orange) */}
+                            <path d="M0,350 L100,340 L200,350 L300,360 L400,340 L500,360 L600,370 L700,350 L800,330 L900,340 L1000,320 L1100,350 L1200,340" 
+                                  stroke="#f97316" strokeWidth="2" fill="none" />
+                            
+                            {/* Flow line (red) */}
+                            <path d="M0,430 L100,440 L200,420 L300,410 L400,430 L500,450 L600,430 L700,450 L800,430 L900,420 L1000,430 L1100,410 L1200,430" 
+                                  stroke="#dc2626" strokeWidth="2" fill="none" />
+                        </svg>
+                        
+                        {/* X-axis labels */}
+                        <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-gray-500 px-2">
+                            <div>14:00</div>
+                            <div>14:05</div>
+                            <div>14:10</div>
+                            <div>14:15</div>
+                            <div>14:20</div>
+                            <div>14:25</div>
+                            <div>14:30</div>
+                            <div>14:35</div>
+                            <div>14:40</div>
+                            <div>14:45</div>
+                            <div>14:50</div>
+                            <div>14:55</div>
+                            <div>14:60</div>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-4 flex justify-between items-center">
+                        <div className="bg-gray-100 px-4 py-2 rounded-md border border-gray-200 text-sm">
+                            14:22 — Flow rate deviation > 12 % (FT-401)
+                        </div>
+                        <div className="text-sm text-gray-600">
+                            Operator: A. Petrov
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 border-t border-gray-200 py-3 px-6 text-xs text-gray-500">
+                    <div className="flex space-x-4">
+                        <span>Connection: OK · Latency: 18 ms · Logging: enabled · Export to CSV available via toolbar</span>
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const StatusCard = ({ title, value, unit, trend, status, borderColor }) => {
+      const getStatusStyle = (status) => {
+        switch(status) {
+          case 'OK': return 'bg-green-700 text-white';
+          case 'ALARM': return 'bg-red-700 text-white';
+          case 'MAINT': return 'bg-orange-500 text-white';
+          case 'IDLE': return 'bg-gray-500 text-white';
+          case 'WARN': return 'bg-orange-600 text-white';
+          default: return 'bg-gray-500 text-white';
+        }
+      };
+
+      return (
+        <div className={`bg-white rounded-lg border-l-4 ${borderColor} p-4 shadow-sm`}>
+          <div className="text-gray-600 text-sm mb-2">{title}</div>
+          <div className="text-4xl font-bold text-gray-900 mb-2">
+            {value}
+            {unit && <span className="text-sm font-normal text-gray-600 ml-1">{unit}</span>}
+          </div>
+          <div className="text-gray-600 text-xs mb-2">trend: {trend}</div>
+          <div>
+            <span className={`text-xs px-3 py-1 rounded ${getStatusStyle(status)}`}>
+              {status}
+            </span>
+          </div>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const statusData = [
+        {
+          title: "Pump P-101",
+          value: "1480",
+          unit: "",
+          trend: "+12",
+          status: "OK",
+          borderColor: "l--green-700 border-green-700"
+        },
+        {
+          title: "Pump P-102",
+          value: "1492",
+          unit: "",
+          trend: "+8",
+          status: "OK", 
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Compressor C-201",
+          value: "3.21",
+          unit: "bar",
+          trend: "+0.04",
+          status: "OK",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Motor M-301",
+          value: "94.2",
+          unit: "",
+          trend: "+5.1",
+          status: "ALARM",
+          borderColor: "l-red-700 border-red-700"
+        },
+        {
+          title: "Valve V-102",
+          value: "CLOSED",
+          unit: "",
+          trend: "—",
+          status: "ALARM",
+          borderColor: "l-red-700 border-red-700"
+        },
+        {
+          title: "Conveyor CV-401",
+          value: "0.00",
+          unit: "/s",
+          trend: "—",
+          status: "MAINT",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Mixer MX-501",
+          value: "240",
+          unit: "",
+          trend: "—",
+          status: "IDLE",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Heater H-201",
+          value: "62.0",
+          unit: "",
+          trend: "-1.2",
+          status: "WARN",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Tank T-101",
+          value: "72",
+          unit: "",
+          trend: "+2",
+          status: "OK",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Tank T-102",
+          value: "41",
+          unit: "",
+          trend: "-1",
+          status: "OK",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Sensor T-405",
+          value: "38.5",
+          unit: "",
+          trend: "+0.4",
+          status: "OK",
+          borderColor: "l-green-700 border-green-700"
+        },
+        {
+          title: "Sensor F-902",
+          value: "180",
+          unit: "/h",
+          trend: "+3",
+          status: "OK",
+          borderColor: "l-green-700 border-green-700"
+        }
+      ];
+
+      return (
+        <div className="min-h-screen bg-gray-50">
+          {/* Header */}
+          <div className="bg-[#0a2e56] text-white px-6 py-4">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="text-2xl font-bold">Equipment Status Dashboard</h1>
+                <div className="text-gray-300 text-sm mt-1">Shift: Assembly 2 - Line A - Shift B</div>
+              </div>
+              <div className="bg-gray-700 bg-opacity-50 px-4 py-2 rounded text-sm">
+                2026-04-19 14:32:07 MSK
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {statusData.map((item, index) => (
+                <StatusCard 
+                  key={index}
+                  title={item.title}
+                  value={item.value}
+                  unit={item.unit}
+                  trend={item.trend}
+                  status={item.status}
+                  borderColor={item.borderColor}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="border-t bg-gray-50 px-6 py-3">
+            <div className="text-gray-600 text-sm">
+              Connection: OK - Items: 12 - Critical: 2 - Warnings: 2
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

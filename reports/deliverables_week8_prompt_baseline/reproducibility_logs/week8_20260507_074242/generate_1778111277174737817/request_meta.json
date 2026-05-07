@@ -1,0 +1,28 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 76016,
+      "sha256_prefix": "d59e31202346994be7fd2e3845472890"
+    },
+    "frame_name": "01 Equipment Status — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": {},
+    "variables": {
+      "--surface-0": "#f3f5f8",
+      "--surface-card": "#ffffff",
+      "--text-primary": "#1b2630",
+      "--text-secondary": "#5a6675",
+      "--accent-running": "#2e7d32",
+      "--accent-warning": "#f9a825",
+      "--accent-fault": "#c62828",
+      "--radius-md": "6px",
+      "--header-bar": "#13314f"
+    },
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "baseline"
+  }
+}

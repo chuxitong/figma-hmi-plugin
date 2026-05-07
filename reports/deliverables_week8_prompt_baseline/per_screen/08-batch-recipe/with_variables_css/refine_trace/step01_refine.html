@@ -1,0 +1,209 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Recipe Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-grow p-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                            <div className="lg:col-span-3 bg-white rounded-lg shadow-sm border border-gray-200">
+                                <div className="p-6">
+                                    <StepsTable />
+                                </div>
+                            </div>
+                            <div className="lg:col-span-1 space-y-6">
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Live parameters</h2>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <ParameterCard title="Temperature" value="65.4" unit="°C" status="OK" />
+                                        <ParameterCard title="pH" value="7.1" unit="" status="OK" />
+                                        <ParameterCard title="RPM" value="240" unit="" status="OK" />
+                                        <ParameterCard title="Pressure" value="1.18" unit="bar" status="WARN" />
+                                    </div>
+                                </div>
+                                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Timeline</h2>
+                                    <div className="flex items-center justify-between mb-8">
+                                        {[1, 2, 3, 4, 5, 6, 7].map((step) => (
+                                            <TimelineStep 
+                                                key={step} 
+                                                number={step} 
+                                                isCompleted={step <= 3} 
+                                                time={getTimelineTime(step)} 
+                                            />
+                                        ))}
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <button className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded">
+                                            RESUME
+                                        </button>
+                                        <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded">
+                                            HOLD
+                                        </button>
+                                        <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded">
+                                            ABORT
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#13314f] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-xl font-bold flex items-center gap-2">
+                                <i className="fas fa-cog"></i> Batch Recipe Management
+                            </h1>
+                            <p className="text-xs text-gray-300 mt-1">
+                                Recipe: R-204 · Lot 2026-017 · Batch operator: A. Petrov
+                            </p>
+                        </div>
+                        <div className="bg-[#1e3a7a] text-gray-300 py-2 px-4 rounded-md text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const StepsTable = () => {
+            const steps = [
+                { id: 1, name: "Pre-heat", duration: "10 min", status: "DONE" },
+                { id: 2, name: "Fill base", duration: "8 min", status: "DONE" },
+                { id: 3, name: "Mix", duration: "15 min", status: "ACTIVE" },
+                { id: 4, name: "Add catalyst", duration: "4 min", status: "PENDING" },
+                { id: 5, name: "Hold", duration: "20 min", status: "PENDING" },
+                { id: 6, name: "Cool down", duration: "12 min", status: "PENDING" },
+                { id: 7, name: "Discharge", duration: "6 min", status: "PENDING" }
+            ];
+
+            return (
+                <div>
+                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Steps</h2>
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">#</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Step</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Duration</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
+                                    <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {steps.map((step) => (
+                                    <tr key={step.id} className="border-b border-gray-200">
+                                        <td className="px-4 py-3 text-gray-800">{step.id}</td>
+                                        <td className="px-4 py-3 text-gray-800 font-medium">{step.name}</td>
+                                        <td className="px-4 py-3 text-gray-800">{step.duration}</td>
+                                        <td className="px-4 py-3">
+                                            <span className={`px-8 py-1 rounded text-white text-xs font-medium ${
+                                                step.status === 'DONE' ? 'bg-green-700' :
+                                                step.status === 'ACTIVE' ? 'bg-blue-600' :
+                                                'bg-gray-500'
+                                            }`}>
+                                                {step.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            <button className="border border-gray-400 rounded px-6 py-1 text-gray-800 hover:bg-gray-50 font-medium">
+                                                View
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        };
+
+        const ParameterCard = ({ title, value, unit, status }) => {
+            const getStatusColor = () => {
+                return status === 'OK' ? 'bg-green-700' : 'bg-orange-500';
+            };
+
+            return (
+                <div className="border rounded-lg p-4">
+                    <div className="text-gray-500 text-sm mb-2">{title}</div>
+                    <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-medium text-gray-800">{value}</span>
+                        {unit && <span className="text-xl text-gray-600">{unit}</span>}
+                    </div>
+                    <div className="mt-2">
+                        <span className={`${getStatusColor()} text-white text-xs px-8 py-1 rounded`}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+
+        const TimelineStep = ({ number, isCompleted, time }) => {
+            return (
+                <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
+                        isCompleted ? 'bg-green-700' : 'bg-gray-500'
+                    }`}>
+                        {number}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">{time}</div>
+                </div>
+            );
+        };
+
+        const getTimelineTime = (step) => {
+            switch(step) {
+                case 1: return "10m";
+                case 2: return "8m";
+                case 3: return "15m";
+                case 4: return "4m";
+                case 5: return "20m";
+                case 6: return "12m";
+                case 7: return "6m";
+                default: return "";
+            }
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                    <div className="text-xs text-gray-500">
+                        Recipe R-204 · Step 3 of 7 ACTIVE · Compliance: ANSI/ISA-101.01
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

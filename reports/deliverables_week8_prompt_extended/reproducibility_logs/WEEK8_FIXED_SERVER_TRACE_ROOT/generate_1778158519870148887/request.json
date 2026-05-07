@@ -1,0 +1,18 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 69496,
+      "sha256_prefix": "d446111b8e039864affc3d8c566d3bb5"
+    },
+    "frame_name": "06 Tank Synoptic — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": null,
+    "variables": null,
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "extended"
+  }
+}

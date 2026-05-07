@@ -1,0 +1,193 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--pipe-stroke": "#3a4756",
+  "--tank-fill": "#eaeef3",
+  "--highlight": "#1976d2",
+  "--surface-0": "#f3f5f8"
+}
+</design_variables>
+
+<css_hints>
+{
+  "Synoptic": {
+    "width": "1440px",
+    "height": "900px"
+  }
+}
+</css_hints>
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Farm Synoptic</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f1f5f9;
+        }
+        
+        .tank-chart {
+            position: relative;
+            width: 100px;
+            height: 180px;
+            border: 2px solid #666;
+            border-radius: 4px;
+            background-color: #e0e8f0;
+        }
+        
+        .tank-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-radius: 0;
+            transition: height 0.5s;
+        }
+        
+        .percentage-label {
+            position: absolute;
+            right: -30px;
+            top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-1 p-6 bg-[#f1f5f9]">
+                        <div className="bg-white rounded-lg border border-gray-300 p-6 mb-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-6">Levels and connections</h2>
+                            <div className="grid grid-cols-5 gap-6">
+                                <TankDisplay id="T-101" percentage={72} status="OK" color="green" />
+                                <TankDisplay id="T-102" percentage={41} status="OK" color="green" />
+                                <TankDisplay id="T-103" percentage={88} status="WARN" color="orange" />
+                                <TankDisplay id="T-104" percentage={12} status="ALARM" color="red" />
+                                <TankDisplay id="T-201" percentage={64} status="OK" color="green" />
+                                <TankDisplay id="T-202" percentage={95} status="ALARM" color="red" />
+                                <TankDisplay id="T-203" percentage={33} status="OK" color="green" />
+                                <TankDisplay id="T-204" percentage={58} status="OK" color="green" />
+                                <TankDisplay id="T-301" percentage={47} status="OK" color="green" />
+                                <TankDisplay id="T-302" percentage={22} status="WARN" color="orange" />
+                            </div>
+                        </div>
+                        <div className="bg-white rounded-lg border border-gray-300 p-6">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Status legend</h2>
+                            <div className="flex items-center space-x-6">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-16 h-6 bg-green-600 rounded text-white text-xs font-bold text-center leading-6">OK</div>
+                                    <span className="text-xs text-gray-600">в норме</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-16 h-6 bg-orange-500 rounded text-white text-xs font-bold text-center leading-6">WARN</div>
+                                    <span className="text-xs text-gray-600">отключение, нужно вмешательство</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-16 h-6 bg-red-600 rounded text-white text-xs font-bold text-center leading-6">ALARM</div>
+                                    <span className="text-xs text-gray-600">критическое отключение, требуется ACK</span>
+                                </div>
+                            </div>
+                            <div className="mt-6 text-xs text-gray-500">
+                                Соответствие закодировано терменами независимыми признаками: цвет state-fill, текстовая белёж state-badge, форма state-shape.
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#0b3a5d] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center space-x-4">
+                            <div className="text-green-400">
+                                <i className="fas fa-tint text-xl"></i>
+                            </div>
+                            <div>
+                                <h1 className="text-2xl font-bold">Tank Farm Synoptic</h1>
+                                <p className="text-sm text-gray-300">Warehouse 2 - Tank yard A - 10 tanks</p>
+                            </div>
+                        </div>
+                        <div className="bg-[#1c3b67] px-4 py-2 rounded text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const TankDisplay = ({ id, percentage, status, color }) => {
+            const getStatusColor = (status) => {
+                switch (status) {
+                    case 'OK': return 'bg-green-600';
+                    case 'WARN': return 'bg-orange-500';
+                    case 'ALARM': return 'bg-red-600';
+                    default: return 'bg-gray-500';
+                }
+            };
+
+            const getFillColor = (color) => {
+                switch (color) {
+                    case 'green': return 'bg-green-600';
+                    case 'orange': return 'bg-orange-500';
+                    case 'red': return 'bg-red-600';
+                    default: return 'bg-gray-500';
+                }
+            };
+
+            return (
+                <div className="flex flex-col items-center">
+                    <div className="tank-chart mb-2">
+                        <div className="tank-fill" style={{ height: `${percentage}%`, backgroundColor: color === 'green' ? '#4285F4' : color === 'orange' ? '#FB8C00' : '#DC3545' }}></div>
+                        <div className="percentage-label">{percentage}%</div>
+                    </div>
+                    <div className="text-sm font-bold text-gray-800 mb-2">{id}</div>
+                    <div className={`text-xs font-bold text-white px-4 py-0.5 rounded ${getStatusColor(status)}`}>
+                        {status}
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 text-xs text-gray-500">
+                    <div className="flex space-x-2">
+                        <span>Connection: OK</span>
+                        <span>•</span>
+                        <span> Tanks online: 10/10</span>
+                        <span>•</span>
+                        <span> Critical: 2</span>
+                        <span>•</span>
+                        <span> Warning: 2</span>
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

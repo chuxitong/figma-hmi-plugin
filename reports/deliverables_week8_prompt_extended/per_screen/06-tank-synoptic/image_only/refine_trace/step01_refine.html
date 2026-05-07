@@ -1,0 +1,100 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <Header />
+                    <div className="container mx-auto p-6">
+                        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                            <h2 className="text-lg font-bold text-gray-800 mb-6">Levels and connections</h2>
+                            <div className="grid grid-cols-5 gap-8">
+                                <TankWidget id="T-101" level={72} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-102" level={41} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-103" level={88} status="WARN" color="bg-orange-500" />
+                                <TankWidget id="T-104" level={12} status="ALARM" color="bg-red-600" />
+                                <TankWidget id="T-201" level={64} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-202" level={95} status="ALARM" color="bg-red-600" />
+                                <TankWidget id="T-203" level={33} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-204" level={58} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-301" level={47} status="OK" color="bg-green-700" />
+                                <TankWidget id="T-302" level={22} status="WARN" color="bg-orange-500" />
+                            </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <h2 className="text-lg font-bold text-gray-800 mb-4">Status legend</h2>
+                            <div className="flex items-center space-x-6">
+                                <div className="flex items-center">
+                                    <span className="bg-green-600 text-white px-4 py-0.5 rounded mr-2 font-medium text-sm">OK</span>
+                                    <span className="text-sm text-gray-600">в норме</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="bg-orange-500 text-white px-4 py-0.5 rounded mr-2 font-medium text-sm">WARN</span>
+                                    <span className="text-sm text-gray-600">отключение, нужно вмешательство</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="bg-red-600 text-white px-4 py-0.5 rounded mr-2 font-medium text-sm">ALARM</span>
+                                    <span className="text-sm text-gray-600">критическое отключение, требуется ACK</span>
+                                </div>
+                            </div>
+                            <p className="mt-6 text-xs text-gray-500">
+                                Сообщение закодировано терма независимыми признаками: цвет state-fill, текстовая белёк state-badge, форма state-shape.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 border-t border-gray-200 p-4">
+                        <div className="container mx-auto">
+                            <p className="text-xs text-gray-500">Connection: OK · Tanks online: 10/10 · Critical: 2 · Warning: 2</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const TankWidget = ({ id, level, status, color }) => {
+            return (
+                <div className="flex flex-col items-center">
+                    <div className="relative w-24 h-44 mb-2">
+                        <div className="absolute top-0 left-0 right-0 bottom-0 border-2 border-gray-300 rounded-sm bg-gray-100"></div>
+                        <div 
+                            className={`absolute bottom-0 w-full ${color}`} 
+                            style={{ height: `${level}%` }}
+                        ></div>
+                        <div className="absolute top-16 right-0 text-xs text-gray-600">
+                            {level}%
+                        </div>
+                    </div>
+                    <div className="mb-2 text-sm font-bold text-gray-700">{id}</div>
+                    <div>
+                        <span className={`px-4 py-0.5 rounded text-white text-sm font-medium ${
+                            status === 'OK' ? 'bg-green-600' : 
+                            status === 'WARN' ? 'bg-orange-500' : 'bg-red-600'
+                        }`}>
+                            {status}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

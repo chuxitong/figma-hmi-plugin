@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Farm Synoptic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const TankLevel = ({ tankId, percentage, status }) => {
+            const getStatusColor = () => {
+                switch(status) {
+                    case 'OK': return 'bg-green-700';
+                    case 'WARN': return 'bg-orange-500';
+                    case 'ALARM': return 'bg-red-700';
+                    default: return 'bg-green-700';
+                }
+            };
+
+            return (
+                <div className="flex flex-col items-center">
+                    <div className="relative w-24 h-40 border-2 border-gray-500 rounded bg-gray-100">
+                        <div 
+                            className={`absolute bottom-0 w-full ${getStatusColor()} rounded-b`}
+                            style={{ height: `${percentage}%` }}
+                        ></div>
+                        <div className="absolute top-2 right-0 text-xs text-gray-600">
+                            {percentage}%
+                        </div>
+                    </div>
+                    <div className="mt-2 text-center">
+                        <div className="text-sm font-bold text-gray-800">{tankId}</div>
+                    </div>
+                    <div className={`mt-1 px-4 py-0.5 text-xs font-bold text-white rounded ${
+                        status === 'OK' ? 'bg-green-700' : 
+                        status === 'WARN' ? 'bg-orange-500' : 'bg-red-700'
+                    }`}>
+                        {status}
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const tanks = [
+                { id: 'T-101', percentage: 72, status: 'OK' },
+                { id: 'T-102', percentage: 41, status: 'OK' },
+                { id: 'T-103', percentage: 88, status: 'WARN' },
+                { id: 'T-104', percentage: 12, status: 'ALARM' },
+                { id: 'T-201', percentage: 64, status: 'OK' },
+                { id: 'T-202', percentage: 95, status: 'ALARM' },
+                { id: 'T-203', percentage: 33, status: 'OK' },
+                { id: 'T-204', percentage: 58, status: 'OK' },
+                { id: 'T-301', percentage: 47, status: 'OK' },
+                { id: 'T-302', percentage: 22, status: 'WARN' }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Header */}
+                    <div className="bg-slate-900 text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center space-x-3">
+                                <i className="fas fa-water text-xl"></i>
+                                <div>
+                                    <h1 className="text-xl font-bold">Tank Farm Synoptic</h1>
+                                    <p className="text-sm text-gray-300">Process Gallery 2 - Tank yard A - 10 tanks</p>
+                                </div>
+                            </div>
+                            <div className="bg-slate-800 px-4 py-2 rounded text-sm text-gray-300">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="p-6">
+                        <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <h2 className="text-lg font-bold text-gray-800 mb-8">Levels and connections</h2>
+                            
+                            {/* Tank Grid */}
+                            <div className="grid grid-cols-5 gap-8 mb-8">
+                                {tanks.map((tank) => (
+                                    <TankLevel 
+                                        key={tank.id}
+                                        tankId={tank.id}
+                                        percentage={tank.percentage}
+                                        status={tank.status}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Connection Line */}
+                            <div className="w-full h-4 bg-gray-400 rounded mb-8"></div>
+
+                            {/* Status Legend */}
+                            <div className="border-t pt-6">
+                                <h3 className="text-md font-bold text-gray-800 mb-4">Status legend</h3>
+                                <div className="flex items-center space-x-6 mb-4">
+                                    <div className="flex items-center space-x-2">
+                                        <div className="px-4 py-0.5 bg-green-700 text-white text-xs rounded">OK</div>
+                                        <span className="text-xs text-gray-600">в норме</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <div className="px-4 py-0.5 bg-orange-500 text-white text-xs rounded">WARN</div>
+                                        <span className="text-xs text-gray-600">отключение, нужно вмешательство</span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <div className="px-4 py-0.5 bg-red-700 text-white text-xs rounded">ALARM</div>
+                                        <span className="text-xs text-gray-600">критическое отключение, требуется ACK</span>
+                                    </div>
+                                </div>
+                                <p className="text-xs text-gray-500">
+                                    Сообщение закодировано тремя независимыми признаками: цвет state-fill, текстовый белый state-badge, форма state-shape.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="px-6 py-4 border-t bg-gray-50">
+                        <div className="text-xs text-gray-500">
+                            Connection: OK - Tanks online: 10/10 - Critical: 2 - Warning: 2
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Reduce padding for the trend card.

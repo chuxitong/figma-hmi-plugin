@@ -1,0 +1,18 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 101764,
+      "sha256_prefix": "502632d0468a758de9da1d1d4e4bc977"
+    },
+    "frame_name": "03 Trend Monitor — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": null,
+    "variables": null,
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "extended"
+  }
+}

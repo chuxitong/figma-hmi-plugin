@@ -1,0 +1,187 @@
+<html>
+<head>
+    <title>Equipment Status Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function StatusCard({ title, value, trend, status, borderColor }) {
+            const getStatusStyle = () => {
+                switch(status) {
+                    case 'OK':
+                        return 'bg-green-600 text-white';
+                    case 'ALARM':
+                        return 'bg-red-600 text-white';
+                    case 'MAINT':
+                        return 'bg-orange-500 text-white';
+                    case 'WARN':
+                        return 'bg-orange-500 text-white';
+                    default:
+                        return 'bg-green-600 text-white';
+                }
+            };
+
+            return (
+                <div className={`bg-white rounded-lg border border-gray-300 shadow-sm ${borderColor} p-4`}>
+                    <div className="text-gray-600 text-sm mb-2">{title}</div>
+                    <div className="text-4xl font-bold text-gray-900 mb-2">{value}</div>
+                    <div className="text-gray-600 text-xs mb-2">trend: {trend}</div>
+                    <div className={`inline-block px-3 py-1 rounded-sm text-xs font-medium ${getStatusStyle()}`}>
+                        {status}
+                    </div>
+                </div>
+            );
+        }
+
+        function App() {
+            const equipmentData = [
+                {
+                    title: "Pump P-101",
+                    value: "1480",
+                    trend: "+12",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Pump P-102",
+                    value: "1492",
+                    trend: "+8",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Compressor C-201",
+                    value: "3.21",
+                    trend: "+0.04",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Motor M-301",
+                    value: "94.2",
+                    trend: "+5.1",
+                    status: "ALARM",
+                    borderColor: "border-l-4 border-red-600"
+                },
+                {
+                    title: "Valve V-102",
+                    value: "CLOSED",
+                    trend: "—",
+                    status: "ALARM",
+                    borderColor: "border-l-4 border-red-600"
+                },
+                {
+                    title: "Conveyor CV-401",
+                    value: "0.00",
+                    trend: "—",
+                    status: "MAINT",
+                    borderColor: "border-l-4 border-orange-500"
+                },
+                {
+                    title: "Mixer MX-501",
+                    value: "240",
+                    trend: "—",
+                    status: "IDLE",
+                    borderColor: "border-l-4 border-gray-500"
+                },
+                {
+                    title: "Heater H-201",
+                    value: "62.0",
+                    trend: "-1.2",
+                    status: "WARN",
+                    borderColor: "border-l-4 border-orange-500"
+                },
+                {
+                    title: "Tank T-101",
+                    value: "72",
+                    trend: "+2",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Tank T-102",
+                    value: "41",
+                    trend: "-1",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Sensor T-405",
+                    value: "38.5",
+                    trend: "+0.4",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                },
+                {
+                    title: "Sensor F-902",
+                    value: "180",
+                    trend: "+3",
+                    status: "OK",
+                    borderColor: "border-l-4 border-green-600"
+                }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gray-50 flex flex-col">
+                    {/* Header */}
+                    <header className="bg-slate-800 text-white py-4 px-6">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-xl font-semibold flex items-center">
+                                    <i className="fas fa-industry mr-2"></i>
+                                    Equipment Status Dashboard
+                                </h1>
+                                <div className="text-sm text-gray-300 mt-1">
+                                    Facility 2 · Assembly 2 · Line A · Shift B
+                                </div>
+                            </div>
+                            <div className="bg-slate-700 rounded-md px-4 py-2 text-sm text-gray-200">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="flex-grow p-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {equipmentData.map((item, index) => (
+                                <StatusCard 
+                                    key={index}
+                                    title={item.title}
+                                    value={item.value}
+                                    trend={item.trend}
+                                    status={item.status}
+                                    borderColor={item.borderColor}
+                                />
+                            ))}
+                        </div>
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-gray-100 py-4 px-6 border-t border-gray-200">
+                        <div className="text-sm text-gray-600">
+                            Connection: OK · Items: 12 · Critical: 2 · Warning: 2
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

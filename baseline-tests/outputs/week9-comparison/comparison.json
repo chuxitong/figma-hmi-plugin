@@ -1,0 +1,61 @@
+{
+  "elapsed_s": 12.1,
+  "results": [
+    {
+      "mockup": "m1_equipment_status",
+      "frame_name": "Equipment Status Dashboard",
+      "baseline_bytes": 2589,
+      "improved_bytes": 2659,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m2_alarm_event",
+      "frame_name": "Alarm & Event Monitor",
+      "baseline_bytes": 3010,
+      "improved_bytes": 3080,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m3_trend_monitor",
+      "frame_name": "Real-Time Trend Monitor",
+      "baseline_bytes": 2740,
+      "improved_bytes": 2810,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m4_operator_panel",
+      "frame_name": "Operator Control Panel",
+      "baseline_bytes": 3137,
+      "improved_bytes": 3207,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m5_production_overview",
+      "frame_name": "Production Line Overview",
+      "baseline_bytes": 3076,
+      "improved_bytes": 3146,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m6_tank_synoptic",
+      "frame_name": "Tank Farm Synoptic",
+      "baseline_bytes": 3355,
+      "improved_bytes": 3425,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m7_energy_dashboard",
+      "frame_name": "Energy Monitoring Dashboard",
+      "baseline_bytes": 3578,
+      "improved_bytes": 3648,
+      "diff_lines": 39
+    },
+    {
+      "mockup": "m8_batch_recipe",
+      "frame_name": "Batch Recipe Management",
+      "baseline_bytes": 2876,
+      "improved_bytes": 2946,
+      "diff_lines": 39
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "notes": "April 2026 sample of one real-model POST /generate. preview_base64 and full code are abbreviated here; archive the full payload locally with python one-liners described in reports/deliverables_week4/week-4-real-model-setup.md.",
+  "environment": {
+    "USE_REAL_MODEL": "1",
+    "resolved_local_weights": "/root/autodl-tmp/UI2Code_N",
+    "hf_offline_flags": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1（由 apply_real_model_env_defaults 在启动时设置，见 model_wrapper.py）"
+  },
+  "request": {
+    "method": "POST",
+    "url": "http://127.0.0.1:8000/generate",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body_summary": {
+      "frame_name": "07-energy-dashboard",
+      "width": 1280,
+      "height": 720,
+      "task_description": "Real-model warmup /generate (retry).",
+      "image_source_file": "mockups/png/07-energy-dashboard.png",
+      "image_base64": "<base64 of mockups/png/07-energy-dashboard.png; reconstruct full JSON per week-4-real-model-setup.md>"
+    }
+  },
+  "response_summary": {
+    "http_status": 200,
+    "model_kind": "ui2coden",
+    "code_length_chars": 10627,
+    "preview_base64_present": true,
+    "wall_clock_seconds_approx": 133,
+    "explanation_prefix": "Initial code generated from screenshot; user task description was included in the model prompt. Preview format: PNG (base64 in preview_base64)."
+  },
+  "response_metadata_example": {
+    "operation": "generate",
+    "model_kind": "ui2coden",
+    "viewport": { "width": 1280, "height": 720 },
+    "preview_png_embedded": true,
+    "context": {
+      "css_hints": false,
+      "variables": false,
+      "task_description": true
+    }
+  },
+  "code_excerpt": {
+    "head": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Energy Dashboard</title>\n<style>…",
+    "tail": "…</body>\n</html>"
+  },
+  "preview_base64": "〈省略：实际为 PNG 的 base64，长度可达数十万字符；联调全量见本机保存的 *.full.json 或管道到文件〉"
+}

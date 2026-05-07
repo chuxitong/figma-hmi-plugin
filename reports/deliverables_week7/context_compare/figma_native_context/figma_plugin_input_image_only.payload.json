@@ -1,0 +1,13 @@
+{
+    "endpoint": "POST /generate",
+    "savedAtUtc": "2026-05-06T21:50:57.166Z",
+    "body": {
+      "image_base64": "<<truncated 158124 chars>>",
+      "frame_name": "04-operator-panel",
+      "width": 1440,
+      "height": 900,
+      "task_description": null,
+      "css_hints": {},
+      "variables": {}
+    }
+  }

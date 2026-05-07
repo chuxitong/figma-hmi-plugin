@@ -1,0 +1,23 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 135992,
+      "sha256_prefix": "b3cfc141209af564f5884be1dd28989c"
+    },
+    "frame_name": "05 Production Overview — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": {},
+    "variables": {
+      "--surface-0": "#f3f5f8",
+      "--header-bar": "#13314f",
+      "--good": "#2e7d32",
+      "--attention": "#f9a825"
+    },
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "extended"
+  }
+}

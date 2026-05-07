@@ -1,0 +1,27 @@
+{
+  "slug": "07-energy-dashboard",
+  "config": "with_variables",
+  "model_backend": "ui2coden",
+  "context_source_bulk": "synthetic_script",
+  "seconds_first_generate": 70.44,
+  "seconds_to_acceptable": 243.62,
+  "refine_iters_actual": 2,
+  "refine_mode": "forced_2_rounds",
+  "ssim_trace": [
+    0.7662638473278541,
+    0.7784760184203665,
+    0.7725452851509597
+  ],
+  "taxonomy_after_last_snapshot": {
+    "spacing_suspected": 1,
+    "typography_suspected": 0,
+    "alignment_weak": 1,
+    "hierarchy_weak": 0,
+    "button_semantics_ambiguous": 0,
+    "missing_title_or_header": 0,
+    "chart_or_trend_reproduction_weak": 0
+  },
+  "SSIM_goal": 0.38,
+  "max_refines_budget": 2,
+  "force_refine_rounds": 2
+}

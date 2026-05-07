@@ -1,0 +1,220 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-bg": "#f3f5f8",
+  "--plot-grid": "#dde3ea",
+  "--plot-line": "#1976d2",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+Refinement focus: improve pixel alignment and typography without rebuilding unrelated cards unless the reference clearly requires it.
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameter Trend Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        
+        .chart-grid {
+            background-image: linear-gradient(to right, #dde3ea 1px, transparent 1px),
+                             linear-gradient(to bottom, #dde3ea 1px, transparent 1px);
+            background-size: 50px 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-slate-50">
+                    {/* Header */}
+                    <header className="bg-[#13314f] text-white px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <h1 className="text-2xl font-semibold">Parameter Trend Monitor</h1>
+                                <p className="text-sm text-gray-300 mt-1">Trend Window: 60 min · Sample: 1 s</p>
+                            </div>
+                            <div className="bg-[#1e3a8a] px-4 py-2 rounded-md text-sm">
+                                2026-04-19 14:32:07 MSK
+                            </div>
+                        </div>
+                    </header>
+                    
+                    {/* Main Content */}
+                    <div className="p-6">
+                        {/* Parameter Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                            <ParameterCard 
+                                title="Temperature" 
+                                value="72.4" 
+                                change="+1.2 sa cmH2O" 
+                                color="green"
+                            />
+                            <ParameterCard 
+                                title="Pressure" 
+                                value="3.21" 
+                                change="+0.04 sa cmH2O" 
+                                color="gray"
+                            />
+                            <ParameterCard 
+                                title="Flow" 
+                                value="184" 
+                                change="-3 sa cmH2O" 
+                                color="orange"
+                            />
+                            <ParameterCard 
+                                title="Setpoint dev" 
+                                value="1.8" 
+                                change="+0.2 sa cmH2O" 
+                                color="green"
+                            />
+                        </div>
+                        
+                        {/* Trend Chart */}
+                        <div className="border border-gray-300 rounded-lg p-4 bg-white">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-lg font-semibold text-gray-800">Trend window — 14:00 to 15:00</h2>
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex items-center">
+                                        <div className="w-4 h-2 bg-green-700 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Temp (°C)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-4 h-2 bg-orange-500 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Pressure (bar)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-4 h-2 bg-red-700 mr-2"></div>
+                                        <span className="text-xs text-gray-600">Flow (L/min)</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <div className="w-4 h-2 bg-red-700 mr-1"></div>
+                                        <span className="text-xs text-gray-600">band: ±2σ</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Chart Area */}
+                            <div className="chart-grid h-64 relative mb-4">
+                                {/* Y-axis labels */}
+                                <div className="absolute left-0 top-0 bottom-0 w-8 flex flex-col justify-between text-xs text-gray-500">
+                                    <div>100</div>
+                                    <div>90</div>
+                                    <div>80</div>
+                                    <div>70</div>
+                                    <div>60</div>
+                                    <div>50</div>
+                                    <div>40</div>
+                                </div>
+                                
+                                {/* Chart Lines - These would be drawn with actual chart library */}
+                                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 300" preserveAspectRatio="none">
+                                    {/* Green line (Temperature) */}
+                                    <path d="M0,90 L50,95 L100,100 L150,110 L200,105 L250,120 L300,115 L350,105 L400,110 L450,105 L500,95 L550,110 L600,108 L650,85 L700,90 L750,95 L800,110 L850,105 L900,75 L950,85 L1000,90" 
+                                          stroke="#2c7a4d" strokeWidth="2" fill="none" />
+                                    
+                                    {/* Orange line (Pressure) */}
+                                    <path d="M0,150 L50,140 L100,160 L150,155 L200,150 L250,140 L300,145 L350,150 L400,155 L450,160 L500,165 L550,155 L600,160 L650,150 L700,155 L750,145 L800,150 L850,160 L900,155 L950,150 L1000,150" 
+                                          stroke="#e67e22" strokeWidth="2" fill="none" />
+                                    
+                                    {/* Red line (Flow) */}
+                                    <path d="M0,180 L50,185 L100,170 L150,160 L200,165 L250,170 L300,175 L350,170 L400,165 L450,180 L500,175 L550,180 L600,175 L650,190 L700,185 L750,180 L800,175 L850,165 L900,170 L950,175 L1000,180" 
+                                          stroke="#cd5c66" strokeWidth="2" fill="none" />
+                                    
+                                    {/* Red band line */}
+                                    <path d="M0,200 L50,195 L100,190 L150,185 L200,190 L250,185 L300,180 L350,185 L400,180 L450,175 L500,180 L550,185 L600,190 L650,185 L700,180 L750,185 L800,180 L850,175 L900,180 L950,185 L1000,190" 
+                                          stroke="#cd5c66" strokeWidth="2" fill="none" />
+                                </svg>
+                                
+                                {/* X-axis labels */}
+                                <div className="absolute left-8 right-0 bottom-0 flex justify-between text-xs text-gray-500">
+                                    <div>14:00</div>
+                                    <div>14:05</div>
+                                    <div>14:10</div>
+                                    <div>14:15</div>
+                                    <div>14:20</div>
+                                    <div>14:25</div>
+                                    <div>14:30</div>
+                                    <div>14:35</div>
+                                    <div>14:40</div>
+                                    <div>14:45</div>
+                                    <div>14:50</div>
+                                    <div>14:55</div>
+                                    <div>14:60</div>
+                                </div>
+                            </div>
+                            
+                            {/* Bottom Info */}
+                            <div className="border border-gray-200 rounded-md p-2 bg-gray-50">
+                                <div className="flex justify-between text-sm">
+                                    <div>14:22 — Flow rate deviation > 12 % (FT-401)</div>
+                                    <div>Operator: A. Petrov</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* Footer */}
+                    <footer className="p-4 border-t border-gray-200">
+                        <div className="text-xs text-gray-500">
+                            Connection: OK · Latency: 18 ms · Logging: enabled · Export to CSV available via toolbar
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+        
+        const ParameterCard = ({ title, value, change, color }) => {
+            const getBorderColor = () => {
+                switch(color) {
+                    case 'green': return 'border-green-700';
+                    case 'orange': return 'border-orange-500';
+                    default: return 'border-gray-800';
+                }
+            };
+            
+            const getAccentColor = () => {
+                switch(color) {
+                    case 'green': return 'text-green-700';
+                    case 'orange': return 'text-orange-500';
+                    default: return 'text-gray-800';
+                }
+            };
+            
+            return (
+                <div className={`border-l-4 ${getBorderColor()} rounded-lg border border-gray-200 p-4 bg-white`}>
+                    <div className="text-sm text-gray-500 mb-1">{title}</div>
+                    <div className={`text-3xl font-bold ${getAccentColor()}`}>{value}</div>
+                    <div className="text-xs text-gray-600 mt-2">
+                        <span className={color === 'orange' ? 'text-orange-500' : color === 'green' ? 'text-green-600' : 'text-gray-600'}>
+                            {change}
+                        </span>
+                    </div>
+                </div>
+            );
+        };
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

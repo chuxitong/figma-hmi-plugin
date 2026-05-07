@@ -1,0 +1,322 @@
+This is an industrial HMI reference. The first image is the target reference. The second image is the current rendered output of the attached HTML. Improve the HTML so that its rendered appearance is closer to the reference: tighten spacing, correct typography hierarchy, align blocks, preserve the color palette, fix obviously missing elements visible in the reference but absent from the current render. Return the full updated HTML.
+
+First image: target reference. Second image: current render of the attached HTML.
+
+<design_variables>
+{
+  "--surface-bg": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--sev-critical": "#c62828",
+  "--sev-high": "#ef6c00",
+  "--accent-tab": "#1976d2"
+}
+</design_variables>
+
+<css_hints>
+{
+  "Frame": {
+    "width": "1440px",
+    "height": "900px",
+    "background-color": "#f3f5f8"
+  },
+  "TableRow": {
+    "min-height": "40px"
+  }
+}
+</css_hints>
+
+<previous_html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarms & Events Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f1f5f9;
+        }
+        
+        .header-bg {
+            background-color: #13314f;
+        }
+        
+        .critical-bg {
+            background-color: #c62828;
+            color: white;
+        }
+        
+        .warning-bg {
+            background-color: #ef6c00;
+            color: white;
+        }
+        
+        .info-bg {
+            background-color: #1976d2;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="flex flex-col min-h-screen">
+                    <Header />
+                    <main className="flex-1 p-4 bg-gray-50">
+                        <SummaryCards />
+                        <FilterSection />
+                        <AlarmTable />
+                    </main>
+                    <Footer />
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <header className="header-bg text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-bold">Alarms & Events Monitor</h1>
+                            <p className="text-sm text-gray-300">Refinery 2 · Shift B · All sites</p>
+                        </div>
+                        <div className="bg-[#1d3c70] text-gray-300 px-4 py-2 rounded-md text-sm">
+                            2026-04-19 14:34:55 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        function SummaryCards() {
+            const summaryData = [
+                {
+                    title: "Critical",
+                    count: "2",
+                    subtitle: "active",
+                    change: "+1 за смену",
+                    color: "critical",
+                    borderColor: "border-red-600"
+                },
+                {
+                    title: "Warning",
+                    count: "5",
+                    subtitle: "active",
+                    change: "-1 за смену",
+                    color: "warning",
+                    borderColor: "border-orange-600"
+                },
+                {
+                    title: "Information",
+                    count: "11",
+                    subtitle: "cent",
+                    change: "+3 за смену",
+                    color: "info",
+                    borderColor: "border-green-600"
+                },
+                {
+                    title: "Acknowledged",
+                    count: "34",
+                    subtitle: "t 24h",
+                    change: "+7 за смену",
+                    color: "info",
+                    borderColor: "border-green-600"
+                },
+                {
+                    title: "MTBA",
+                    count: "1h 42m",
+                    subtitle: "",
+                    change: "-12m за смену",
+                    color: "warning",
+                    borderColor: "border-orange-600"
+                }
+            ];
+
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+                    {summaryData.map((item, index) => (
+                        <div key={index} className="bg-white rounded-md shadow-sm border-l-4 ">
+                            <div className="p-4">
+                                <div className="text-gray-500 text-sm">{item.title}</div>
+                                <div className="text-4xl font-bold text-gray-800">{item.count}</div>
+                                <div className="text-gray-500 text-xs">{item.change}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        function FilterSection() {
+            return (
+                <div className="bg-white rounded-lg shadow-sm border p-4 mb-6">
+                    <div className="flex flex-wrap items-center gap-4">
+                        <div className="text-gray-600 text-sm">Severity</div>
+                        <div className="flex gap-2">
+                            <button className="px-4 py-1 bg-red-700 text-white text-sm rounded-full font-medium">CRITICAL</button>
+                            <button className="px-4 py-1 bg-orange-500 text-white text-sm rounded-full font-medium">WARNING</button>
+                            <button className="px-4 py-1 bg-blue-600 text-white text-sm rounded-full font-medium">INFO</button>
+                        </div>
+                        <div className="text-gray-600 text-sm ml-4">Tag / описание</div>
+                        <div className="flex-grow">
+                            <input 
+                                type="text" 
+                                placeholder="Введите тер или часть описания..." 
+                                className="w-full px-4 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <button className="px-6 py-1 bg-green-700 text-white text-sm rounded-md font-medium">ACK ALL</button>
+                        <button className="px-6 py-1 border border-gray-400 text-gray-700 text-sm rounded-md font-medium">Export...</button>
+                    </div>
+                </div>
+            );
+        }
+
+        function AlarmTable() {
+            const alarmData = [
+                {
+                    severity: "CRITICAL",
+                    time: "14:31:42",
+                    tag: "TT-301",
+                    description: "Motor temperature exceeds high-high limit",
+                    value: "94.2",
+                    unit: "°C",
+                    source: "Refinery2/U2/M-301"
+                },
+                {
+                    severity: "CRITICAL",
+                    time: "14:28:15",
+                    tag: "PT-102",
+                    description: "Discharge pressure too high",
+                    value: "5.8",
+                    unit: "bar",
+                    source: "Refinery2/U1/P-102"
+                },
+                {
+                    severity: "WARNING",
+                    time: "14:22:10",
+                    tag: "FT-401",
+                    description: "Flow rate deviation > 12 %",
+                    value: "23.1",
+                    unit: "m³/h",
+                    source: "Refinery2/U4/F-401"
+                },
+                {
+                    severity: "WARNING",
+                    time: "14:15:30",
+                    tag: "CT-502",
+                    description: "Cooling water temperature rising",
+                    value: "38.5",
+                    unit: "°C",
+                    source: "Utilities/CW-502"
+                },
+                {
+                    severity: "WARNING",
+                    time: "14:09:54",
+                    tag: "LT-301",
+                    description: "Tank level above setpoint",
+                    value: "88.4",
+                    unit: "%",
+                    source: "Refinery2/U2/T-301"
+                },
+                {
+                    severity: "INFO",
+                    time: "14:05:18",
+                    tag: "PDT-201",
+                    description: "Filter differential pressure",
+                    value: "0.8",
+                    unit: "bar",
+                    source: "Refinery2/U2/F-201"
+                },
+                {
+                    severity: "INFO",
+                    time: "14:01:09",
+                    tag: "FT-902",
+                    description: "Flow within tolerance — restored",
+                    value: "180",
+                    unit: "m³/h",
+                    source: "Refinery2/U9/F-902"
+                },
+                {
+                    severity: "INFO",
+                    time: "13:54:22",
+                    tag: "CT-101",
+                    description: "Communication restored",
+                    value: "-",
+                    unit: "",
+                    source: "Bus/CT-101"
+                }
+            ];
+
+            return (
+                <div className="bg-white rounded-lg shadow-sm border">
+                    <table className="w-full">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Severity</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Time</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Tag</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Description</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Value</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Source</th>
+                                <th className="text-left py-3 px-4 text-gray-600 text-sm font-medium">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {alarmData.map((alarm, index) => (
+                                <tr key={index} className="border-t hover:bg-gray-50">
+                                    <td className="py-3 px-4">
+                                        <span className={`px-3 py-1 text-xs font-medium rounded-md ${
+                                            alarm.severity === "CRITICAL" ? "bg-red-700 text-white" : 
+                                            alarm.severity === "WARNING" ? "bg-orange-500 text-white" : 
+                                            "bg-blue-600 text-white"
+                                        }`}>
+                                            {alarm.severity}
+                                        </span>
+                                    </td>
+                                    <td className="py-3 px-4 text-gray-700">{alarm.time}</td>
+                                    <td className="py-3 px-4 text-gray-900 font-medium">{alarm.tag}</td>
+                                    <td className="py-3 px-4 text-gray-800">{alarm.description}</td>
+                                    <td className="py-3 px-4">
+                                        <span className="text-gray-700">{alarm.value}</span> <span className="text-gray-600">{alarm.unit}</span>
+                                    </td>
+                                    <td className="py-3 px-4 text-gray-600 text-sm">{alarm.source}</td>
+                                    <td className="py-3 px-4">
+                                        <div className="flex space-x-2">
+                                            <button className="px-4 py-1 border border-gray-400 text-gray-800 text-sm rounded-md font-medium hover:bg-gray-50">ACK</button>
+                                            <button className="px-4 py-1 border border-gray-400 text-gray-800 text-sm rounded-md font-medium hover:bg-gray-50">View</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="bg-gray-100 py-4 px-6 text-xs text-gray-500 border-t">
+                    <div className="flex justify-between items-center">
+                        <div>Connection: OK · Latency: 22 ms · Compliance: ANSI/ISA-101.01-2015 — colour + text + shape encoding for every state</div>
+                    </div>
+                </footer>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+</previous_html>

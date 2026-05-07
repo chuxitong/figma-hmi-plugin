@@ -1,0 +1,33 @@
+{
+  "endpoint": "POST /generate",
+  "payload": {
+    "image_base64": {
+      "present": true,
+      "char_len": 84968,
+      "sha256_prefix": "979cb4df1331ee3171b5e03e90b99ab7"
+    },
+    "frame_name": "04 Operator Panel — HMI",
+    "task_description": null,
+    "width": 1440,
+    "height": 900,
+    "css_hints": {
+      "Frame": {
+        "width": "1440px",
+        "height": "900px",
+        "background-color": "#f3f5f8"
+      },
+      "PrimaryAction": {
+        "background-color": "#1976d2"
+      }
+    },
+    "variables": {
+      "--surface-0": "#f3f5f8",
+      "--header-bar": "#13314f",
+      "--btn-primary": "#1976d2",
+      "--btn-danger": "#c62828",
+      "--accent-warn-text": "#ef6c00"
+    },
+    "note_en": "effective_prompt.txt is English user text (+ optional XML-ish context blocks); tokenizer chat template wraps it with image tensors (not reproduced here).",
+    "prompt_profile_env": "baseline"
+  }
+}

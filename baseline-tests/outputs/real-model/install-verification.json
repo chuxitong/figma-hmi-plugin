@@ -1,0 +1,20 @@
+{
+  "torch": "2.11.0+cu128",
+  "cuda_available": true,
+  "cuda_device_name": "NVIDIA GeForce RTX 5090",
+  "cuda_capability": [
+    12,
+    0
+  ],
+  "cuda_total_vram_gb": 31.36,
+  "weight_dir_exists": true,
+  "shard_count": 4,
+  "shard_total_gb": 19.17,
+  "processor_class": "Glm4vProcessor",
+  "tokenizer_vocab_size": 151329,
+  "model_type": "glm4v",
+  "architectures": [
+    "Glm4vForConditionalGeneration"
+  ],
+  "total_parameters_declared": 20585554944
+}

@@ -1,0 +1,4 @@
+=== POST /edit 指令（与 run_week3_verified.py 一致）===
+Increase the main page title font size and make it more prominent.
+
+各 mockup 的 current_code 为对应 week003_m02_01_generate.html / week003_m03_01_generate.html。

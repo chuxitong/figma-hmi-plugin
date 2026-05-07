@@ -1,0 +1,62 @@
+{
+  "readme_zh_relative": "README_REPRODUCIBILITY.zh.md",
+  "http_posts_recorded": [
+    {
+      "sequence": 1,
+      "method": "POST",
+      "path": "/generate",
+      "relative_gzip": "http_request_bodies/001_POST_generate.full.json.gz",
+      "sha256_uncompressed_utf8_json": "6955d479accddbf029aa14810812b5e56a731e33b2cb35a0852a665f8b0f90e1",
+      "uncompressed_json_bytes": 85367
+    },
+    {
+      "sequence": 2,
+      "method": "POST",
+      "path": "/edit",
+      "relative_gzip": "http_request_bodies/002_POST_edit.full.json.gz",
+      "sha256_uncompressed_utf8_json": "d0557908082fc37febbad86ce1d7dc9be8009a48d7dee2cb26494809830cf53e",
+      "uncompressed_json_bytes": 10202
+    },
+    {
+      "sequence": 3,
+      "method": "POST",
+      "path": "/edit",
+      "relative_gzip": "http_request_bodies/003_POST_edit.full.json.gz",
+      "sha256_uncompressed_utf8_json": "e0c651fb41437ccb412077605e70aaa77fbeaf6e613a622dcb8544ce14805746",
+      "uncompressed_json_bytes": 10064
+    },
+    {
+      "sequence": 4,
+      "method": "POST",
+      "path": "/edit",
+      "relative_gzip": "http_request_bodies/004_POST_edit.full.json.gz",
+      "sha256_uncompressed_utf8_json": "5ab55423d7b76efd83908f8673fda34d0d83e2809cb7e61faeac355771a85587",
+      "uncompressed_json_bytes": 10085
+    },
+    {
+      "sequence": 5,
+      "method": "POST",
+      "path": "/edit",
+      "relative_gzip": "http_request_bodies/005_POST_edit.full.json.gz",
+      "sha256_uncompressed_utf8_json": "5a9e7557a8d3c64a8fd88d30b24dbc4e475c89ef2518af3d3a03a4792233e110",
+      "uncompressed_json_bytes": 8849
+    },
+    {
+      "sequence": 6,
+      "method": "POST",
+      "path": "/generate",
+      "relative_gzip": "http_request_bodies/006_POST_generate.full.json.gz",
+      "sha256_uncompressed_utf8_json": "3815c9b2fa3553a03cfefd5ca30f40452eab654d500ed068e4013ac590571ff8",
+      "uncompressed_json_bytes": 85113
+    },
+    {
+      "sequence": 7,
+      "method": "POST",
+      "path": "/generate",
+      "relative_gzip": "http_request_bodies/007_POST_generate.full.json.gz",
+      "sha256_uncompressed_utf8_json": "8bb013f0755396ebe6a2b0abff18548abdb65dc4d3a80ab3a641aec50ce32716",
+      "uncompressed_json_bytes": 86321
+    }
+  ],
+  "extra": {}
+}

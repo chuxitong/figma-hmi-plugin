@@ -1,0 +1,37 @@
+{
+  "generate": {
+    "test1": {
+      "image": "mockups/png/01-equipment-status.png",
+      "prompt": "Generate a complete single-file HTML page with inline CSS that reproduces this industrial equipment status dashboard. Use a dark background, colored status indicator dots, and card-based layout.",
+      "frame_name": "Equipment Status Dashboard",
+      "width": 1280,
+      "height": 720
+    },
+    "test2": {
+      "image": "mockups/png/02-alarm-event.png",
+      "prompt": "Generate a complete single-file HTML page with inline CSS that reproduces this alarm and event monitoring screen. Include a summary bar with severity counts, tab navigation, and a data table with severity badges, timestamps, descriptions, and acknowledge buttons.",
+      "frame_name": "Alarm & Event Monitor",
+      "width": 1280,
+      "height": 720
+    },
+    "test3": {
+      "image": "mockups/png/04-operator-panel.png",
+      "prompt": "Generate a complete single-file HTML page with inline CSS that reproduces this operator control panel. Include start/stop/reset buttons, operating mode selector (Auto/Manual/Service), setpoint input fields, and live readout displays.",
+      "frame_name": "Operator Control Panel",
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "refine": {
+    "test1_refine": {
+      "reference_image": "mockups/png/01-equipment-status.png",
+      "prompt": "Compare the rendered code screenshot with the original reference image. Improve spacing, font size hierarchy, status indicator styling, and card proportions to make the output closer to the reference mockup.",
+      "iterations": 2
+    }
+  },
+  "edit": {
+    "test1_edit": {
+      "instruction": "Make the warning card border thicker and add a pulsing animation to the fault status indicator."
+    }
+  }
+}

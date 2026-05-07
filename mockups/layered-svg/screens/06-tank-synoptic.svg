@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900"
+     viewBox="0 0 1440 900" font-family="Inter, system-ui, sans-serif">
+  <title>Tank Farm Synoptic</title>
+  <defs>
+    <style>
+      .h1 { font-size: 18px; font-weight: 700; fill: #1b2630; }
+      .h2 { font-size: 14px; font-weight: 700; fill: #1b2630; }
+      .small { font-size: 11px; fill: #5a6675; }
+      .meta  { font-size: 10px; fill: #5a6675; }
+      .num   { font-size: 26px; font-weight: 700; fill: #1b2630; }
+      .cell  { font-size: 12px; fill: #1b2630; }
+      .badge-text { font-size: 10px; font-weight: 700; fill: white; }
+      .header-title { font-size: 18px; font-weight: 700; fill: #ffffff; }
+      .header-meta  { font-size: 11px; fill: #c8d3e2; }
+      .button-text  { font-size: 11px; font-weight: 600; fill: #1b2630; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1440" height="900" fill="#f3f5f8"/>
+<g id="layout-guide" opacity="0.6"><line x1="24.0" y1="80" x2="24.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="140.0" y1="80" x2="140.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="256.0" y1="80" x2="256.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="372.0" y1="80" x2="372.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="488.0" y1="80" x2="488.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="604.0" y1="80" x2="604.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="720.0" y1="80" x2="720.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="836.0" y1="80" x2="836.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="952.0" y1="80" x2="952.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1068.0" y1="80" x2="1068.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1184.0" y1="80" x2="1184.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1300.0" y1="80" x2="1300.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/><line x1="1416.0" y1="80" x2="1416.0" y2="860" stroke="#dde3ea" stroke-dasharray="2 4" stroke-width="0.6"/></g>
+<g id="header">
+  <rect x="0" y="0" width="1440" height="64" fill="#13314f"/>
+  <text x="24" y="40" class="header-title">Tank Farm Synoptic</text>
+  <text x="24" y="56" class="header-meta">Plant: Refinery 2  ·  Tank yard A  ·  10 tanks</text>
+  <g id="header-clock">
+    <rect x="1240" y="14" width="180" height="36" rx="4" fill="#1d4067" stroke="#1d4067"/>
+    <text x="1330" y="38" text-anchor="middle" class="header-meta">2026-04-19  14:32:07 MSK</text>
+  </g>
+</g>
+<g id="tank-farm">
+  <rect x="24" y="100" width="1392" height="600" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<text x="44" y="128" class="h2">Levels and connections</text>
+<g id="tank-instance" data-tank="T-101" data-state="ok">
+  <rect x="50" y="200" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="54" y="267" width="92" height="113" fill="#2e7d32" opacity="0.85"/>
+  <line x1="150" y1="265" x2="176" y2="265" stroke="#3a4756"/>
+  <text x="182" y="269" class="meta">72%</text>
+  <text x="100" y="400" text-anchor="middle" class="cell" font-weight="700">T-101</text>
+  <g id="state-badge">
+    <rect x="70" y="412" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="100" y="425" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="100" y1="380" x2="100" y2="405" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-102" data-state="ok">
+  <rect x="320" y="200" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="324" y="317" width="92" height="63" fill="#2e7d32" opacity="0.85"/>
+  <line x1="420" y1="315" x2="446" y2="315" stroke="#3a4756"/>
+  <text x="452" y="319" class="meta">41%</text>
+  <text x="370" y="400" text-anchor="middle" class="cell" font-weight="700">T-102</text>
+  <g id="state-badge">
+    <rect x="340" y="412" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="370" y="425" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="370" y1="380" x2="370" y2="405" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-103" data-state="warn">
+  <rect x="590" y="200" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="594" y="242" width="92" height="138" fill="#ef6c00" opacity="0.85"/>
+  <line x1="690" y1="240" x2="716" y2="240" stroke="#3a4756"/>
+  <text x="722" y="244" class="meta">88%</text>
+  <text x="640" y="400" text-anchor="middle" class="cell" font-weight="700">T-103</text>
+  <g id="state-badge">
+    <rect x="610" y="412" width="60" height="18" rx="3" fill="#ef6c00"/>
+    <text x="640" y="425" text-anchor="middle" class="badge-text">WARN</text>
+  </g>
+</g>
+<line x1="640" y1="380" x2="640" y2="405" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-104" data-state="alarm">
+  <rect x="860" y="200" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="864" y="363" width="92" height="17" fill="#c62828" opacity="0.85"/>
+  <line x1="960" y1="361" x2="986" y2="361" stroke="#3a4756"/>
+  <text x="992" y="365" class="meta">12%</text>
+  <text x="910" y="400" text-anchor="middle" class="cell" font-weight="700">T-104</text>
+  <g id="state-badge">
+    <rect x="880" y="412" width="60" height="18" rx="3" fill="#c62828"/>
+    <text x="910" y="425" text-anchor="middle" class="badge-text">ALARM</text>
+  </g>
+</g>
+<line x1="910" y1="380" x2="910" y2="405" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-201" data-state="ok">
+  <rect x="1130" y="200" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="1134" y="280" width="92" height="100" fill="#2e7d32" opacity="0.85"/>
+  <line x1="1230" y1="278" x2="1256" y2="278" stroke="#3a4756"/>
+  <text x="1262" y="282" class="meta">64%</text>
+  <text x="1180" y="400" text-anchor="middle" class="cell" font-weight="700">T-201</text>
+  <g id="state-badge">
+    <rect x="1150" y="412" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="1180" y="425" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="1180" y1="380" x2="1180" y2="405" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-202" data-state="alarm">
+  <rect x="50" y="440" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="54" y="470" width="92" height="150" fill="#c62828" opacity="0.85"/>
+  <line x1="150" y1="468" x2="176" y2="468" stroke="#3a4756"/>
+  <text x="182" y="472" class="meta">95%</text>
+  <text x="100" y="640" text-anchor="middle" class="cell" font-weight="700">T-202</text>
+  <g id="state-badge">
+    <rect x="70" y="652" width="60" height="18" rx="3" fill="#c62828"/>
+    <text x="100" y="665" text-anchor="middle" class="badge-text">ALARM</text>
+  </g>
+</g>
+<line x1="100" y1="620" x2="100" y2="645" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-203" data-state="ok">
+  <rect x="320" y="440" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="324" y="570" width="92" height="50" fill="#2e7d32" opacity="0.85"/>
+  <line x1="420" y1="568" x2="446" y2="568" stroke="#3a4756"/>
+  <text x="452" y="572" class="meta">33%</text>
+  <text x="370" y="640" text-anchor="middle" class="cell" font-weight="700">T-203</text>
+  <g id="state-badge">
+    <rect x="340" y="652" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="370" y="665" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="370" y1="620" x2="370" y2="645" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-204" data-state="ok">
+  <rect x="590" y="440" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="594" y="530" width="92" height="90" fill="#2e7d32" opacity="0.85"/>
+  <line x1="690" y1="528" x2="716" y2="528" stroke="#3a4756"/>
+  <text x="722" y="532" class="meta">58%</text>
+  <text x="640" y="640" text-anchor="middle" class="cell" font-weight="700">T-204</text>
+  <g id="state-badge">
+    <rect x="610" y="652" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="640" y="665" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="640" y1="620" x2="640" y2="645" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-301" data-state="ok">
+  <rect x="860" y="440" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="864" y="547" width="92" height="73" fill="#2e7d32" opacity="0.85"/>
+  <line x1="960" y1="545" x2="986" y2="545" stroke="#3a4756"/>
+  <text x="992" y="549" class="meta">47%</text>
+  <text x="910" y="640" text-anchor="middle" class="cell" font-weight="700">T-301</text>
+  <g id="state-badge">
+    <rect x="880" y="652" width="60" height="18" rx="3" fill="#2e7d32"/>
+    <text x="910" y="665" text-anchor="middle" class="badge-text">OK</text>
+  </g>
+</g>
+<line x1="910" y1="620" x2="910" y2="645" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<g id="tank-instance" data-tank="T-302" data-state="warn">
+  <rect x="1130" y="440" width="100" height="180" rx="3" fill="#cdd5df" stroke="#3a4756" stroke-width="1.5"/>
+  <rect x="1134" y="587" width="92" height="33" fill="#ef6c00" opacity="0.85"/>
+  <line x1="1230" y1="585" x2="1256" y2="585" stroke="#3a4756"/>
+  <text x="1262" y="589" class="meta">22%</text>
+  <text x="1180" y="640" text-anchor="middle" class="cell" font-weight="700">T-302</text>
+  <g id="state-badge">
+    <rect x="1150" y="652" width="60" height="18" rx="3" fill="#ef6c00"/>
+    <text x="1180" y="665" text-anchor="middle" class="badge-text">WARN</text>
+  </g>
+</g>
+<line x1="1180" y1="620" x2="1180" y2="645" stroke="#7d8b9c" stroke-width="6" opacity="0.6"/>
+<line x1="100" y1="660" x2="1380" y2="660" stroke="#7d8b9c" stroke-width="10" opacity="0.6"/>
+<line x1="100" y1="660" x2="1380" y2="660" stroke="#3a4756" stroke-width="1"/>
+<g id="legend">
+  <rect x="24" y="720" width="1392" height="124" rx="6" fill="#ffffff" stroke="#d6dae0"/>
+</g>
+<g id="legend-content">
+  <text x="44" y="746" class="h2">Status legend</text>
+  <g><rect x="44" y="760" width="60" height="20" rx="3" fill="#2e7d32"/>
+     <text x="74" y="774" text-anchor="middle" class="badge-text">OK</text>
+     <text x="116" y="775" class="small">в норме</text></g>
+  <g><rect x="206" y="760" width="60" height="20" rx="3" fill="#ef6c00"/>
+     <text x="236" y="774" text-anchor="middle" class="badge-text">WARN</text>
+     <text x="278" y="775" class="small">отклонение, нужно вмешательство</text></g>
+  <g><rect x="540" y="760" width="80" height="20" rx="3" fill="#c62828"/>
+     <text x="580" y="774" text-anchor="middle" class="badge-text">ALARM</text>
+     <text x="632" y="775" class="small">критическое отклонение, требуется ACK</text></g>
+  <text x="44" y="816" class="meta">Состояние закодировано тремя независимыми признаками: цвет state-fill, текстовый бейдж state-badge, форма state-shape.</text>
+</g>
+<g id="footer-status">
+  <rect x="0" y="864" width="1440" height="36" fill="#eaeef3" stroke="#d6dae0"/>
+  <text x="24" y="886" class="meta">Connection: OK  ·  Tanks online: 10/10  ·  Critical: 2  ·  Warning: 2</text>
+</g>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "iso_utc": "2026-05-07T10:56:38.198289+00:00",
+  "week": 8,
+  "deliver": "deliverables_week8_prompt_baseline",
+  "api_base": "http://127.0.0.1:8000",
+  "git_commit": "333885cc38deca1734aa3644d61b04ad56fb58ee",
+  "server_trace_dir_repo_relative": "reports/deliverables_week8_prompt_baseline/reproducibility_logs/week8_20260507_074242",
+  "ui2coden_prompt_profile_observed_via_health_at_start": "baseline",
+  "ui2coden_prompt_profile_env_client_shell": "baseline",
+  "ssim_goal": 0.38,
+  "force_refine_rounds": 2,
+  "max_refines": 2,
+  "screens": 8,
+  "week8_resume": true,
+  "resume_note_zh": "本 RUN_META 产生于带 `--week8-resume` 的续跑；历史 gzip POST 已从 INDEX 或文件系统恢复序号。"
+}

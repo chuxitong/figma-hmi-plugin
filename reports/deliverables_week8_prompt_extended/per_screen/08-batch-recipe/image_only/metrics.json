@@ -1,0 +1,27 @@
+{
+  "slug": "08-batch-recipe",
+  "config": "image_only",
+  "model_backend": "ui2coden",
+  "context_source_bulk": "synthetic_script",
+  "seconds_first_generate": 208.37,
+  "seconds_to_acceptable": 545.87,
+  "refine_iters_actual": 2,
+  "refine_mode": "forced_2_rounds",
+  "ssim_trace": [
+    0.7320492320140816,
+    0.7606143185278249,
+    0.7608052414686108
+  ],
+  "taxonomy_after_last_snapshot": {
+    "spacing_suspected": 1,
+    "typography_suspected": 0,
+    "alignment_weak": 1,
+    "hierarchy_weak": 0,
+    "button_semantics_ambiguous": 1,
+    "missing_title_or_header": 0,
+    "chart_or_trend_reproduction_weak": 0
+  },
+  "SSIM_goal": 0.38,
+  "max_refines_budget": 2,
+  "force_refine_rounds": 2
+}

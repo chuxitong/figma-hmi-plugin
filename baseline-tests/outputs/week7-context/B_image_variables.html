@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Equipment Status</title>
+<style>
+  :root {
+  --bg: #11131a;
+  --panel: #1b1f2a;
+  --panel-2: #24293a;
+  --accent: #29d3c5;
+  --border: #3b4256;
+  --text: #eef1f6;
+  --muted: #9aa3b2;
+}
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: Inter, system-ui, Arial, sans-serif; padding: 24px; }
+  h1 { font-size: 22px; margin-bottom: 12px; }
+  h2 { font-size: 16px; margin: 4px 0 12px; color: var(--muted); font-weight: 500; }
+  .grid { display: grid; gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; }
+  .ok { background: rgba(76,175,80,.18); color: var(--ok); }
+  .warn { background: rgba(255,152,0,.18); color: var(--warn); }
+  .err { background: rgba(229,57,53,.20); color: var(--err); }
+  .info { background: rgba(33,150,243,.18); color: var(--info); }
+  button.btn { background: var(--accent); color: #001014; border: none; border-radius: 6px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
+  button.btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; }
+  .kpi { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .kpi .card { min-width: 160px; }
+  .kpi .v { font-size: 22px; font-weight: 600; }
+  .kpi .l { color: var(--muted); font-size: 12px; }
+</style></head><body>
+<h1>Equipment Status Dashboard</h1><h2>Line 3 / Shift B</h2><div class="grid" style="grid-template-columns: repeat(3, 1fr);"><div class="card"><div>Pump A</div><div class="pill ok" style="margin-top:8px;">Running</div></div><div class="card"><div>Pump B</div><div class="pill warn" style="margin-top:8px;">Warning</div></div><div class="card"><div>Valve 01</div><div class="pill ok" style="margin-top:8px;">Normal</div></div><div class="card"><div>Valve 02</div><div class="pill err" style="margin-top:8px;">Fault</div></div><div class="card"><div>Mixer 1</div><div class="pill ok" style="margin-top:8px;">Running</div></div><div class="card"><div>Mixer 2</div><div class="pill info" style="margin-top:8px;">Idle</div></div></div>
+</body></html>

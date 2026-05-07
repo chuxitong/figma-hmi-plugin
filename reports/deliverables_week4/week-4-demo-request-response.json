@@ -1,0 +1,46 @@
+{
+  "description": "第4周要求：在报告中给出一个可读的演示请求与对应响应。以下为 POST /generate 的脱敏样例，image_base64 用占位；真实全量可运行联调后从 *_response.json 获得。",
+  "request": {
+    "method": "POST",
+    "path": "/generate",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "image_base64": "iVBORw0KGgoAAAANSuhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoUBg1lM6c4AAAAASUVORK5CYII=",
+      "frame_name": "Equipment Status Dashboard",
+      "task_description": "Use a high-contrast header and keep alarm cards visually prominent.",
+      "width": 1280,
+      "height": 720,
+      "css_hints": {
+        "StatusCard": { "width": "280px" }
+      },
+      "variables": {
+        "--color-primary": "#1A73E8"
+      }
+    }
+  },
+  "response": {
+    "code": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Demo</title></head><body><h1>Example</h1><p>…</p></body></html>",
+    "preview_base64": "iVBORw0KGgoB…（此处为实际 PNG 的 base64，长度可达数百万字符；见运行后 reports/*.json 全量）",
+    "explanation": "Initial code generated from screenshot (PNG preview server-side via Playwright).",
+    "metadata": {
+      "operation": "generate",
+      "model_kind": "ui2coden",
+      "viewport": { "width": 1280, "height": 720 },
+      "preview_png_embedded": true,
+      "context": {
+        "css_hints": true,
+        "variables": true,
+        "task_description": true
+      },
+      "next_stage": {
+        "suggested": [
+          { "endpoint": "POST /edit", "for": "Instruction-based text edits to the current HTML." },
+          { "endpoint": "POST /refine", "for": "Visual alignment vs reference: pass reference PNG, current code, and optional rendered PNG." },
+          { "endpoint": "POST /render", "for": "Re-render any HTML to PNG (same engine as inline previews)." }
+        ]
+      }
+    }
+  }
+}

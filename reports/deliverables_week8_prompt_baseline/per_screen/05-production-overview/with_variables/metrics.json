@@ -1,0 +1,27 @@
+{
+  "slug": "05-production-overview",
+  "config": "with_variables",
+  "model_backend": "ui2coden",
+  "context_source_bulk": "synthetic_script",
+  "seconds_first_generate": 254.1,
+  "seconds_to_acceptable": 1032.53,
+  "refine_iters_actual": 2,
+  "refine_mode": "forced_2_rounds",
+  "ssim_trace": [
+    0.6906694779008979,
+    0.69276483204082,
+    0.7067854586542465
+  ],
+  "taxonomy_after_last_snapshot": {
+    "spacing_suspected": 1,
+    "typography_suspected": 0,
+    "alignment_weak": 1,
+    "hierarchy_weak": 0,
+    "button_semantics_ambiguous": 1,
+    "missing_title_or_header": 0,
+    "chart_or_trend_reproduction_weak": 0
+  },
+  "SSIM_goal": 0.38,
+  "max_refines_budget": 2,
+  "force_refine_rounds": 2
+}

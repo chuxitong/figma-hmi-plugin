@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="206"
+     viewBox="0 0 660 206" data-symbol="tank"
+     font-family="Inter, system-ui, sans-serif" font-size="11">
+  <title>tank</title>
+  <defs>
+    <style>
+      .badge-text { font-size: 9px; font-weight: 700; fill: white; }
+      .label-text { font-size: 10px; font-weight: 600; fill: #1b2630; }
+      .meta-text  { font-size: 9px; fill: #5a6675; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="660" height="206" fill="#ffffff"/>
+  <g id="component-set" data-component="tank">
+    <g id="state=normal" transform="translate(28 12)">
+<g id="outline">
+  <rect x="14" y="10" width="60" height="100" rx="4" fill="none" stroke="#3a4756" stroke-width="2"/>
+</g>
+<g id="body">
+  <rect x="16" y="12" width="56" height="96" rx="4" fill="#cdd5df"/>
+</g>
+<g id="state-fill" data-state="normal">
+  <rect x="16" y="48" width="56" height="62" fill="#2e7d32" opacity="0.85"/>
+</g>
+<g id="indicator">
+  <line x1="74" y1="44" x2="86" y2="44" stroke="#3a4756"/>
+  <text x="89" y="48" class="meta-text">62%</text>
+</g>
+<g id="connector-bottom">
+  <rect x="36" y="108" width="16" height="10" fill="#cdd5df" stroke="#3a4756"/>
+</g>
+<g id="state-badge" data-state="normal">
+  <rect x="0" y="160" width="28" height="14" rx="3" fill="#2e7d32"/>
+  <text x="14.0" y="170.5" text-anchor="middle" class="badge-text">OK</text>
+</g>
+<g id="label">
+  <text x="65.0" y="190" text-anchor="middle" class="label-text">TANK</text>
+  <text x="65.0" y="202" text-anchor="middle" class="meta-text">state = normal</text>
+</g>
+    </g>
+    <g id="state=warning" transform="translate(186 12)">
+      <g id="outline">
+        <rect x="14" y="10" width="60" height="100" rx="4" fill="none" stroke="#3a4756" stroke-width="2"/>
+      </g>
+      <g id="body">
+        <rect x="16" y="12" width="56" height="96" rx="4" fill="#cdd5df"/>
+      </g>
+      <g id="state-fill" data-state="warning">
+        <rect x="16" y="24" width="56" height="86" fill="#ef6c00" opacity="0.85"/>
+      </g>
+      <g id="indicator">
+        <line x1="74" y1="44" x2="86" y2="44" stroke="#3a4756"/>
+        <text x="89" y="48" class="meta-text">86%</text>
+      </g>
+      <g id="connector-bottom">
+        <rect x="36" y="108" width="16" height="10" fill="#cdd5df" stroke="#3a4756"/>
+      </g>
+<g id="state-shape" data-state="warning">
+  <polyline points="10,126 36.0,126 44.0,118 52.0,126 78,126"
+           fill="none" stroke="#ef6c00" stroke-width="1.4"/>
+</g>
+<g id="state-badge" data-state="warning">
+  <rect x="0" y="160" width="44" height="14" rx="3" fill="#ef6c00"/>
+  <text x="22.0" y="170.5" text-anchor="middle" class="badge-text">WARN</text>
+</g>
+<g id="label">
+  <text x="65.0" y="190" text-anchor="middle" class="label-text">TANK</text>
+  <text x="65.0" y="202" text-anchor="middle" class="meta-text">state = warning</text>
+</g>
+    </g>
+    <g id="state=alarm" transform="translate(344 12)">
+      <g id="outline">
+        <rect x="14" y="10" width="60" height="100" rx="4" fill="none" stroke="#3a4756" stroke-width="2"/>
+      </g>
+      <g id="body">
+        <rect x="16" y="12" width="56" height="96" rx="4" fill="#cdd5df"/>
+      </g>
+      <g id="state-fill" data-state="alarm">
+        <rect x="16" y="14" width="56" height="96" fill="#c62828" opacity="0.85"/>
+      </g>
+      <g id="indicator">
+        <line x1="74" y1="44" x2="86" y2="44" stroke="#3a4756"/>
+        <text x="89" y="48" class="meta-text">96%</text>
+      </g>
+      <g id="connector-bottom">
+        <rect x="36" y="108" width="16" height="10" fill="#cdd5df" stroke="#3a4756"/>
+      </g>
+<g id="state-shape" data-state="alarm">
+  <rect x="6" y="2" width="76" height="120" rx="4"
+        fill="none" stroke="#c62828" stroke-width="2.4"/>
+  <polygon points="66,6 78,6 78,18"
+           fill="#c62828"/>
+  <text x="72" y="15" text-anchor="middle"
+        fill="white" font-size="9" font-weight="700">!</text>
+</g>
+<g id="state-badge" data-state="alarm">
+  <rect x="0" y="160" width="52" height="14" rx="3" fill="#c62828"/>
+  <text x="26.0" y="170.5" text-anchor="middle" class="badge-text">ALARM</text>
+</g>
+<g id="label">
+  <text x="65.0" y="190" text-anchor="middle" class="label-text">TANK</text>
+  <text x="65.0" y="202" text-anchor="middle" class="meta-text">state = alarm</text>
+</g>
+    </g>
+    <g id="state=closed" transform="translate(502 12)">
+      <g id="outline">
+        <rect x="14" y="10" width="60" height="100" rx="4" fill="none" stroke="#3a4756" stroke-width="2"/>
+      </g>
+      <g id="body">
+        <rect x="16" y="12" width="56" height="96" rx="4" fill="#cdd5df"/>
+      </g>
+      <g id="state-fill" data-state="closed">
+        <rect x="16" y="102" width="56" height="8" fill="#90a4ae" opacity="0.85"/>
+      </g>
+      <g id="indicator">
+        <line x1="74" y1="44" x2="86" y2="44" stroke="#3a4756"/>
+        <text x="89" y="48" class="meta-text">8%</text>
+      </g>
+      <g id="connector-bottom">
+        <rect x="36" y="108" width="16" height="10" fill="#cdd5df" stroke="#3a4756"/>
+      </g>
+<g id="state-shape" data-state="closed">
+  <line x1="8" y1="4" x2="80" y2="120"
+        stroke="#90a4ae" stroke-width="2"/>
+  <line x1="80" y1="4" x2="8" y2="120"
+        stroke="#90a4ae" stroke-width="2"/>
+</g>
+<g id="state-badge" data-state="closed">
+  <rect x="0" y="160" width="60" height="14" rx="3" fill="#90a4ae"/>
+  <text x="30.0" y="170.5" text-anchor="middle" class="badge-text">CLOSED</text>
+</g>
+<g id="label">
+  <text x="65.0" y="190" text-anchor="middle" class="label-text">TANK</text>
+  <text x="65.0" y="202" text-anchor="middle" class="meta-text">state = closed</text>
+</g>
+    </g>
+  </g>
+</svg>

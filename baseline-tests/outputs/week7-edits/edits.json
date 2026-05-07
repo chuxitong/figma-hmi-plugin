@@ -1,0 +1,42 @@
+[
+  {
+    "instruction": "Make the primary button secondary.",
+    "slug": "edit_01_make_the_primary_button_secondary",
+    "edit_time_s": 0.0502,
+    "changed_lines": 0,
+    "html": "baseline-tests\\outputs\\week7-edits\\edit_01_make_the_primary_button_secondary.html",
+    "png": "baseline-tests\\outputs\\week7-edits\\edit_01_make_the_primary_button_secondary.png"
+  },
+  {
+    "instruction": "Make the alarm block more prominent.",
+    "slug": "edit_02_make_the_alarm_block_more_prominent",
+    "edit_time_s": 0.0505,
+    "changed_lines": 1,
+    "html": "baseline-tests\\outputs\\week7-edits\\edit_02_make_the_alarm_block_more_prominent.html",
+    "png": "baseline-tests\\outputs\\week7-edits\\edit_02_make_the_alarm_block_more_prominent.png"
+  },
+  {
+    "instruction": "Reduce padding for the trend card.",
+    "slug": "edit_03_reduce_padding_for_the_trend_card",
+    "edit_time_s": 0.0502,
+    "changed_lines": 1,
+    "html": "baseline-tests\\outputs\\week7-edits\\edit_03_reduce_padding_for_the_trend_card.html",
+    "png": "baseline-tests\\outputs\\week7-edits\\edit_03_reduce_padding_for_the_trend_card.png"
+  },
+  {
+    "instruction": "Make the card border thicker.",
+    "slug": "edit_04_make_the_card_border_thicker",
+    "edit_time_s": 0.0506,
+    "changed_lines": 1,
+    "html": "baseline-tests\\outputs\\week7-edits\\edit_04_make_the_card_border_thicker.html",
+    "png": "baseline-tests\\outputs\\week7-edits\\edit_04_make_the_card_border_thicker.png"
+  },
+  {
+    "instruction": "Increase the title to a larger size.",
+    "slug": "edit_05_increase_the_title_to_a_larger_size",
+    "edit_time_s": 0.0503,
+    "changed_lines": 1,
+    "html": "baseline-tests\\outputs\\week7-edits\\edit_05_increase_the_title_to_a_larger_size.html",
+    "png": "baseline-tests\\outputs\\week7-edits\\edit_05_increase_the_title_to_a_larger_size.png"
+  }
+]

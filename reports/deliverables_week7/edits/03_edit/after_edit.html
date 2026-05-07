@@ -1,0 +1,182 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f5f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <main className="flex-1 p-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <ControlPanel />
+                            <ReadoutPanel />
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+        
+        function Header() {
+            return (
+                <header className="bg-[#0a1f4b] text-white py-4 px-6 border-b border-gray-300">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center">
+                            <i className="fas fa-cog text-xl mr-3"></i>
+                            <div>
+                                <h1 className="text-xl font-medium">Operator Control Panel</h1>
+                                <p className="text-sm text-gray-300">Process loop: Mixer MX-501 · Operator: A. Petrov</p>
+                            </div>
+                        </div>
+                        <div className="text-sm">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+        
+        function Button({ color, children }) {
+            const colorClasses = {
+                green: "bg-[#2e7d32] hover:bg-[#1b5e20] text-white",
+                red: "bg-[#c62828] hover:bg-[#a21d1d] text-white",
+                gray: "bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300"
+            };
+            
+            return (
+                <button className={`px-6 py-2 rounded font-medium ${colorClasses[color]}`}>
+                    {children}
+                </button>
+            );
+        }
+        
+        function ControlPanel() {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                    <h2 className="text-lg font-medium text-gray-800 mb-6">Manual control</h2>
+                    
+                    <div className="flex gap-4 mb-8">
+                        <Button color="green">START</Button>
+                        <Button color="red">STOP</Button>
+                        <Button color="gray">RESET</Button>
+                    </div>
+                    
+                    <div className="mb-8">
+                        <h3 className="text-gray-700 font-medium mb-4">Operating mode</h3>
+                        <div className="flex gap-2">
+                            <Button color="green">AUTO</Button>
+                            <Button color="gray">MANUAL</Button>
+                            <Button color="gray">SERVICE</Button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 className="text-gray-700 font-medium mb-4">Setpoints</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Temperature</span>
+                                <input 
+                                    type="text" 
+                                    value="75.0 °C" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm bg-gray-50" 
+                                    readOnly
+                                />
+                                <Button color="green">SET</Button>
+                            </div>
+                            
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Flow rate</span>
+                                <input 
+                                    type="text" 
+                                    value="180 L/min" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm bg-gray-50" 
+                                    readOnly
+                                />
+                                <Button color="green">SET</Button>
+                            </div>
+                            
+                            <div className="flex items-center gap-4">
+                                <span className="w-24 text-sm text-gray-600">Mixer RPM</span>
+                                <input 
+                                    type="text" 
+                                    value="240 rpm" 
+                                    className="flex-1 border border-gray-300 rounded px-3 py-1 text-sm bg-gray-50" 
+                                    readOnly
+                                />
+                                <Button color="green">SET</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        
+        function ReadoutCard({ title, value, unit, status }) {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                    <div className="text-gray-500 text-sm mb-2">{title}</div>
+                    <div className="text-4xl font-light text-gray-800 mb-3">{value}</div>
+                    <div className="text-gray-500 text-xs mb-4">{unit}</div>
+                    <div>
+                        <Button color={status === 'OK' ? 'green' : 'orange'}>{status}</Button>
+                    </div>
+                </div>
+            );
+        }
+        
+        function ReadoutPanel() {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                    <h2 className="text-lg font-medium text-gray-800 mb-6">Live readouts</h2>
+                    
+                    <div className="grid grid-cols-1 gap-6">
+                        <ReadoutCard 
+                            title="Temperature out" 
+                            value="74.6" 
+                            unit="°C" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Flow out" 
+                            value="178" 
+                            unit="L/min" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Mixer RPM" 
+                            value="238" 
+                            unit="rpm" 
+                            status="OK" 
+                        />
+                        <ReadoutCard 
+                            title="Pressure" 
+                            value="3.18" 
+                            unit="bar" 
+                            status="WARN" 
+                        />
+                    </div>
+                </div>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

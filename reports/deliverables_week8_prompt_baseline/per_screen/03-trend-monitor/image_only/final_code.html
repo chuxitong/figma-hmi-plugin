@@ -1,0 +1,192 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameter Trend Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Header />
+                    <div className="flex-grow p-4 bg-gray-50">
+                        <MetricCards />
+                        <TrendChart />
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const Header = () => {
+            return (
+                <header className="bg-[#0b2746] text-white py-4 px-6">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h1 className="text-2xl font-bold">Parameter Trend Monitor</h1>
+                            <p className="text-sm text-gray-300">Window: 60 min · Sample: 1 s</p>
+                        </div>
+                        <div className="bg-[#1a3556] px-4 py-2 rounded text-sm text-gray-300">
+                            2026-04-19 14:32:07 MSK
+                        </div>
+                    </div>
+                </header>
+            );
+        };
+
+        const MetricCard = ({ title, value, change, unit, borderColor }) => {
+            return (
+                <div className={`bg-white rounded-lg border-l-4 ${borderColor} p-4 shadow-sm`}>
+                    <div className="text-gray-500 text-sm">{title}</div>
+                    <div className="text-4xl font-bold text-gray-800 my-2">{value}</div>
+                    <div className="flex items-center text-xs text-gray-600">
+                        <span className="mr-1">▲</span>
+                        <span>{change} {unit}</span>
+                    </div>
+                </div>
+            );
+        };
+
+        const MetricCards = () => {
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <MetricCard 
+                        title="Temperature" 
+                        value="72.4" 
+                        change="+1.2" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                    <MetricCard 
+                        title="Pressure" 
+                        value="3.21" 
+                        change="+0.04" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                    <MetricCard 
+                        title="Flow" 
+                        value="184" 
+                        change="-3" 
+                        unit="за смени" 
+                        borderColor="border-orange-500" 
+                    />
+                    <MetricCard 
+                        title="Setpoint dev" 
+                        value="1.8" 
+                        change="+0.2" 
+                        unit="за смени" 
+                        borderColor="border-green-600" 
+                    />
+                </div>
+            );
+        };
+
+        const TrendChart = () => {
+            return (
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-lg font-semibold text-gray-800">Trend window — 14:00 to 15:00</h2>
+                        <div className="flex space-x-4">
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-green-600 mr-2"></div>
+                                <span className="text-xs text-gray-600">Temp (°C)</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-orange-500 mr-2"></div>
+                                <span className="text-xs text-gray-600">Pressure (bar)</span>
+                            </div>
+                            <div className="flex items-center">
+                                <div className="w-3 h-3 bg-red-600 mr-2"></div>
+                                <span className="text-xs text-gray-600">Flow (L/min) band: ±2σ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="relative h-64 w-full">
+                        {/* Chart grid */}
+                        <div className="absolute inset-0 w-full h-full">
+                            {/* Horizontal grid lines */}
+                            {[40, 50, 60, 70, 80, 90, 100].map((value) => (
+                                <div key={value} className="absolute w-full border-t border-gray-200" 
+                                     style={{bottom: `${(value - 40) * 100 / 60}%`}}>
+                                    <span className="absolute -left-8 -top-2 text-xs text-gray-500">{value}</span>
+                                </div>
+                            ))}
+                            
+                            {/* Vertical grid lines */}
+                            {['14:00', '14:05', '14:10', '14:15', '14:20', '14:25', '14:30', '14:35', '14:40', '14:45', '14:50', '14:55', '14:60'].map((time) => (
+                                <div key={time} className="absolute h-full border-r border-gray-200" 
+                                     style={{left: `${((time.split(':')[0] * 60 + time.split(':')[1]) / 960) * 100}%`}}>
+                                    <span className="absolute -bottom-6 text-xs text-gray-500 transform -translate-x-1/2">{time}</span>
+                                </div>
+                            ))}
+                            
+                            {/* Temperature Line (Green) */}
+                            <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100" style={{height: '100%', width: '100%'}}>
+                                <polyline 
+                                    points="0,25 8,26 16,27 25,32 33,26 42,23 50,27 58,24 67,23 75,26 83,21 92,23 100,24"
+                                    fill="none" 
+                                    stroke="#16a34a" 
+                                    strokeWidth="1"
+                                />
+                                
+                                {/* Pressure Line (Orange) */}
+                                <polyline 
+                                    points="0,62 8,60 16,59 25,63 33,65 42,62 50,67 58,65 67,64 75,67 83,70 92,65 100,64"
+                                    fill="none" 
+                                    stroke="#f97316" 
+                                    strokeWidth="1"
+                                />
+                                
+                                {/* Flow Line (Red) */}
+                                <polyline 
+                                    points="0,75 8,77 16,74 25,72 33,74 42,78 50,73 58,76 67,72 75,76 83,74 92,78 100,79"
+                                    fill="none" 
+                                    stroke="#dc2626" 
+                                    strokeWidth="1"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div className="mt-4 flex justify-between items-center">
+                        <div className="bg-gray-100 px-4 py-2 rounded-md border border-gray-200 text-sm">
+                            14:22 — Flow rate deviation > 12 % (FT-401)
+                        </div>
+                        <div className="text-sm text-gray-600">
+                            Operator: A. Petrov
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-100 border-t border-gray-200 py-3 px-6">
+                    <div className="text-xs text-gray-500">
+                        Connection: OK · Latency: 18 ms · Logging: enabled · Export to CSV available via toolbar
+                    </div>
+                </footer>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

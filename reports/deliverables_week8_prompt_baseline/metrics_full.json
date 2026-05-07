@@ -1,0 +1,260 @@
+{
+  "api_base": "http://127.0.0.1:8000",
+  "model_backend": "ui2coden",
+  "ui2coden_prompt_profile_observed": "baseline",
+  "context_source_bulk": "synthetic_script",
+  "qualitative_dimensions_template": {
+    "dimensions_en": [
+      "alignment_and_padding_vs_reference",
+      "typographic_hierarchy",
+      "missing_or_extraneous_widgets",
+      "charts_trends_synoptic_quality",
+      "edit_side_effects_when_using_post_edit"
+    ],
+    "note_zh_student": "与 SSIM 并列填写；允许「SSIM 几乎不变但布局更合理」或「SSIM 上升但语义变差」。"
+  },
+  "experiment_api_trace_dir_relative": "reports/deliverables_week8_prompt_baseline/reproducibility_logs/week8_20260507_074242",
+  "reproducibility_bundle_relative": "reports/deliverables_week8_prompt_baseline/reproducibility_complete",
+  "reproducibility_readme_zh_relative": "reports/deliverables_week8_prompt_baseline/reproducibility_complete/README_REPRODUCIBILITY.zh.md",
+  "reference_mockups": [
+    "mockups/png/01-equipment-status.png",
+    "mockups/png/02-alarm-event.png",
+    "mockups/png/03-trend-monitor.png",
+    "mockups/png/04-operator-panel.png",
+    "mockups/png/05-production-overview.png",
+    "mockups/png/06-tank-synoptic.png",
+    "mockups/png/07-energy-dashboard.png",
+    "mockups/png/08-batch-recipe.png"
+  ],
+  "SSIM_goal": 0.38,
+  "max_refines_budget": 2,
+  "force_refine_rounds": 2,
+  "acceptability_definition_en": "Forced refine mode: exactly 2 POST /refine call(s) after each /generate, regardless of first-preview SSIM.",
+  "per_row_csv": [
+    {
+      "screen": "01-equipment-status",
+      "config": "image_only",
+      "seconds_first_generate": 71.45,
+      "seconds_to_acceptable": 202.59,
+      "refine_iterations": 2,
+      "final_ssim": 0.7827
+    },
+    {
+      "screen": "01-equipment-status",
+      "config": "with_variables",
+      "seconds_first_generate": 112.05,
+      "seconds_to_acceptable": 239.64,
+      "refine_iterations": 2,
+      "final_ssim": 0.8091
+    },
+    {
+      "screen": "01-equipment-status",
+      "config": "with_variables_css",
+      "seconds_first_generate": 65.87,
+      "seconds_to_acceptable": 284.16,
+      "refine_iterations": 2,
+      "final_ssim": 0.7521
+    },
+    {
+      "screen": "02-alarm-event",
+      "config": "image_only",
+      "seconds_first_generate": 123.07,
+      "seconds_to_acceptable": 463.29,
+      "refine_iterations": 2,
+      "final_ssim": 0.6619
+    },
+    {
+      "screen": "02-alarm-event",
+      "config": "with_variables",
+      "seconds_first_generate": 91.01,
+      "seconds_to_acceptable": 380.26,
+      "refine_iterations": 2,
+      "final_ssim": 0.6682
+    },
+    {
+      "screen": "02-alarm-event",
+      "config": "with_variables_css",
+      "seconds_first_generate": 132.32,
+      "seconds_to_acceptable": 401.54,
+      "refine_iterations": 2,
+      "final_ssim": 0.6472
+    },
+    {
+      "screen": "03-trend-monitor",
+      "config": "image_only",
+      "seconds_first_generate": 253.96,
+      "seconds_to_acceptable": 631.2,
+      "refine_iterations": 2,
+      "final_ssim": 0.7561
+    },
+    {
+      "screen": "03-trend-monitor",
+      "config": "with_variables",
+      "seconds_first_generate": 88.23,
+      "seconds_to_acceptable": 316.9,
+      "refine_iterations": 2,
+      "final_ssim": 0.7529
+    },
+    {
+      "screen": "03-trend-monitor",
+      "config": "with_variables_css",
+      "seconds_first_generate": 78.87,
+      "seconds_to_acceptable": 394.2,
+      "refine_iterations": 2,
+      "final_ssim": 0.7435
+    },
+    {
+      "screen": "04-operator-panel",
+      "config": "image_only",
+      "seconds_first_generate": 200.25,
+      "seconds_to_acceptable": 519.46,
+      "refine_iterations": 2,
+      "final_ssim": 0.7698
+    },
+    {
+      "screen": "04-operator-panel",
+      "config": "with_variables",
+      "seconds_first_generate": 200.54,
+      "seconds_to_acceptable": 1275.44,
+      "refine_iterations": 2,
+      "final_ssim": 0.8315
+    },
+    {
+      "screen": "04-operator-panel",
+      "config": "with_variables_css",
+      "seconds_first_generate": 204.18,
+      "seconds_to_acceptable": 379.48,
+      "refine_iterations": 2,
+      "final_ssim": 0.7687
+    },
+    {
+      "screen": "05-production-overview",
+      "config": "image_only",
+      "seconds_first_generate": 135.43,
+      "seconds_to_acceptable": 392.79,
+      "refine_iterations": 2,
+      "final_ssim": 0.7105
+    },
+    {
+      "screen": "05-production-overview",
+      "config": "with_variables",
+      "seconds_first_generate": 254.1,
+      "seconds_to_acceptable": 1032.53,
+      "refine_iterations": 2,
+      "final_ssim": 0.7068
+    },
+    {
+      "screen": "05-production-overview",
+      "config": "with_variables_css",
+      "seconds_first_generate": 255.33,
+      "seconds_to_acceptable": 748.41,
+      "refine_iterations": 2,
+      "final_ssim": 0.7163
+    },
+    {
+      "screen": "06-tank-synoptic",
+      "config": "image_only",
+      "seconds_first_generate": 71.43,
+      "seconds_to_acceptable": 362.2,
+      "refine_iterations": 2,
+      "final_ssim": 0.7269
+    },
+    {
+      "screen": "06-tank-synoptic",
+      "config": "with_variables",
+      "seconds_first_generate": 348.74,
+      "seconds_to_acceptable": 801.95,
+      "refine_iterations": 2,
+      "final_ssim": 0.7437
+    },
+    {
+      "screen": "06-tank-synoptic",
+      "config": "with_variables_css",
+      "seconds_first_generate": 85.65,
+      "seconds_to_acceptable": 443.45,
+      "refine_iterations": 2,
+      "final_ssim": 0.7422
+    },
+    {
+      "screen": "07-energy-dashboard",
+      "config": "image_only",
+      "seconds_first_generate": 90.27,
+      "seconds_to_acceptable": 542.95,
+      "refine_iterations": 2,
+      "final_ssim": 0.761
+    },
+    {
+      "screen": "07-energy-dashboard",
+      "config": "with_variables",
+      "seconds_first_generate": 70.44,
+      "seconds_to_acceptable": 243.62,
+      "refine_iterations": 2,
+      "final_ssim": 0.7725
+    },
+    {
+      "screen": "07-energy-dashboard",
+      "config": "with_variables_css",
+      "seconds_first_generate": 67.65,
+      "seconds_to_acceptable": 1370.92,
+      "refine_iterations": 2,
+      "final_ssim": 0.7683
+    },
+    {
+      "screen": "08-batch-recipe",
+      "config": "image_only",
+      "seconds_first_generate": 102.94,
+      "seconds_to_acceptable": 577.63,
+      "refine_iterations": 2,
+      "final_ssim": 0.7588
+    },
+    {
+      "screen": "08-batch-recipe",
+      "config": "with_variables",
+      "seconds_first_generate": 224.76,
+      "seconds_to_acceptable": 668.67,
+      "refine_iterations": 2,
+      "final_ssim": 0.7496
+    },
+    {
+      "screen": "08-batch-recipe",
+      "config": "with_variables_css",
+      "seconds_first_generate": 90.51,
+      "seconds_to_acceptable": 403.86,
+      "refine_iterations": 2,
+      "final_ssim": 0.748
+    }
+  ],
+  "timing_means_generate_sec": {
+    "image_only": 131.1,
+    "with_variables": 173.73375,
+    "with_variables_css": 122.5475
+  },
+  "timing_means_to_accept_sec": {
+    "image_only": 461.51375,
+    "with_variables": 619.87625,
+    "with_variables_css": 553.2525
+  },
+  "error_taxonomy_flag_rate_mean": {
+    "spacing_suspected": 1,
+    "typography_suspected": 0.0417,
+    "alignment_weak": 1,
+    "hierarchy_weak": 0.0417,
+    "button_semantics_ambiguous": 0.4444,
+    "missing_title_or_header": 0,
+    "chart_or_trend_reproduction_weak": 0.1528
+  },
+  "effects": {
+    "mean_delta_ssim_adding_variables": 0.01333,
+    "mean_delta_ssim_adding_css_on_top_of_variables": -0.0185,
+    "taxonomy_descriptions_en": {
+      "spacing_suspected": "Spacing / padding heuristic flag",
+      "typography_suspected": "Typography may be implicit in HTML",
+      "alignment_weak": "Little flex/grid semantics",
+      "hierarchy_weak": "Weak heading hierarchy",
+      "button_semantics_ambiguous": "Primary/secondary button cues unclear",
+      "missing_title_or_header": "Few semantic header keywords",
+      "chart_or_trend_reproduction_weak": "Charts/synoptic simplified"
+    }
+  },
+  "week8_resume": true
+}

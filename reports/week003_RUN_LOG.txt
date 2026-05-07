@@ -1,0 +1,47 @@
+=== Week3 verified run (python) base=http://127.0.0.1:8000 ===
+Ref PNG: /root/autodl-tmp/figma-hmi-plugin/mockups/png/01-equipment-status.png
+Edit instruction: 'Increase the main page title font size and make it more prominent.'
+Refine rounds: 3
+
+[1] POST /generate ...
+    elapsed 72.6s
+    saved: week003_00_reference.png, week003_01_generate* html|png|json|b64
+
+--- POST /edit（产生 week003_02_after_edit*）请求说明 ---
+  URL: POST http://127.0.0.1:8000/edit
+  JSON 键: current_code, instruction, width, height
+  instruction（自然语言，英文）: 'Increase the main page title font size and make it more prominent.'
+  width x height: 1280 x 720
+  current_code: 与上一步 /generate 返回的 code 相同（落盘为 week003_01_generate.html，日志不重复全文）
+  源码常量: 本脚本 EDIT_INSTRUCTION
+
+[2] POST /edit ...
+    elapsed 39.9s
+    saved: week003_02_* html|png|json|b64
+
+[3.1] render + refine, iteration 1 ...
+    refine elapsed 45.6s
+    saved: week003_refine_iter1_a_render_in.png, a_render_in.b64, week003_refine_iter1_b_preview.png, b_preview.b64, *response.json, week003_refine_iter1.html
+
+[3.2] render + refine, iteration 2 ...
+    refine elapsed 169.1s
+    saved: week003_refine_iter2_a_render_in.png, a_render_in.b64, week003_refine_iter2_b_preview.png, b_preview.b64, *response.json, week003_refine_iter2.html
+
+[3.3] render + refine, iteration 3 ...
+    refine elapsed 165.5s
+    saved: week003_refine_iter3_a_render_in.png, a_render_in.b64, week003_refine_iter3_b_preview.png, b_preview.b64, *response.json, week003_refine_iter3.html
+
+[4] capture Swagger + health JSON ...
+=== POST /edit（After-edit）复现说明 ===
+URL: POST http://127.0.0.1:8000/edit
+Body（JSON）:
+  "current_code": <与 week003_01_generate.html 相同，即上一步 /generate 的完整 HTML>
+  "instruction": "Increase the main page title font size and make it more prominent."
+  "width": 1280
+  "height": 720
+
+自然语言指令（instruction）英文原文:
+Increase the main page title font size and make it more prominent.
+
+===
+VERIFY: GET http://127.0.0.1:8000/health 应显示 ui2code_n_active: true

@@ -1,0 +1,23 @@
+[
+  {
+    "test": "test1",
+    "phase": "generate",
+    "frame_name": "Equipment Status Dashboard",
+    "time_seconds": 0.05,
+    "output_chars": 2589
+  },
+  {
+    "test": "test2",
+    "phase": "generate",
+    "frame_name": "Alarm & Event Monitor",
+    "time_seconds": 0.05,
+    "output_chars": 3010
+  },
+  {
+    "test": "test3",
+    "phase": "generate",
+    "frame_name": "Operator Control Panel",
+    "time_seconds": 0.05,
+    "output_chars": 3137
+  }
+]

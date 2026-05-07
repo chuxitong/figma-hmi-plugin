@@ -1,0 +1,38 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 01 Equipment Status — HMI
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--surface-card": "#ffffff",
+  "--text-primary": "#1b2630",
+  "--text-secondary": "#5a6675",
+  "--accent-running": "#2e7d32",
+  "--accent-warning": "#f9a825",
+  "--accent-fault": "#c62828",
+  "--radius-md": "6px",
+  "--header-bar": "#13314f"
+}
+</design_variables>
+
+<css_hints>
+{
+  "Frame": {
+    "width": "1440px",
+    "height": "900px",
+    "background-color": "#f3f5f8"
+  },
+  "StatusCard": {
+    "background-color": "#ffffff",
+    "border-radius": "6px",
+    "border-left-width": "6px",
+    "border-left-style": "solid"
+  },
+  "Pump P-101": {
+    "border-left-color": "#2e7d32"
+  },
+  "Valve V-102": {
+    "border-left-color": "#c62828"
+  }
+}
+</css_hints>

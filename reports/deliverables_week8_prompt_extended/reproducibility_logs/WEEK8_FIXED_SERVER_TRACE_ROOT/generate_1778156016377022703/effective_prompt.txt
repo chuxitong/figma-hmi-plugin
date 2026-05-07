@@ -1,0 +1,18 @@
+You are generating code for an industrial HMI screen. Look at the screenshot and produce a single self-contained HTML page with inline CSS that reproduces the layout, typography, color palette and interactive elements. Use semantic HTML. No external assets.
+Screen name hint: 04 Operator Panel — HMI
+
+<design_variables>
+{
+  "--surface-0": "#f3f5f8",
+  "--header-bar": "#13314f",
+  "--btn-primary": "#1976d2",
+  "--btn-danger": "#c62828",
+  "--accent-warn-text": "#ef6c00"
+}
+</design_variables>
+
+Additional engineering constraints for industrial HMI operator views:
+- Keep alarms, status indicators, and critical metrics visually distinct from decorative chrome.
+- Prefer predictable layout (flex or grid) with consistent spacing in control panels.
+- Do not omit major equipment or trend regions that appear in the screenshot.
+- If multiple buttons are visible, reflect primary vs secondary / neutral roles in styling.
